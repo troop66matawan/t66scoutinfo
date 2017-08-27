@@ -25,11 +25,23 @@ app.component('scoutlist', {
            if (response.hasOwnProperty('scoutmaster')) {
              var allScoutsRef = firedb.ref('scouts/');
              allScoutsRef.on('value', function(snapshot) {
-               _this.scouts = _this.firePropsToArray(snapshot.val());
+               $scope.$apply(function(){
+                 _this.scouts = _this.firePropsToArray(snapshot.val());
+               });
                console.log(_this.scouts);
              })
            } else {
-
+             if (response.hasOwnProperty('access')){
+              for (var scoutIndex in response.access) {
+                var scout = response.access[scoutIndex];
+                var scoutRef = firedb.ref('scouts/'+scout);
+                scoutRef.on('value', function(snapshot) {
+                  $scope.$apply(function(){
+                    _this.scouts.push(snapshot.val());
+                  });
+                });
+              }
+             }
            }
            console.log(snapshot.val());
          })
