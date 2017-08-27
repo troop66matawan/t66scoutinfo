@@ -1,0 +1,181 @@
+.t66tmweb {
+  height: 100%;
+}
+.scoutname {
+  display: flex;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: xx-large;
+}
+
+.scoutname .firstname {
+  margin: 5px;
+}
+
+.scoutname .lastname {
+  margin: 5px;
+}
+
+.infobox {
+  display: flex;
+  width: 75%;
+  margin-left: 30px;
+}
+.infobox .info {
+
+}
+.infobox .label {
+  font-weight: bolder;
+}
+
+.infobox .right {
+  margin-left: auto;
+}
+
+.infobox .left {
+
+}
+.scoutrank {
+  margin-top: 30px;
+}
+.scoutrank .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+.scoutrank .rank {
+  width: 75%;
+  margin-left: 30px;
+  display:flex;
+  margin-top: 7px;
+
+}
+.scoutrank .rank .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 10px;
+}
+.scoutrank .sep {
+  flex-grow: 1;
+  border-bottom: 1px dashed;
+}
+.scoutrank .rankdate {
+  flex-grow: 0;
+  width: 30%;
+}
+.scoutmb {
+  margin-top: 30px;
+}
+.scoutmb .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+.scoutmb .badges {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.scoutmb .badges .meritbadge {
+  width: 75px;
+  margin-left: 30px;
+}
+
+.scoutmb .summary {
+  width: 75%;
+  margin-left: 30px;
+  display:flex;
+  margin-top: 7px;
+
+}
+.scoutmb .summary .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 10px;
+}
+.scoutmb .summary .sep {
+  flex-grow: 1;
+  border-bottom: 1px dashed;
+}
+.scoutmb .summary .val {
+  flex-grow: 0;
+  width: 30%;
+}
+
+.scoutmb .eagleneeded {
+  width: 50%;
+  text-align: right;
+}
+
+.camping {
+  margin-top: 30px;
+}
+.camping .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.table {
+  width: 75%;
+  display: flex;
+  justify-content:  center;
+  flex-flow: column nowrap;
+  font-size: .8rem;
+  margin: auto;
+  line-height: 1.5;
+  border-bottom: 1px solid #d0d0d0;
+  flex: 1 1 auto;
+}
+
+.th {
+  display: none;
+  font-weight: 700;
+  background-color: #f2f2f2;
+}
+
+.th > .td {
+  white-space: normal;
+  justify-content: center;
+}
+
+.tr {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.tr:nth-of-type(even) {
+  background-color: #f2f2f2;
+}
+
+.tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.td {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0.5em;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0px;
+  white-space: nowrap;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+}
