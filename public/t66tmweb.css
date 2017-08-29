@@ -1,6 +1,13 @@
 .t66tmweb {
   height: 100%;
 }
+
+.scoutdiv {
+  background: #ffffff;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .scoutname {
   display: flex;
   width: 100%;
@@ -46,6 +53,7 @@
   padding-left: 20px;
   padding-top: 3px;
   padding-bottom: 3px;
+  padding-right: 20px;
 }
 .scoutrank .rank {
   width: 75%;
@@ -78,15 +86,18 @@
   padding-left: 20px;
   padding-top: 3px;
   padding-bottom: 3px;
+  padding-right: 20px;
 }
 .scoutmb .badges {
-  width: 70%;
+  width: 85%;
   display: flex;
   flex-wrap: wrap;
+  margin:auto;
 }
 .scoutmb .badges .meritbadge {
   width: 75px;
-  margin-left: 30px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .scoutmb .summary {
@@ -126,10 +137,11 @@
   padding-left: 20px;
   padding-top: 3px;
   padding-bottom: 3px;
+  padding-right: 20px;
 }
 
 .table {
-  width: 75%;
+  width: 85%;
   display: flex;
   justify-content:  center;
   flex-flow: column nowrap;
@@ -178,4 +190,14 @@
   white-space: nowrap;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
+}
+
+.t66footer {
+  background: #d0c0b0;
+  height: 150px;
+  margin: auto;
+}
+
+.t66footer img {
+  height: 150px;
 }

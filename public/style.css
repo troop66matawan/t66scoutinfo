@@ -10,6 +10,7 @@ body {
   max-width: 600px;
   margin: 0 auto;
   text-align: center;
+  background: #d0c0b0;
 }
 
 .clearfix {
@@ -21,33 +22,18 @@ body {
 }
 
 #user-info {
-  border: 1px solid #CCC;
   clear: both;
   margin: 0 auto 20px;
   max-width: 400px;
   padding: 10px;
-  text-align: left;
 }
 
-#photo-container {
-  background-color: #EEE;
-  border: 1px solid #CCC;
-  float: left;
-  height: 80px;
-  margin-right: 10px;
-  width: 80px;
+#user-banner {
+  background: #c0b0a0;
 }
 
-#photo {
-  height: 80px;
-  margin: 0;
-  width: 80px;
-}
-
-@media (max-width: 300px) {
-  #photo-container,
-  #photo {
-    height: 40px;
-    width: 40px;
-  }
+#name {
+  font-family: "Roboto", sans-serif;
+  font-size: 22px;
+  font-weight: bold;
 }

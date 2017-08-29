@@ -22,6 +22,10 @@ app.component('scoutlist', {
          var usersRef = firedb.ref('users/' + user.uid);
          usersRef.on('value', function(snapshot) {
            var response = snapshot.val();
+           if (response.hasOwnProperty('FirstName') && response.hasOwnProperty('LastName')) {
+             var displayName = response.FirstName + ' ' + response.LastName;
+             document.getElementById('name').textContent = displayName;
+           }
            if (response.hasOwnProperty('scoutmaster')) {
              var allScoutsRef = firedb.ref('scouts/');
              allScoutsRef.on('value', function(snapshot) {
@@ -68,9 +72,10 @@ app.component('scoutlist', {
      }
   },
   template:
-  '<div>' +
+  '<div class="scoutdiv">' +
     '<select ng-model="selected" ng-options="scout as $ctrl.genName(scout._lastName, scout._firstName) for scout in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
-    '<scoutdiv scout="selected"/>'+
+    '<scoutdiv scout="selected"></scoutdiv>'+
+    '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {
   //   scouts: '@'
@@ -256,7 +261,7 @@ app.component('scoutmb', {
 });
 app.component('meritbadge', {
   template:
-    '<div class="meritbadge" title="{{$ctrl.mb._name}}">'+
+    '<div class="badge" title="{{$ctrl.mb._name}}">'+
       '<img width="75px" height="75px" src="{{$ctrl.mbimage}}">' +
     '</div>',
   controller: function ($scope) {
