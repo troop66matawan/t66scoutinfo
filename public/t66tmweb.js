@@ -86,8 +86,10 @@ app.component('scoutdiv' , {
   template:
     '<div><scoutinfo scout="$ctrl.scout"></scoutinfo>'+
     '<scoutrank scout="$ctrl.scout"></scoutrank>'+
+    '<scoutpor scout="$ctrl.scout"></scoutpor>' +
     '<scoutmb scout="$ctrl.scout"></scoutmb>'+
     '<camping scout="$ctrl.scout"></camping>' +
+    '<reportdate scout="$ctrl.scout"></reportdate>' +
     '</div>',
   bindings: {
     scout: '='
@@ -124,6 +126,20 @@ app.component('scoutrank', {
     '<div class="rank"><div class="label">Star:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._star"></scoutdate></div></div>'+
     '<div class="rank"><div class="label">Life:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._life"></scoutdate></div></div>'+
     '<div class="rank"><div class="label">Eagle:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._eagle"></scoutdate></div></div>'+
+  '</div>',
+  bindings: {
+    scout: '='
+  }
+});
+app.component('scoutpor', {
+  template:
+  '<div class="scoutpor">'+
+    '<div class="header">Positions of Responsibility</div>' +
+    '<div class="por">' +
+      '<div class="pors" ng-repeat="por in $ctrl.scout._leadership">' +
+        '<position por="por"></position> ' +
+      '</div>' +
+    '</div>' +
   '</div>',
   bindings: {
     scout: '='
@@ -273,6 +289,18 @@ app.component('meritbadge', {
     mb: '='
   }
 });
+app.component('position', {
+  template:
+    '<div class="position" title="">'+
+      '<div class="label">{{$ctrl.por._position}}</div><div class="sep"></div>'+
+      '<div class="rankdate"><scoutdate date="$ctrl.por._startDate"></scoutdate></div>'+
+      '<span> - </span>' +
+      '<div class="rankdate"><scoutdate date="$ctrl.por._endDate"></scoutdate></div>'+
+    '</div>',
+  bindings: {
+    por: '='
+  }
+});
 app.component('camping', {
   controller: function ($scope) {
     this.totalNights = function() {
@@ -296,6 +324,16 @@ app.component('camping', {
       '</div>'+
       '<div class="tr"><div class="td"></div><div class="td"></div><div class="td" style="justify-content: flex-end;">Total Nights</div><div class="td">{{$ctrl.totalNights()}}</div></div>' +
       '</div>'+
+  '</div>',
+  bindings: {
+    scout: '='
+  }
+});
+app.component('reportdate', {
+  template:
+  '<div class="reportdate">'+
+    '<span class="label">Report Date: </span>' +
+    '<scoutdate date="$ctrl.scout._reportDate"></scoutdate>' +
   '</div>',
   bindings: {
     scout: '='

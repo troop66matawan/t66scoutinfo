@@ -37,3 +37,8 @@ body {
   font-size: 22px;
   font-weight: bold;
 }
+
+.softwareversion {
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+}

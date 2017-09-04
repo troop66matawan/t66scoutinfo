@@ -29,6 +29,7 @@
   margin-left: 30px;
 }
 .infobox .info {
+  font-family: "Roboto", sans-serif;
 
 }
 .infobox .label {
@@ -60,7 +61,7 @@
   margin-left: 30px;
   display:flex;
   margin-top: 7px;
-
+  font-family: "Roboto", sans-serif;
 }
 .scoutrank .rank .label {
   font-weight: bolder;
@@ -105,6 +106,7 @@
   margin-left: 30px;
   display:flex;
   margin-top: 7px;
+  font-family: "Roboto", sans-serif;
 
 }
 .scoutmb .summary .label {
@@ -124,6 +126,7 @@
 .scoutmb .eagleneeded {
   width: 50%;
   text-align: right;
+  font-family: "Roboto", sans-serif;
 }
 
 .camping {
@@ -167,6 +170,7 @@
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
+  border-left: 1px solid #d0d0d0;
 }
 
 .tr:nth-of-type(even) {
@@ -190,6 +194,7 @@
   white-space: nowrap;
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
+  font-family: "Roboto", sans-serif;
 }
 
 .t66footer {
@@ -200,4 +205,56 @@
 
 .t66footer img {
   height: 150px;
+}
+.scoutpor {
+  margin-top: 30px;
+}
+.scoutpor .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+.scoutpor .por {
+  width: 75%;
+  margin-left: 30px;
+  margin-top: 7px;
+
+}
+.position {
+  width: 100%;
+  display:flex;
+  margin-top: 7px;
+  font-family: "Roboto", sans-serif;
+
+}
+.position .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 10px;
+}
+.position .sep {
+  flex-grow: 1;
+  border-bottom: 1px dashed;
+}
+.position .rankdate {
+  flex-grow: 0;
+  width: 30%;
+}
+
+.reportdate {
+  margin-top: 30px;
+  display: flex;
+  font-family: "Roboto", sans-serif;
+}
+
+.reportdate .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 30px;
+  padding-right: 10px;
 }
