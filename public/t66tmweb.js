@@ -110,7 +110,7 @@ app.component('scoutdate', {
         var day = dateObj.date;
         var year = 1900 + dateObj.year;
 
-        return month + '/' + day + '/' + year;
+        return month + '/ ' + day + '/ ' + year;
       }
     }
   }
@@ -294,9 +294,11 @@ app.component('position', {
   template:
     '<div class="position" title="">'+
       '<div class="label">{{$ctrl.por._position}}</div><div class="sep"></div>'+
+      '<div class="posdaterange">'+
       '<div class="rankdate"><scoutdate date="$ctrl.por._startDate"></scoutdate></div>'+
-      '<span> - </span>' +
+      '<span style="margin:auto"> - </span>' +
       '<div class="rankdate"><scoutdate date="$ctrl.por._endDate"></scoutdate></div>'+
+      '</div>'+
     '</div>',
   bindings: {
     por: '='
