@@ -89,6 +89,7 @@ app.component('scoutdiv' , {
     '<scoutpor scout="$ctrl.scout"></scoutpor>' +
     '<scoutmb scout="$ctrl.scout"></scoutmb>'+
     '<camping scout="$ctrl.scout"></camping>' +
+    '<service scout="$ctrl.scout"></service>' +
     '<reportdate scout="$ctrl.scout"></reportdate>' +
     '</div>',
   bindings: {
@@ -305,9 +306,9 @@ app.component('camping', {
   controller: function ($scope) {
     this.totalNights = function() {
       var nights=0;
-      if (this.scout && this.scout._activities) {
-        for (i=0;i<this.scout._activities.length;i++) {
-          var amount = parseInt(this.scout._activities[i].amount);
+      if (this.scout && this.scout._camping) {
+        for (i=0;i<this.scout._camping.length;i++) {
+          var amount = parseInt(this.scout._camping[i].amount);
           nights += amount;
         }
       }
@@ -319,10 +320,38 @@ app.component('camping', {
     '<div class="header">Camping</div>' +
     '<div class="table">' +
       '<div class="tr th"><div class="td">Date</div><div class="td">Location</div><div class="td">Remarks</div><div class="td">Nights</div></div>'+
-      '<div class="tr" ng-repeat="trip in $ctrl.scout._activities">'+
+      '<div class="tr" ng-repeat="trip in $ctrl.scout._camping">'+
         '<div class="td"><scoutdate date="trip.activityDate"></scoutdate></div><div class="td">{{trip.location}}</div><div class="td">{{trip.remarks}}</div><div class="td">{{trip.amount}}</div>' +
       '</div>'+
       '<div class="tr"><div class="td"></div><div class="td"></div><div class="td" style="justify-content: flex-end;">Total Nights</div><div class="td">{{$ctrl.totalNights()}}</div></div>' +
+      '</div>'+
+  '</div>',
+  bindings: {
+    scout: '='
+  }
+});
+app.component('service', {
+  controller: function ($scope) {
+    this.totalNights = function() {
+      var nights=0;
+      if (this.scout && this.scout._service) {
+        for (i=0;i<this.scout._service.length;i++) {
+          var amount = parseInt(this.scout._service[i].amount);
+          nights += amount;
+        }
+      }
+      return nights;
+    };
+  },
+  template:
+  '<div class="service">'+
+    '<div class="header">Service</div>' +
+    '<div class="table">' +
+      '<div class="tr th"><div class="td">Date</div><div class="td">Location</div><div class="td">Remarks</div><div class="td">Hours</div></div>'+
+      '<div class="tr" ng-repeat="trip in $ctrl.scout._service">'+
+        '<div class="td"><scoutdate date="trip.activityDate"></scoutdate></div><div class="td">{{trip.location}}</div><div class="td">{{trip.remarks}}</div><div class="td">{{trip.amount}}</div>' +
+      '</div>'+
+      '<div class="tr"><div class="td"></div><div class="td"></div><div class="td" style="justify-content: flex-end;">Total Hours</div><div class="td">{{$ctrl.totalNights()}}</div></div>' +
       '</div>'+
   '</div>',
   bindings: {
