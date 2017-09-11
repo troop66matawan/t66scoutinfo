@@ -280,6 +280,7 @@ app.component('meritbadge', {
   template:
     '<div class="badge" title="{{$ctrl.mb._name}}">'+
       '<img width="75px" height="75px" src="{{$ctrl.mbimage}}">' +
+      '<span class="mbearneddate"><scoutdate date="$ctrl.mb._earned"></scoutdate></span>' +
     '</div>',
   controller: function ($scope) {
     this.$onInit = function() {
