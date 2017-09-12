@@ -8,11 +8,16 @@
   margin:auto;
 }
 
+.scoutinfo .name {
+  display: flex;
+}
+
 .scoutname {
   display: flex;
   width: 100%;
   font-family: "Roboto", sans-serif;
   font-size: xx-large;
+  flex-wrap: wrap;
 }
 
 .scoutname .firstname {
@@ -23,6 +28,13 @@
   margin: 5px;
 }
 
+.scoutinfoimage {
+  margin-left: auto;
+}
+.scoutimage {
+  height: 100px;
+  width: 100px;
+}
 .infobox {
   display: flex;
   width: 75%;

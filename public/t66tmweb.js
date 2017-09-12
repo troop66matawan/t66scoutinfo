@@ -148,7 +148,14 @@ app.component('scoutpor', {
 });
 app.component('scoutinfo', {
   template:
-    '<div><scoutname scout="$ctrl.scout"></scoutname><div class="infobox"> <div class="info label left">BSA ID:</div> <div class="info left">{{$ctrl.scout._bsaID}}</div>' +
+    '<div class="scoutinfo"><div class="name"><scoutname scout="$ctrl.scout"></scoutname>' +
+    ' <scoutimage class="scoutinfoimage" scout="$ctrl.scout"></scoutimage></div><div' +
+    ' class="infobox">' +
+    ' <div' +
+    ' class="info' +
+    ' label' +
+    ' left">BSA' +
+    ' ID:</div> <div class="info left">{{$ctrl.scout._bsaID}}</div>' +
     '<div class="info label right">DOB:</div><div class="info"><scoutdate date="$ctrl.scout._dateOfBirth"></scoutdate></div></div></div>',
   bindings: {
     scout: '='
@@ -162,6 +169,15 @@ app.component('scoutname', {
     scout: '='
   }
 });
+
+app.component('scoutimage', {
+  template:
+    '<div class="scoutimage"><img height="100px" width="100px" src="images/scoutSilhoutte.png"></div>',
+  bindings: {
+    scout: '='
+  }
+});
+
 app.component('scoutmb', {
   controller: function ($scope) {
      this.mbMap = new Map();
