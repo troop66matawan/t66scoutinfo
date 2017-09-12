@@ -172,9 +172,38 @@ app.component('scoutname', {
 
 app.component('scoutimage', {
   template:
-    '<div class="scoutimage"><img height="100px" width="100px" src="images/scoutSilhoutte.png"></div>',
+    '<div class="scoutimage"><img id="scoutprofileimage" height="100px" width="100px"' +
+    ' src="{{$ctrl.getScoutImage($ctrl.scout._firstName, $ctrl.scout._lastName)}}"></div>',
   bindings: {
     scout: '='
+  },
+  controller: function ($scope) {
+    this.getScoutImage = function(firstName, lastName) {
+      var placeholder = 'images/scoutSilhoutte.png';
+      var profileImage = {};
+      var img = document.getElementById('scoutprofileimage');
+
+      if (firstName !== undefined && lastName !== undefined) {
+        var scoutName = firstName + lastName;
+        var photoDbRef = firedb.ref('scoutphoto/' + scoutName);
+        photoDbRef.once('value', function(snapshot) {
+          var pathToPhoto = snapshot.val();
+          if (pathToPhoto !== null) {
+            var pathRef = firestore.ref(pathToPhoto);
+            pathRef.getDownloadURL().then(function(url) {
+              // `url` is the download URL for 'images/stars.jpg'
+              img.src = url;
+              profileImage.url = url;
+            })
+          } else {
+            img.src = placeholder;
+          }
+        }, function(fail) {
+          console.log(fail);
+        });
+      }
+      return placeholder;
+    }
   }
 });
 
