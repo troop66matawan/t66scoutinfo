@@ -75,6 +75,7 @@ app.component('scoutlist', {
   '<div class="scoutdiv">' +
     '<select ng-model="selected" ng-options="scout as $ctrl.genName(scout._lastName, scout._firstName) for scout in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
     '<scoutdiv scout="selected"></scoutdiv>'+
+    '<trailtoeaglereport ng-if="0" scouts="$ctrl.scouts" min-age="16"></trailtoeaglereport>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {
@@ -207,100 +208,28 @@ app.component('scoutimage', {
   }
 });
 
+app.component('eagleneeded', {
+  template: '<div class="eagleneeded" ng-repeat="eagle in $ctrl.needEagleReq($ctrl.scout)">{{eagle}}</div>',
+  bindings: {
+    scout: '='
+  },
+  controller: ['EagleRequired', function(EagleRequired) {
+    const _this = this;
+
+    _this.needEagleReq = function(scout) {
+       return EagleRequired.needEagleReq(scout);
+    };
+   }]
+});
 app.component('scoutmb', {
-  controller: function ($scope) {
+  controller: ['EagleRequired', function (EagleRequired) {
      this.mbMap = new Map();
      initmbmap(this.mbMap);
 
-     this.needEagleReq = function() {
-       if (!this.scout) {
-         return;
-       }
-     var need = new Array();
-       var eagles = new Array();
-       eagles.push("Camping");
-       eagles.push("Cit In Community");
-       eagles.push("Cit In Nation");
-       eagles.push("Cit In World");
-       eagles.push('Communication');
-       eagles.push('Cooking');
-       eagles.push('Family Life');
-       eagles.push('First Aid');
-       eagles.push('Personal Fitness');
-       eagles.push('Personal Management');
-
-       var option1 = new Array();
-       option1.push('Cycling');
-       option1.push('Swimming');
-        option1.push('Hiking');
-
-        var option2 = new Array();
-        option2.push('Environmental Sci');
-        option2.push('Sustainability');
-
-       var option3 = new Array();
-       option3.push('Emergency Prep');
-       option3.push('Lifesaving');
-
-
-
-       //eagles.forEach(function(mb) {
-       for (i=0;i<eagles.length;i++) {
-         mb = eagles[i];
-         var found = false;
-         if (this.scout && this.scout.meritBadges) {
-           for (j=0;j<this.scout.meritBadges.length;j++) {
-             if (this.scout.meritBadges[j]._name === mb) {
-              found = true;
-              continue;
-              }
-            }
-         }
-         if (!found) {
-           need.push(mb);
-         }
-       }
-
-       var need1 = this.checkEagleOptions(option1, this.scout.meritBadges);
-       if (need1 !== '') {
-         need.push(need1);
-       }
-       var need2 = this.checkEagleOptions(option2, this.scout.meritBadges);
-       if (need2 !== '') {
-         need.push(need2);
-       }
-       var need3 = this.checkEagleOptions(option3, this.scout.meritBadges);
-       if (need3 !== '') {
-         need.push(need3);
-       }
-       return need;
+     this.needEagleReq = function(scout) {
+       return EagleRequired.needEagleReq(scout);
      }
-
-     this.checkEagleOptions = function(optionSet, mbs) {
-       var need='';
-       var found = false;
-
-       if (mbs) {
-         for (i=0;i<optionSet.length;i++) {
-           option = optionSet[i];
-           for (j=0;j<mbs.length;j++) {
-             if (mbs[j]._name === option)
-             found = true;
-             continue;
-           }
-         }
-       }
-       if (found == false) {
-         for (i=0;i<optionSet.length;i++) {
-           need += optionSet[i];
-           if (i+1 < optionSet.length) {
-             need += " or ";
-           }
-         }
-       }
-       return need;
-     }
-  },  template:
+  }],  template:
   '<div class="scoutmb">'+
     '<div class="header" >Merit Badges</div>' +
       '<div class="badges">' +
@@ -312,10 +241,9 @@ app.component('scoutmb', {
         '<div class="label">Total Merit Badges</div><div class="sep"></div><div class="val">{{$ctrl.scout.meritBadges.length}}</div>' +
       '</div>' +
       '<div class="summary">' +
-        '<div class="label">Need Eagle</div><div class="sep"></div><div class="val">{{$ctrl.needEagleReq().length}}</div>'+
+        '<div class="label">Need Eagle</div><div class="sep"></div><div class="val">{{$ctrl.needEagleReq($ctrl.scout).length}}</div>'+
       '</div>' +
-      '<div class="eagleneeded" ng-repeat="eagle in $ctrl.needEagleReq()">{{eagle}}</div>' +
-
+      '<eagleneeded scout="$ctrl.scout"></eagleneeded>' +
   '</div>',
   bindings: {
     scout: '='
@@ -350,6 +278,7 @@ app.component('position', {
     por: '='
   }
 });
+
 app.component('camping', {
   controller: function ($scope) {
     this.totalNights = function() {
@@ -378,6 +307,7 @@ app.component('camping', {
     scout: '='
   }
 });
+
 app.component('service', {
   controller: function ($scope) {
     this.totalNights = function() {
