@@ -1,0 +1,399 @@
+.t66tmweb {
+  height: 100%;
+}
+#btn {
+  display: none;
+}
+#box {
+  display: none;
+}
+#name {
+  display: none;
+}
+.softwareversion {
+  display: none;
+}
+#sign-out {
+  display:none;
+}
+#scoutselect {
+  display: none;
+}
+.scoutdiv {
+  background: #ffffff;
+  width: 100%;
+  margin:auto;
+}
+
+.scoutinfo .name {
+  display: flex;
+}
+
+.scoutname {
+  display: flex;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: xx-large;
+  flex-wrap: wrap;
+}
+
+.scoutname .firstname {
+  margin: 5px;
+}
+
+.scoutname .lastname {
+  margin: 5px;
+}
+
+.scoutinfoimage {
+  margin-left: auto;
+  margin-right: 10px;
+}
+.scoutimage {
+  height: 100px;
+  width: 100px;
+}
+.infobox {
+  display: flex;
+  width: 75%;
+  margin-left: 30px;
+}
+.infobox .info {
+  padding-right: 10px;
+  font-family: "Roboto", sans-serif;
+  white-space: pre;
+}
+.posdaterange {
+  display: flex;
+  width: 55%;
+  flex-grow: 0;
+  flex-wrap: wrap;
+}
+.infobox .label {
+  font-weight: bolder;
+}
+
+.infobox .right {
+  margin-left: auto;
+}
+
+.infobox .left {
+
+}
+.scoutrank {
+  margin-top: 30px;
+}
+.scoutrank .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+.scoutrank .rank {
+  width: 75%;
+  margin-left: 30px;
+  display:flex;
+  margin-top: 7px;
+  font-family: "Roboto", sans-serif;
+}
+.scoutrank .rank .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 10px;
+}
+.scoutrank .sep {
+  flex-grow: 1;
+  border-bottom: 1px dashed;
+}
+.scoutrank .rankdate {
+  flex-grow: 0;
+  width: 30%;
+  white-space: pre; 
+}
+.scoutmb {
+  margin-top: 30px;
+}
+.scoutmb .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+  margin-bottom:5px;
+}
+.scoutmb .badges {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin:auto;
+  page-break-inside: avoid;
+}
+.scoutmb .badges .meritbadge {
+  width: 75px;
+  margin-left: 15px;
+  margin-right: 15px;
+  page-break-inside: avoid;
+}
+.scoutmb .badges .meritbadge .badge{
+  position: relative;
+  height: 90px;
+  page-break-inside: avoid;
+}
+.scoutmb .badges .meritbadge .badge .mbearneddate{
+  position: relative;
+  right: -10px;
+  bottom: 20px;
+  color: rgba(0,0,0,.9);
+  background: rgba(255,255,255,.6);
+  border-radius: 6px;
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  padding: 3px;
+  font-weight: bold;
+  display: block;
+  page-break-inside: avoid;
+}
+meritbadge {
+  page-break-inside: avoid;
+}
+.scoutmb .summary {
+  width: 75%;
+  margin-left: 30px;
+  display:flex;
+  margin-top: 7px;
+  font-family: "Roboto", sans-serif;
+
+}
+.scoutmb .summary .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 10px;
+}
+.scoutmb .summary .sep {
+  flex-grow: 1;
+  border-bottom: 1px dashed;
+}
+.scoutmb .summary .val {
+  flex-grow: 0;
+  width: 30%;
+}
+
+.scoutmb .eagleneeded {
+  width: 50%;
+  text-align: right;
+  font-family: "Roboto", sans-serif;
+}
+
+.camping {
+  margin-top: 30px;
+}
+.camping .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+
+.service {
+  margin-top: 30px;
+}
+.service .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+
+
+.table {
+  width: 100%;
+  display: flex;
+  justify-content:  center;
+  flex-flow: column nowrap;
+  font-size: .8rem;
+  margin: auto;
+  line-height: 1.5;
+  border-bottom: 1px solid #d0d0d0;
+  flex: 1 1 auto;
+}
+
+.th {
+  display: none;
+  font-weight: 700;
+  background-color: #f2f2f2;
+}
+
+.th > .td {
+  white-space: normal;
+  justify-content: center;
+}
+
+.tr {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  border-left: 1px solid #d0d0d0;
+}
+
+.tr:nth-of-type(even) {
+  background-color: #f2f2f2;
+}
+
+.tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+.td {
+  display: flex;
+  flex-flow: row nowrap;
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0.5em;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0px;
+  white-space: pre-wrap;
+  border-bottom: 1px solid #d0d0d0;
+  border-right: 1px solid #d0d0d0;
+  font-family: "Roboto", sans-serif;
+}
+
+.t66footer {
+  display: none;
+}
+
+.t66footer img {
+  height: 150px;
+}
+.scoutpor {
+  margin-top: 30px;
+}
+.scoutpor .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+.scoutpor .por {
+  width: 85%;
+  margin-left: 30px;
+  margin-top: 7px;
+
+}
+.position {
+  width: 100%;
+  display:flex;
+  margin-top: 7px;
+  font-family: "Roboto", sans-serif;
+
+}
+.position .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 10px;
+  width: 20%;
+}
+.position .sep {
+  flex-grow: 1;
+  border-bottom: 1px dashed;
+}
+
+.position .rankdate {
+  flex-grow: 0;
+  margin:auto;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.reportdate {
+  margin-top: 30px;
+  display: flex;
+  font-family: "Roboto", sans-serif;
+}
+
+.reportdate .label {
+  font-weight: bolder;
+  flex-grow: 0;
+  margin-left: 30px;
+  padding-right: 10px;
+}
+
+.trailtoeagle .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+
+.photoreport {
+  display: flex;
+  flex-wrap: wrap;
+}
+.photoreportcontainer .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+.photoreport .scoutname {
+  display: flex;
+  font-family: "Roboto", sans-serif;
+  font-size: smaller;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 100px;
+}
+.photoreport .scoutname .firstname {
+  margin: 5px auto 5px auto;
+}
+.photoreport .scoutname .lastname {
+  margin: 5px auto 5px auto;
+}
+.photoreport .scoutname .sep {
+  margin: 1px;
+}
+.photoreport .scoutimage {
+  padding-left: 10px;
+}
+
+.photoreport .scoutphoto {
+  width: 120px;
+  height: 150px;
+  margin: auto;
+  page-break-inside: avoid;
+}
+img {
+  display: block;
+  page-break-inside: avoid; /* or 'auto' */
+}
+span {
+  page-break-inside: avoid;
+}

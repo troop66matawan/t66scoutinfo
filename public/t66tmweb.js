@@ -106,7 +106,10 @@ app.component('scoutlist', {
   '<div class="scoutdiv">' +
     '<slide-in-menu menu-options="$ctrl.menuOptions" view="$ctrl.view"></slide-in-menu>' +
     '<div ng-if="$ctrl.view ===1">' +
-      '<select ng-model="$ctrl.selected" ng-options="scout as $ctrl.genName(scout._lastName, scout._firstName) for scout' +
+      '<select id="scoutselect" ng-model="$ctrl.selected" ng-options="scout as $ctrl.genName(scout._lastName,' +
+  ' scout._firstName)' +
+  ' for' +
+  ' scout' +
       ' in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
       '<scoutdiv scout="$ctrl.selected"></scoutdiv>'+
     '</div>' +
