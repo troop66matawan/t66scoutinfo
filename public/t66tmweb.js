@@ -1,9 +1,18 @@
 var app = angular.module('t66tmweb', ["firebase"]);
 
 app.component('scoutlist', {
+  bindings: {
+  },
   controller: function ($scope, $window, $firebaseAuth) {
     const _this = this;
     _this.scouts = [];
+    _this.view = 1;
+    _this.menuOptions = [
+      {name: 'Individual Scout Data', value: 1},
+    ];
+    _this.trailToEagleReportMenuItem =       {name: 'Trail to Eagle Advancement Report', value: 2};
+    _this.photoReportMenuItem = {name: 'Scout Photo Report', value: 3};
+
 
     var firebaseAuthObject = $firebaseAuth(firebaseauth);
     firebaseAuthObject.$onAuthStateChanged(function(authData) {
@@ -30,7 +39,29 @@ app.component('scoutlist', {
              var allScoutsRef = firedb.ref('scouts/');
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
+                 _this.menuOptions.push(_this.trailToEagleReportMenuItem);
+                 _this.menuOptions.push(_this.photoReportMenuItem);
                  _this.scouts = _this.firePropsToArray(snapshot.val());
+
+                 _this.scouts.sort(function(a,b) {
+                   if (a._lastName < b._lastName) {
+                     return -1;
+                   } else if (a._lastName > b._lastName) {
+                     return 1;
+                   } else {
+                     if (a._firstname < b._firstName) {
+                       return -1;
+                     } else if (a._firstName > b._firstName) {
+                       return 1;
+                     } else {
+                       return 0;
+                     }
+                   }
+                 });
+
+                 if (_this.scouts && _this.scouts.length > 0) {
+                   _this.selected = _this.scouts[0];
+                 }
                });
                console.log(_this.scouts);
              })
@@ -73,9 +104,14 @@ app.component('scoutlist', {
   },
   template:
   '<div class="scoutdiv">' +
-    '<select ng-model="selected" ng-options="scout as $ctrl.genName(scout._lastName, scout._firstName) for scout in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
-    '<scoutdiv scout="selected"></scoutdiv>'+
-    '<trailtoeaglereport ng-if="0" scouts="$ctrl.scouts" min-age="16"></trailtoeaglereport>' +
+    '<slide-in-menu menu-options="$ctrl.menuOptions" view="$ctrl.view"></slide-in-menu>' +
+    '<div ng-if="$ctrl.view ===1">' +
+      '<select ng-model="$ctrl.selected" ng-options="scout as $ctrl.genName(scout._lastName, scout._firstName) for scout' +
+      ' in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
+      '<scoutdiv scout="$ctrl.selected"></scoutdiv>'+
+    '</div>' +
+    '<trailtoeaglereport ng-if="$ctrl.view === 2" scouts="$ctrl.scouts" min-age="16"></trailtoeaglereport>' +
+    '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {
@@ -94,8 +130,15 @@ app.component('scoutdiv' , {
     '<reportdate scout="$ctrl.scout"></reportdate>' +
     '</div>',
   bindings: {
-    scout: '='
-  }
+    scout: '<'
+  },
+  controller: [function() {
+    const _this = this;
+    _this.$onChanges = function(changes) {
+      _this.scout = changes.scout.currentValue;
+    };
+
+  }]
 });
 app.component('scoutdate', {
   template: '<div>{{$ctrl.dateToString($ctrl.date)}}</div>',
@@ -173,17 +216,36 @@ app.component('scoutname', {
 
 app.component('scoutimage', {
   template:
-    '<div class="scoutimage"><img id="scoutprofileimage" height="100px" width="100px"' +
-    ' src="{{$ctrl.getScoutImage($ctrl.scout._firstName, $ctrl.scout._lastName)}}"></div>',
+    '<div class="scoutimage"><img ng-attr-id="{{$ctrl.getImgId($ctrl.scout)}}" height="100px" width="100px"' +
+    ' ng-src="{{$ctrl.getScoutImage($ctrl.scout)}}"></div>',
   bindings: {
     scout: '='
   },
   controller: function ($scope) {
-    this.getScoutImage = function(firstName, lastName) {
+
+    this.getImgId = function(scout) {
+      if (scout) {
+        return scout._firstName + scout._lastName + "scoutprofileimage";
+      } else {
+        return "scoutprofileimage";
+      }
+    };
+
+    this.getScoutImage = function(scout) {
+      var firstName;
+      var lastName;
       var placeholder = 'images/scoutSilhoutte.png';
       var profileImage = {};
-      var img = document.getElementById('scoutprofileimage');
+      var id = this.getImgId(scout);
+      var img = document.getElementById(id);
 
+      if (!img) {
+        return;
+      }
+      if (scout) {
+        firstName = scout._firstName;
+        lastName = scout._lastName;
+      }
       if (firstName !== undefined && lastName !== undefined) {
         var scoutName = firstName + lastName;
         var photoDbRef = firedb.ref('scoutphoto/' + scoutName);
@@ -197,7 +259,9 @@ app.component('scoutimage', {
               profileImage.url = url;
             })
           } else {
-            img.src = placeholder;
+            if (img) {
+              img.src = placeholder;
+            }
           }
         }, function(fail) {
           console.log(fail);

@@ -313,3 +313,55 @@
   margin-left: 30px;
   padding-right: 10px;
 }
+
+.trailtoeagle .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+
+.photoreport {
+  display: flex;
+  flex-wrap: wrap;
+}
+.photoreportcontainer .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+.photoreport .scoutname {
+  display: flex;
+  font-family: "Roboto", sans-serif;
+  font-size: smaller;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 100px;
+}
+.photoreport .scoutname .firstname {
+  margin: 5px auto 5px auto;
+}
+.photoreport .scoutname .lastname {
+  margin: 5px auto 5px auto;
+}
+.photoreport .scoutname .sep {
+  margin: 1px;
+}
+.photoreport .scoutimage {
+  padding-left: 10px;
+}
+
+.photoreport .scoutphoto {
+  width: 120px;
+  height: 150px;
+  margin: auto;
+}

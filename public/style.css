@@ -22,13 +22,14 @@ body {
 
 #user-info {
   clear: both;
-  margin: 0 auto 20px;
+  margin:  0  0 20px auto;
   max-width: 400px;
   padding: 10px;
 }
 
 #user-banner {
   background: #c0b0a0;
+  display:flex;
 }
 
 #name {
@@ -37,7 +38,39 @@ body {
   font-weight: bold;
 }
 
+#menu {
+  height: 24px;
+}
+
+#menu i {
+  padding: 15px;
+}
+
 .softwareversion {
   font-family: "Roboto", sans-serif;
   font-size: 10px;
+}
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
 }

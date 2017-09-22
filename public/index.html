@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Troop 66, Matawan, NJ - ScoutInfo</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/live/4.1/firebase.js"></script>
     <script src="config.js"></script>
     <script src="common.js"></script>
@@ -14,12 +16,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src='t66tmweb.js'></script>
     <link rel="stylesheet" type="text/css" href="t66tmweb.css">
+    <script src="slideInMenu.js"></script>
+    <link rel="stylesheet" type="text/css" href="slideInMenu.css">
     <script src="t66RankAdv.js"></script>
+    <script src="photoReport.js"></script>
     <script src="trailToEagleReport.js"></script>
     <script type="text/javascript" src="mbmap.js"></script>
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
-
   </head>
   <body>
     <div id="container">
@@ -28,6 +32,7 @@
         <div id="main">
           <div id="user-signed-in" class="hidden">
             <div id="user-banner">
+              <div id="menu"></div>
               <div id="user-info">
                 <div id="name"></div>
                 <div class="clearfix"></div>
@@ -35,10 +40,10 @@
              </div>
             <div id="scoutinfo" style="display:initial">
               <div ng-app='t66tmweb' class='t66tmweb'>
-                <scoutlist>		</scoutlist>
+                <scoutlist view="1">		</scoutlist>
               </div>
             </div>
-            <div class="softwareversion">v1.4.1</div>
+            <div class="softwareversion">v2.0</div>
             <p>
               <button id="sign-out">Sign Out</button>
             </p>
