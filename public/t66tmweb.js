@@ -184,14 +184,41 @@ app.component('scoutpor', {
   '<div class="scoutpor">'+
     '<div class="header">Positions of Responsibility</div>' +
     '<div class="por">' +
-      '<div class="pors" ng-repeat="por in $ctrl.scout._leadership">' +
+      '<div class="pors" ng-repeat="por in $ctrl.scout._leadership | orderBy: \'_startDate.time\'">' +
         '<position por="por"></position> ' +
       '</div>' +
     '</div>' +
   '</div>',
   bindings: {
     scout: '='
-  }
+  },
+  controller: [function() {
+    const _this = this;
+    _this.pormap = new Map();
+
+    _this.initpormap = function(pormap){
+       pormap.set("Asst SPL", "images/por/aspl.jpg");
+       pormap.set("Asst Patrol Ldr", "images/por/asst_patrol_leader.jpg");
+       pormap.set("Bugler", "images/por/bugler.jpg");
+       pormap.set("Chaplain Aide", "images/por/chaplainaide.jpg");
+       pormap.set("Den Chief", "images/por/denchief.jpg");
+       pormap.set("Historian", "images/por/historian.jpg");
+       pormap.set("Instructor", "images/por/instructor.jpg");
+       pormap.set("Inst - First Aid", "images/por/instructor.jpg");
+       pormap.set("Junior Asst SM", "images/por/jasm.jpg");
+       pormap.set("Librarian", "images/por/librarian.jpg");
+       pormap.set("O/A Rep", "images/por/oaTroopRep.jpg");
+       pormap.set("Patrol Leader", "images/por/patrol-leader.jpg");
+       pormap.set("Quartermaster", "images/por/quartermaster.jpg");
+       pormap.set("Scribe", "images/por/scribe.jpg");
+       pormap.set("Senior Patrol Ldr", "images/por/seniorpatrolleader.jpg");
+       pormap.set("Senior Patrol Ld", "images/por/seniorpatrolleader.jpg");
+       pormap.set("Troop Guide", "images/por/troopguide.jpg");
+       pormap.set("Troop Webmaster", "images/por/webmaster.jpg");
+    };
+
+    _this.initpormap(_this.pormap);
+  }]
 });
 app.component('scoutinfo', {
   template:
@@ -300,7 +327,7 @@ app.component('scoutmb', {
   '<div class="scoutmb">'+
     '<div class="header" >Merit Badges</div>' +
       '<div class="badges">' +
-        '<div class="meritbadge" ng-repeat="mb in $ctrl.scout.meritBadges">' +
+        '<div class="meritbadge" ng-repeat="mb in $ctrl.scout.meritBadges | orderBy: \'_earned.time\'">' +
           '<meritbadge mb="mb"></meritbadge> ' +
         '</div>' +
       '</div>' +
@@ -333,17 +360,20 @@ app.component('meritbadge', {
 });
 app.component('position', {
   template:
-    '<div class="position" title="">'+
-      '<div class="label">{{$ctrl.por._position}}</div><div class="sep"></div>'+
-      '<div class="posdaterange">'+
-      '<div class="rankdate"><scoutdate date="$ctrl.por._startDate"></scoutdate></div>'+
-      '<span style="margin:auto"> - </span>' +
-      '<div class="rankdate"><scoutdate date="$ctrl.por._endDate"></scoutdate></div>'+
+    '<div class="position" title="{{$ctrl.por._position}}">'+
+      '<img width="150px" height="150px" ng-src="{{$ctrl.porimage}}">' +
+      '<span class="porstartdate"><scoutdate date="$ctrl.por._startDate"></scoutdate></span>'+
+      '<span class="porenddate"><scoutdate date="$ctrl.por._endDate"></scoutdate></span>'+
       '</div>'+
     '</div>',
   bindings: {
     por: '='
-  }
+  },
+  controller: function ($scope) {
+    this.$onInit = function() {
+      this.porimage = $scope.$parent.$ctrl.pormap.get($scope.$ctrl.por._position);
+    };
+  },
 });
 
 app.component('camping', {
