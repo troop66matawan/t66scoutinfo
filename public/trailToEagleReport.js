@@ -18,9 +18,9 @@ app.component('trailtoeaglereport', {
     '<div class="td">{{scout._lastName}}</div><div class="td">{{scout._firstName}}</div>'+'' +
     '<div class="td"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
     '<div class="td"><scoutdate date="scout._dateOfBirth"></scoutdate></div>' +
-    '<div class="td">{{$ctrl.monthsTo18(scout._dateOfBirth)}} / {{$ctrl.daysTo18(scout._dateOfBirth)}}</div>' +
-    '<div class="td">{{scout._rankAdvancement._neededLeadership}}</div>'+
-    '<div class="td">{{scout.meritBadges.length}}</div><div class="td">{{$ctrl.needEagleReq(scout).length}}</div>' +
+    '<div class="td {{$ctrl.styleBackgroundDate(scout)}}">{{$ctrl.monthsTo18(scout._dateOfBirth)}} / {{$ctrl.daysTo18(scout._dateOfBirth)}}</div>' +
+    '<div class="td {{$ctrl.styleBackgroundLdr(scout)}}">{{scout._rankAdvancement._neededLeadership}}</div>'+
+    '<div class="td">{{scout.meritBadges.length}}</div><div class="td {{$ctrl.styleBackgroundMb(scout)}}">{{$ctrl.needEagleReq(scout).length}}</div>' +
     '<div class="td"><eagleneeded scout="scout"></eagleneeded></div>' +
   '</div>'+
   '</div>'+
@@ -48,6 +48,43 @@ app.component('trailtoeaglereport', {
         return  a._dateOfBirth.time - b._dateOfBirth.time;
       });
     }
+
+    _this.styleBackgroundMb = function(scout) {
+	var daysTo18 = _this.daysTo18(scout._dateOfBirth);
+	var needMB = _this.needEagleReq(scout).length;
+
+	if (daysTo18 < 30 && needMB > 0) {
+	    return "whiteonblack";
+	} else if (daysTo18 >= 30 && daysTo18 < 90 && needMB > 0) {
+	    return "whiteonred";
+	} else if (daysTo18 >= 90 && daysTo18 < 180 && needMB > 0) {
+	    return "blackonyellow";
+	}
+	return "";
+    };
+
+    _this.styleBackgroundDate = function(scout) {
+	var daysTo18 = _this.daysTo18(scout._dateOfBirth);
+
+	if (daysTo18 < 182) {
+	    return "whiteonred";
+	} else if (daysTo18 >= 182 && daysTo18 < 365) {
+	    return "blackonyellow";
+	}
+	return "";
+    };
+
+    _this.styleBackgroundLdr = function(scout) {
+	var daysTo18 = _this.daysTo18(scout._dateOfBirth);
+	var ldrDays = scout._rankAdvancement._neededLeadership;
+
+	if (ldrDays+60 > daysTo18) {
+	    return "whiteonred";
+	} else if (ldrDays+60 <= daysTo18 && ldrDays+180 > daysTo18) {
+	    return "blackonyellow";
+	}
+	return "";
+    };
 
     _this.needEagleReq = function(scout) {
       return EagleRequired.needEagleReq(scout);

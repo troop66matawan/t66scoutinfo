@@ -391,3 +391,18 @@
   height: 150px;
   margin: auto;
 }
+
+.whiteonred {
+  background: red;
+  color: white;
+}
+
+.blackonyellow {
+  background: yellow;
+  color: black;
+}
+
+.whiteonblack {
+  background: black;
+  color: white;
+ }

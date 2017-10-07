@@ -396,4 +396,17 @@ img {
 }
 span {
   page-break-inside: avoid;
+}.whiteonred {
+  background: red;
+  color: white;
 }
+
+.blackonyellow {
+  background: yellow;
+  color: black;
+}
+
+.whiteonblack {
+  background: black;
+  color: white;
+ }
