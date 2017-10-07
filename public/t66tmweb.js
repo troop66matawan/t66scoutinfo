@@ -1,5 +1,9 @@
 var app = angular.module('t66tmweb', ["firebase"]);
 
+app.run(['RankPatchFactory', function(RankPatchFactory) {
+  RankPatchFactory.initialize();
+}]);
+
 app.component('scoutlist', {
   bindings: {
   },
@@ -163,20 +167,76 @@ app.component('scoutdate', {
   }
 });
 
+app.factory('RankPatchFactory', function() {
+  var rankPatch = {};
+
+  rankPatch.initialize = function() {
+    rankPatch.patchMap = new Map();
+    rankPatch.patchMap.set("_scout", "images/rank/scout.png");
+    rankPatch.patchMap.set("_scout_old", "images/rank/scout_old.jpeg");
+    rankPatch.patchMap.set("_tenderfoot", "images/rank/tenderfoot.png");
+    rankPatch.patchMap.set("_2ndClass", "images/rank/secondclass.png");
+    rankPatch.patchMap.set("_1stClass", "images/rank/firstclass.png");
+    rankPatch.patchMap.set("_star", "images/rank/star.png");
+    rankPatch.patchMap.set("_life", "images/rank/life.png");
+    rankPatch.patchMap.set("_eagle", "images/rank/eagle.jpg");
+  };
+
+  rankPatch.getPatchUrl = function(rank,date) {
+    var getrank = rank;
+    if (rank === "_scout" ) {
+      if (date && date.year < 116) {//2016
+        getrank += "_old";
+      }
+    }
+    return rankPatch.patchMap.get(getrank);
+  };
+
+  return rankPatch;
+});
 app.component('scoutrank', {
   template:
   '<div class="scoutrank">'+
     '<div class="header">Ranks</div>' +
-    '<div class="rank"><div class="label">Scout:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._scout"></scoutdate></div></div>'+
-    '<div class="rank"><div class="label">Tenderfoot:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._tenderfoot"></scoutdate></div></div>'+
-    '<div class="rank"><div class="label">2nd Class:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._2ndClass"></scoutdate></div></div>'+
-    '<div class="rank"><div class="label">1st Class:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._1stClass"></scoutdate></div></div>'+
-    '<div class="rank"><div class="label">Star:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._star"></scoutdate></div></div>'+
-    '<div class="rank"><div class="label">Life:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._life"></scoutdate></div></div>'+
-    '<div class="rank"><div class="label">Eagle:</div><div class="sep"></div><div class="rankdate"><scoutdate date="$ctrl.scout._rankAdvancement._eagle"></scoutdate></div></div>'+
+    '<div class="ranks">'+
+      '<rankpatch rank="_scout"  date="$ctrl.scout._rankAdvancement._scout"></rankpatch>'+
+      '<rankpatch rank="_tenderfoot"  date="$ctrl.scout._rankAdvancement._tenderfoot"></rankpatch>'+
+      '<rankpatch rank="_2ndClass"  date="$ctrl.scout._rankAdvancement._2ndClass"></rankpatch>'+
+      '<rankpatch rank="_1stClass"  date="$ctrl.scout._rankAdvancement._1stClass"></rankpatch>'+
+      '<rankpatch rank="_star"  date="$ctrl.scout._rankAdvancement._star"></rankpatch>'+
+      '<rankpatch rank="_life"  date="$ctrl.scout._rankAdvancement._life"></rankpatch>'+
+      '<rankpatch rank="_eagle"  date="$ctrl.scout._rankAdvancement._eagle"></rankpatch>'+
+    '</div>' +
   '</div>',
   bindings: {
     scout: '='
+  },
+
+});
+app.component('rankpatch', {
+  template:
+  '<div ng-if="$ctrl.isValidDate()" class="rankpatch">'+
+   '<img class="rank" ng-src="{{$ctrl.getRankPatch($ctrl.rank,$ctrl.date)}}">' +
+   '<span class="rankdate"><scoutdate date="$ctrl.date"></scoutdate></span>'+
+  '</div>',
+  controller: ['RankPatchFactory', function(RankPatchFactory) {
+    const _this = this;
+    _this.rpf = RankPatchFactory;
+
+    _this.isValidDate = function() {
+      var rv = false;
+      if (_this.date && _this.date.time > 0)
+        rv = true;
+      
+      return rv;
+    };
+    _this.getRankPatch = function(rank,date) {
+      return _this.rpf.getPatchUrl(rank,date);
+    }
+  }],
+  bindings: {
+    rank: '@',
+    date: '<'
   }
 });
 app.component('scoutpor', {
