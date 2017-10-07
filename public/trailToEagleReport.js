@@ -10,7 +10,7 @@ app.component('trailtoeaglereport', {
     //		return "Last Name, First Name, Rank, Birthday,Months to 18,Leadership Remaining,Total Merit Badges,Count of remaining Eagle Badges, Remaining Eagle Required Badges";
 
     '<div class="td">Last name</div><div class="td">First Name</div><div class="td">Rank</div>'+'' +
-    '<div class="td">Birthday</div><div class="td">Months to 18</div><div class="td">Leadership Remaining</div>'+
+    '<div class="td">Birthday</div><div class="td">Months/Days to 18</div><div class="td">Leadership Remaining</div>'+
     '<div class="td">Total Merit Badges</div><div class="td"># Eagle remaining</div>'+'' +
     '<div class="td">Eagle MB Remaining</div>'+
   '</div>'+
@@ -18,8 +18,8 @@ app.component('trailtoeaglereport', {
     '<div class="td">{{scout._lastName}}</div><div class="td">{{scout._firstName}}</div>'+'' +
     '<div class="td"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
     '<div class="td"><scoutdate date="scout._dateOfBirth"></scoutdate></div>' +
-    '<div class="td">{{$ctrl.monthsTo18(scout._dateOfBirth)}}</div>' +
-    '<div class="td"></div>'+
+    '<div class="td">{{$ctrl.monthsTo18(scout._dateOfBirth)}} / {{$ctrl.daysTo18(scout._dateOfBirth)}}</div>' +
+    '<div class="td">{{scout._rankAdvancement._neededLeadership}}</div>'+
     '<div class="td">{{scout.meritBadges.length}}</div><div class="td">{{$ctrl.needEagleReq(scout).length}}</div>' +
     '<div class="td"><eagleneeded scout="scout"></eagleneeded></div>' +
   '</div>'+
@@ -63,6 +63,16 @@ app.component('trailtoeaglereport', {
         rv = true;
 
       return rv;
+    };
+
+    _this.daysTo18 = function(dob) {
+      var eighteen = new Date(dob.time);
+      eighteen.setFullYear(eighteen.getFullYear()+18);
+      var now = new Date();
+
+      var diff = eighteen - now;
+      
+      return Math.round((diff)/(1000*3600*24));
     };
 
     _this.monthsTo18 = function(dob) {
