@@ -35,11 +35,12 @@ app.component('scoutlist', {
          var usersRef = firedb.ref('users/' + user.uid);
          usersRef.on('value', function(snapshot) {
            var response = snapshot.val();
-           if (response.hasOwnProperty('FirstName') && response.hasOwnProperty('LastName')) {
-             var displayName = response.FirstName + ' ' + response.LastName;
+           if (response.hasOwnProperty('firstName') && response.hasOwnProperty('lastName')) {
+             var displayName = response.firstName + ' ' + response.lastName;
              document.getElementById('name').textContent = displayName;
            }
-           if (response.hasOwnProperty('scoutmaster')) {
+           if (response.hasOwnProperty('position')  &&
+                response.position === 'scoutmaster' || response.position === 'eaglecommittee') {
              var allScoutsRef = firedb.ref('scouts/');
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
@@ -77,6 +78,9 @@ app.component('scoutlist', {
                 scoutRef.on('value', function(snapshot) {
                   $scope.$apply(function(){
                     _this.scouts.push(snapshot.val());
+                    if (_this.scouts && _this.scouts.length > 0) {
+                      _this.selected = _this.scouts[0];
+                    }
                   });
                 });
               }
