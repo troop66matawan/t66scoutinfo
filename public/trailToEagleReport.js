@@ -35,7 +35,7 @@ app.component('trailtoeaglereport', {
       _this.scouts.forEach(function(scout) {
         var rank = scout._rankAdvancement;
         var dob = scout._dateOfBirth;
-        if ( (!rank.hasOwnProperty('_eagle')) && (rank.hasOwnProperty('_life')  || (!rank.hasOwnProperty('_life') &&
+        if ( rank && (!rank.hasOwnProperty('_eagle')) && (rank.hasOwnProperty('_life')  || (!rank.hasOwnProperty('_life') &&
              (_this.olderThanMinAge(dob)))))
         {
           _this.trailToEagleScouts.push(scout);
