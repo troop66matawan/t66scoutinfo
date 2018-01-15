@@ -19,7 +19,7 @@ app.component('trailtoeaglereport', {
     '<div class="td"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
     '<div class="td"><scoutdate date="scout._dateOfBirth"></scoutdate></div>' +
     '<div class="td {{$ctrl.styleBackgroundDate(scout)}}">{{$ctrl.monthsTo18(scout._dateOfBirth)}} / {{$ctrl.daysTo18(scout._dateOfBirth)}}</div>' +
-    '<div class="td {{$ctrl.styleBackgroundLdr(scout)}}">{{scout._rankAdvancement._neededLeadership}}</div>'+
+    '<div class="td {{$ctrl.styleBackgroundLdr(scout)}}"><leadershipneeded scout="scout"></leadershipneeded></div>'+
     '<div class="td">{{scout.meritBadges.length}}</div><div class="td {{$ctrl.styleBackgroundMb(scout)}}">{{$ctrl.needEagleReq(scout).length}}</div>' +
     '<div class="td"><eagleneeded scout="scout"></eagleneeded></div>' +
   '</div>'+

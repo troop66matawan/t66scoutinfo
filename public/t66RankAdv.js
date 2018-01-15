@@ -2,13 +2,13 @@ app.component('currentrank', {
   bindings: {
     rankadv: '=',
   },
-  template: '<div>{{$ctrl.currentRank}}</div>' ,
+  template: '<div>{{$ctrl.prettyPrint($ctrl.currentRank)}}</div>' ,
   controller: function() {
     const _this = this;
 
     _this.currentRank = 'none';
 
-    _this.$onInit = function() {
+    _this.prettyPrint = function() {
       if (_this.rankadv) {
         if (_this.rankadv.hasOwnProperty('_eagle')){
           _this.currentRank = 'Eagle';
@@ -25,9 +25,35 @@ app.component('currentrank', {
         } else if (_this.rankadv.hasOwnProperty('_scout')){
           _this.currentRank = 'Scout';
         }
+        return _this.currentRank;
       }
     };
 
+  }
+});
+
+app.component('leadershipneeded', {
+  bindings: {
+    scout: '=',
+  },
+  template: '<div>{{$ctrl.adjustLeadershipSinceReportDate()}}</div>' ,
+  controller: function() {
+    const _this = this;
+
+    _this.adjustLeadershipSinceReportDate = function() {
+      var neededLeadership=_this.scout._rankAdvancement._neededLeadership;
+      var rptDate=_this.scout._reportDate;
+      var report = new Date(rptDate.time);
+      var now = new Date();
+
+      var diff = now - report;
+
+      var result='';
+      if (neededLeadership !== undefined) {
+        result = (neededLeadership - Math.round((diff) / (1000 * 3600 * 24)));
+      }
+      return result;
+    };
   }
 });
 

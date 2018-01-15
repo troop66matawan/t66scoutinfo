@@ -287,15 +287,22 @@ app.component('scoutpor', {
 });
 app.component('scoutinfo', {
   template:
-    '<div class="scoutinfo"><div class="name"><scoutname scout="$ctrl.scout"></scoutname>' +
-    ' <scoutimage class="scoutinfoimage" scout="$ctrl.scout"></scoutimage></div><div' +
-    ' class="infobox">' +
-    ' <div' +
-    ' class="info' +
-    ' label' +
-    ' left">BSA' +
-    ' ID:</div> <div class="info left">{{$ctrl.scout._bsaID}}</div>' +
-    '<div class="info label right">DOB:</div><div class="info"><scoutdate date="$ctrl.scout._dateOfBirth"></scoutdate></div></div></div>',
+    '<div class="scoutinfo">'+
+      '<div class="name"><scoutname scout="$ctrl.scout"></scoutname>' +
+      ' <scoutimage class="scoutinfoimage" scout="$ctrl.scout"></scoutimage>'+
+      '</div>'+
+      '<div class="infobox">' +
+        '<div class="info label left">BSA ID:</div><div class="info left">{{$ctrl.scout._bsaID}}</div>' +
+        '<div class="info label right">DOB:</div>'+
+        '<div class="info"><scoutdate date="$ctrl.scout._dateOfBirth"></scoutdate></div>' +
+      '</div>'+
+      '<div class="infobox">' +
+        '<div class="info label left">Current Rank:</div>' +
+        '<div class="info"><currentrank rankadv="$ctrl.scout._rankAdvancement"></currentrank></div>'+
+        '<div class="info label right">Leadership Days Needed:</div>'+
+        '<div class="info"><leadershipneeded scout="$ctrl.scout"></leadershipneeded></div>' +
+      '</div>'+
+    '</div>',
   bindings: {
     scout: '='
   }
