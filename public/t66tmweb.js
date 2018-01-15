@@ -302,6 +302,10 @@ app.component('scoutinfo', {
         '<div class="info label right">Leadership Days Needed:</div>'+
         '<div class="info"><leadershipneeded scout="$ctrl.scout"></leadershipneeded></div>' +
       '</div>'+
+      '<div class="infobox">' +
+        '<div class="info label right">Service Project Hours Needed:</div>'+
+        '<div class="info">{{$ctrl.scout._rankAdvancement._neededServiceHours}}</div>' +
+      '</div>' +
     '</div>',
   bindings: {
     scout: '='
