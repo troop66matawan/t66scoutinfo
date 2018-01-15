@@ -9,6 +9,7 @@ app.component('currentrank', {
     _this.currentRank = 'none';
 
     _this.prettyPrint = function() {
+      _this.currentRank = undefined;
       if (_this.rankadv) {
         if (_this.rankadv.hasOwnProperty('_eagle')){
           _this.currentRank = 'Eagle';
