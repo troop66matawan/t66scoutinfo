@@ -269,6 +269,7 @@ app.component('scoutpor', {
        pormap.set("Historian", "images/por/historian.jpg");
        pormap.set("Instructor", "images/por/instructor.jpg");
        pormap.set("Inst - First Aid", "images/por/instructor.jpg");
+       pormap.set("Inst - Cooking", "images/por/instructor.jpg");
        pormap.set("Junior Asst SM", "images/por/jasm.jpg");
        pormap.set("Librarian", "images/por/librarian.jpg");
        pormap.set("O/A Rep", "images/por/oaTroopRep.jpg");
