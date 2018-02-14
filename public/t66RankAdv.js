@@ -2,33 +2,73 @@ app.component('currentrank', {
   bindings: {
     rankadv: '=',
   },
-  template: '<div>{{$ctrl.prettyPrint($ctrl.currentRank)}}</div>' ,
-  controller: function() {
+  template: '<div>{{$ctrl.prettyPrint()}}</div>' ,
+  controller: ['RankAdvancement', function(RankAdvancement) {
     const _this = this;
 
-    _this.currentRank = 'none';
-
     _this.prettyPrint = function() {
-      _this.currentRank = undefined;
-      if (_this.rankadv) {
-        if (_this.rankadv.hasOwnProperty('_eagle')){
-          _this.currentRank = 'Eagle';
-        } else if (_this.rankadv.hasOwnProperty('_life')){
-          _this.currentRank = 'Life';
-        } else if (_this.rankadv.hasOwnProperty('_star')){
-          _this.currentRank = 'Star';
-        } else if (_this.rankadv.hasOwnProperty('_1stClass')){
-          _this.currentRank = 'First Class';
-        } else if (_this.rankadv.hasOwnProperty('_2ndClass')){
-          _this.currentRank = 'Second Class';
-        } else if (_this.rankadv.hasOwnProperty('_tenderfoot')){
-          _this.currentRank = 'Tenderfoot';
-        } else if (_this.rankadv.hasOwnProperty('_scout')){
-          _this.currentRank = 'Scout';
-        }
-        return _this.currentRank;
-      }
+      return RankAdvancement.getCurrentRankText(_this.rankadv);
     };
+  }]
+});
+
+app.service('RankAdvancement', function() {
+
+  this.getCurrentRankText = function(rankadv) {
+    var rankDate = undefined;
+    if (rankadv) {
+      if (rankadv.hasOwnProperty('_eagle')){
+        rankDate = 'Eagle';
+      } else if (rankadv.hasOwnProperty('_life')){
+        rankDate = 'Life';
+      } else if (rankadv.hasOwnProperty('_star')){
+        rankDate = 'Star';
+      } else if (rankadv.hasOwnProperty('_1stClass')){
+        rankDate = 'First Class';
+      } else if (rankadv.hasOwnProperty('_2ndClass')){
+        rankDate = 'Second Class';
+      } else if (rankadv.hasOwnProperty('_tenderfoot')){
+        rankDate = 'Tenderfoot';
+      } else if (rankadv.hasOwnProperty('_scout')){
+        rankDate = 'Scout';
+      }
+      return rankDate;
+    }
+  };
+
+  this.getCurrentRankDate = function(rankadv) {
+    var rankDate = undefined;
+    if (rankadv) {
+      if (rankadv.hasOwnProperty('_eagle')){
+        rankDate = rankadv._eagle;
+      } else if (rankadv.hasOwnProperty('_life')){
+        rankDate = rankadv._life;
+      } else if (rankadv.hasOwnProperty('_star')){
+        rankDate = rankadv._star;
+      } else if (rankadv.hasOwnProperty('_1stClass')){
+        rankDate = rankadv._1stClass;
+      } else if (rankadv.hasOwnProperty('_2ndClass')){
+        rankDate = rankadv._2ndClass;
+      } else if (rankadv.hasOwnProperty('_tenderfoot')){
+        rankDate = rankadv._tenderfoot;
+      } else if (rankadv.hasOwnProperty('_scout')){
+        rankDate = rankadv._scout;
+      }
+    }
+    return rankDate;
+  };
+});
+
+
+app.component('currentrankdate', {
+  bindings: {
+    rankadv: '=',
+  },
+  template: '<div><scoutdate date="{{$ctrl.currentRankDate()}}"></div>' ,
+  controller: function() {
+    const _this = this;
+    
+
 
   }
 });
@@ -42,16 +82,18 @@ app.component('leadershipneeded', {
     const _this = this;
 
     _this.adjustLeadershipSinceReportDate = function() {
-      var neededLeadership=_this.scout._rankAdvancement._neededLeadership;
-      var rptDate=_this.scout._reportDate;
-      var report = new Date(rptDate.time);
-      var now = new Date();
-
-      var diff = now - report;
-
       var result='';
-      if (neededLeadership !== undefined) {
-        result = (neededLeadership - Math.round((diff) / (1000 * 3600 * 24)));
+      if (_this.scout && _this.scout._rankAdvancement) {
+        var neededLeadership = _this.scout._rankAdvancement._neededLeadership;
+        var rptDate = _this.scout._reportDate;
+        var report = new Date(rptDate.time);
+        var now = new Date();
+
+        var diff = now - report;
+
+        if (neededLeadership !== undefined) {
+          result = (neededLeadership - Math.round((diff) / (1000 * 3600 * 24)));
+        }
       }
       return result;
     };

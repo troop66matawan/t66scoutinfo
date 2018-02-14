@@ -354,6 +354,16 @@
   padding-bottom: 3px;
   padding-right: 20px;
 }
+.scoutsnotadvancing .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
 
 .photoreport {
   display: flex;
