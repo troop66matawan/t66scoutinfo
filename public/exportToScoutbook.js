@@ -22,8 +22,8 @@ app.component('exporttoscoutbook', {
 
     _this.createCSVAdvancement = function(scout,type,advancement,date){
       var csv = scout._bsaID + ',';
-      csv += scout._lastName + ',';
       csv += scout._firstName + ',';
+      csv += scout._lastName + ',';
       csv += type + ',';
       csv += advancement + ',';
       csv += (date.month +1) + '/'+date.date + '/' + (1900+date.year) + ',';
