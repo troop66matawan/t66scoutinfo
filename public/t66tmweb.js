@@ -17,6 +17,7 @@ app.component('scoutlist', {
     _this.trailToEagleReportMenuItem =       {name: 'Trail to Eagle Advancement Report', value: 2};
     _this.photoReportMenuItem = {name: 'Scout Photo Report', value: 3};
     _this.scoutsNotAdvancing = {name: 'Scouts Not Advancing', value: 4};
+    _this.exportToScoutbook = {name: 'Export to Scoutbook', value: 5};
 
 
     var firebaseAuthObject = $firebaseAuth(firebaseauth);
@@ -48,6 +49,7 @@ app.component('scoutlist', {
                  _this.menuOptions.push(_this.trailToEagleReportMenuItem);
                  _this.menuOptions.push(_this.photoReportMenuItem);
                  _this.menuOptions.push(_this.scoutsNotAdvancing);
+                 _this.menuOptions.push(_this.exportToScoutbook);
 
                  _this.scouts = _this.firePropsToArray(snapshot.val());
 
@@ -127,6 +129,7 @@ app.component('scoutlist', {
     '<trailtoeaglereport ng-if="$ctrl.view === 2" scouts="$ctrl.scouts" min-age="16"></trailtoeaglereport>' +
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
     '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="$ctrl.scouts"></scoutsnotadvancing>' +
+    '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {
