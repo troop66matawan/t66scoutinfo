@@ -56,34 +56,36 @@ app.component('exporttoscoutbook', {
       csvString = _this.encodeCSV();
       csvString += 'BSA Member ID,First Name,Last Name,Advancement Type,Advancement,Date Completed,Approved\r\n';
       _this.scouts.forEach(function(scout) {
-        var rank = scout._rankAdvancement;
+        if (scout._bsaID !== undefined) {
+          var rank = scout._rankAdvancement;
 
-        if (rank.hasOwnProperty('_scout')) {
-          csvString += _this.createCSVAdvancement(scout,'Rank','Scout', rank._scout );
-        }
-        if (rank.hasOwnProperty('_tenderfoot')) {
-          csvString += _this.createCSVAdvancement(scout,'Rank','Tenderfoot', rank._tenderfoot );
-        }
-        if (rank.hasOwnProperty('_2ndClass')) {
-          csvString += _this.createCSVAdvancement(scout,'Rank','Second Class', rank._2ndClass );
-        }
-        if (rank.hasOwnProperty('_1stClass')) {
-          csvString += _this.createCSVAdvancement(scout,'Rank','First Class', rank._1stClass );
-        }
-        if (rank.hasOwnProperty('_star')) {
-          csvString += _this.createCSVAdvancement(scout,'Rank','Star Scout', rank._star );
-        }
-        if (rank.hasOwnProperty('_life')) {
-          csvString += _this.createCSVAdvancement(scout,'Rank','Life Scout', rank._life );
-        }
-        if (rank.hasOwnProperty('_eagle')) {
-          csvString += _this.createCSVAdvancement(scout,'Rank','Eagle Scout', rank._eagle );
-        }
-        if (scout.meritBadges !== undefined ) {
-          for (var j = 0; j < scout.meritBadges.length; j++) {
-            csvString += _this.createCSVAdvancement(scout, 'Merit Badge',
-              _this.mapTroopMasterMBNameToScoutbook(scout.meritBadges[j]._name),
-              scout.meritBadges[j]._earned);
+          if (rank.hasOwnProperty('_scout')) {
+            csvString += _this.createCSVAdvancement(scout, 'Rank', 'Scout', rank._scout);
+          }
+          if (rank.hasOwnProperty('_tenderfoot')) {
+            csvString += _this.createCSVAdvancement(scout, 'Rank', 'Tenderfoot', rank._tenderfoot);
+          }
+          if (rank.hasOwnProperty('_2ndClass')) {
+            csvString += _this.createCSVAdvancement(scout, 'Rank', 'Second Class', rank._2ndClass);
+          }
+          if (rank.hasOwnProperty('_1stClass')) {
+            csvString += _this.createCSVAdvancement(scout, 'Rank', 'First Class', rank._1stClass);
+          }
+          if (rank.hasOwnProperty('_star')) {
+            csvString += _this.createCSVAdvancement(scout, 'Rank', 'Star Scout', rank._star);
+          }
+          if (rank.hasOwnProperty('_life')) {
+            csvString += _this.createCSVAdvancement(scout, 'Rank', 'Life Scout', rank._life);
+          }
+          if (rank.hasOwnProperty('_eagle')) {
+            csvString += _this.createCSVAdvancement(scout, 'Rank', 'Eagle Scout', rank._eagle);
+          }
+          if (scout.meritBadges !== undefined) {
+            for (var j = 0; j < scout.meritBadges.length; j++) {
+              csvString += _this.createCSVAdvancement(scout, 'Merit Badge',
+                _this.mapTroopMasterMBNameToScoutbook(scout.meritBadges[j]._name),
+                scout.meritBadges[j]._earned);
+            }
           }
         }
       });
@@ -95,6 +97,7 @@ app.component('exporttoscoutbook', {
       mbMap.set("Cit In Community", "Citizenship in the Community");
       mbMap.set("Cit In Nation", "Citizenship in the Nation");
       mbMap.set("Cit In World", "Citizenship in the World");
+      mbMap.set("Disability Aware", "Disabilities Awareness");
       mbMap.set("Emergency Prep", "Emergency Preparedness");
       mbMap.set("Environmental Sci", "Environmental Science");
       mbMap.set("Fish and_Wildlife_Management", "Fish and Wildlife Management");
@@ -105,6 +108,7 @@ app.component('exporttoscoutbook', {
       mbMap.set("Search %26_Rescue", "Search and Rescue");
       mbMap.set("Signs%2C Signals%2C_and_Codes", "Signs, Signals, and Codes");
       mbMap.set("Soil and Water", "Soil and Water Conservation");
+      mbMap.set("Small Boat Sailing", "Small-Boat Sailing");
     }
 
   }]
