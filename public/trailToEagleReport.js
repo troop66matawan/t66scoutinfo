@@ -16,7 +16,7 @@ app.component('trailtoeaglereport', {
   '</div>'+
   '<div class="tr" ng-repeat="scout in $ctrl.trailToEagleScouts">'+
     '<div class="td">{{scout._lastName}}</div><div class="td">{{scout._firstName}}</div>'+'' +
-    '<div class="td"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
+    '<div class="td {{$ctrl.styleBackgroundRank(scout)}}"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
     '<div class="td"><scoutdate date="scout._dateOfBirth"></scoutdate></div>' +
     '<div class="td {{$ctrl.styleBackgroundDate(scout)}}">{{$ctrl.monthsTo18(scout._dateOfBirth)}} / {{$ctrl.daysTo18(scout._dateOfBirth)}}</div>' +
     '<div class="td {{$ctrl.styleBackgroundLdr(scout)}}"><leadershipneeded scout="scout"></leadershipneeded></div>'+
@@ -25,7 +25,7 @@ app.component('trailtoeaglereport', {
   '</div>'+
   '</div>'+
   '</div>',
-  controller: ['EagleRequired', function(EagleRequired) {
+  controller: ['EagleRequired','RankAdvancement', function(EagleRequired,RankAdvancement) {
     const _this = this;
     _this.trailToEagleScouts = [];
 
@@ -64,14 +64,18 @@ app.component('trailtoeaglereport', {
     };
 
     _this.styleBackgroundDate = function(scout) {
-	var daysTo18 = _this.daysTo18(scout._dateOfBirth);
-
-	if (daysTo18 < 182) {
-	    return "whiteonred";
-	} else if (daysTo18 >= 182 && daysTo18 < 365) {
-	    return "blackonyellow";
-	}
-	return "";
+	     var daysTo18 = _this.daysTo18(scout._dateOfBirth);
+       var currentRank = RankAdvancement.getCurrentRankText(scout._rankAdvancement);
+       
+       if (currentRank === "Life") {
+         if (daysTo18 < 182) {
+           return "whiteonred";
+         } else if (daysTo18 >= 182 && daysTo18 < 365) {
+           return "blackonyellow";
+         }
+      } else {
+        return _this.styleBackgroundRank(scout);
+      }  
     };
 
     _this.styleBackgroundLdr = function(scout) {
@@ -85,6 +89,33 @@ app.component('trailtoeaglereport', {
 	}
 	return "";
     };
+    
+    _this.styleBackgroundRank = function(scout) {
+      var monthsTo18 = _this.monthsTo18(scout._dateOfBirth);
+      var daysTo18 = _this.daysTo18(scout._dateOfBirth);
+      var ldrDays = scout._rankAdvancement._neededLeadership;
+      var currentRank = RankAdvancement.getCurrentRankText(scout._rankAdvancement);
+      
+      if (currentRank === 'First Class' || currentRank === 'Second Class' || currentRank === 'Tenderfoot' || currentRank === 'Scout') {
+        if ((monthsTo18 < 12) || (daysTo18 < (365 - ldrDays)) ) {
+          return "whiteonblack";
+        } else if ((monthsTo18 < 14) || (daysTo18 < (14*30 - ldrDays)) ){
+          return "whiteonred";
+        } if ((monthsTo18 < 16) || (daysTo18 < (16*30 - ldrDays)) ){
+          return "blackonyellow";
+        } 
+      } else if (currentRank === 'Star') {
+        if ((monthsTo18 < 6) || (daysTo18 < (180 - ldrDays)) ) {
+          return "whiteonblack";
+        } else if ((monthsTo18 < 8) || (daysTo18 < (8*30 - ldrDays)) ){
+          return "whiteonred";
+        } if ((monthsTo18 < 12) || (daysTo18 < (365 - ldrDays)) ){
+          return "blackonyellow";
+        } 
+      }
+      
+      return "";
+    }
 
     _this.needEagleReq = function(scout) {
       return EagleRequired.needEagleReq(scout);
