@@ -299,19 +299,31 @@ app.component('scoutinfo', {
       ' <scoutimage class="scoutinfoimage" scout="$ctrl.scout"></scoutimage>'+
       '</div>'+
       '<div class="infobox">' +
-        '<div class="info label left">BSA ID:</div><div class="info left">{{$ctrl.scout._bsaID}}</div>' +
-        '<div class="info label right">DOB:</div>'+
-        '<div class="info"><scoutdate date="$ctrl.scout._dateOfBirth"></scoutdate></div>' +
+        '<div class="infoitem">'+
+          '<div class="info label left">BSA ID:</div><div class="info left">{{$ctrl.scout._bsaID}}</div>' +
+        '</div>' +          
+        '<div class="info placeholder"></div>' +
+        '<div class="infoitem">'+
+          '<div class="info label right">DOB:</div>'+
+          '<div class="info"><scoutdate date="$ctrl.scout._dateOfBirth"></scoutdate></div>' +
+        '</div>' +
       '</div>'+
       '<div class="infobox">' +
-        '<div class="info label left">Current Rank:</div>' +
-        '<div class="info"><currentrank rankadv="$ctrl.scout._rankAdvancement"></currentrank></div>'+
-        '<div class="info label right">Leadership Days Needed:</div>'+
+      '<div class="infoitem">'+
+        '<div class="info label left">Leadership Days Needed:</div>'+
         '<div class="info"><leadershipneeded scout="$ctrl.scout"></leadershipneeded></div>' +
       '</div>'+
+      '<div class="info placeholder"></div>' +
+      '<div class="infoitem">'+
+          '<div class="info label right">Current Rank:</div>' +
+          '<div class="info"><currentrank rankadv="$ctrl.scout._rankAdvancement"></currentrank></div>'+
+        '</div>' +
+      '</div>' +
       '<div class="infobox">' +
-        '<div class="info label right">Service Project Hours Needed:</div>'+
-        '<div class="info">{{$ctrl.scout._rankAdvancement._neededServiceHours}}</div>' +
+        '<div class="infoitem">'+
+          '<div class="info label left">Service Project Hours Needed:</div>'+
+          '<div class="info">{{$ctrl.scout._rankAdvancement._neededServiceHours}}</div>' +
+        '</div>' +
       '</div>' +
     '</div>',
   bindings: {
