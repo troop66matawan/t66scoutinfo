@@ -146,6 +146,18 @@
   border-radius: 6px;
   font-weight: bold;
 }
+.scoutmb .badges .meritbadge .badge .mbname{
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  background: rgba(255,255,255,.6);
+  color: rgba(0,0,0,.9);
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  padding: 3px;
+  border-radius: 6px;
+  font-weight: bold;
+}
 
 .scoutmb .summary {
   width: 75%;

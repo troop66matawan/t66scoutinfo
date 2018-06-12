@@ -440,14 +440,26 @@ app.component('scoutmb', {
 });
 app.component('meritbadge', {
   template:
-    '<div class="badge" title="{{$ctrl.mb._name}}">'+
+    '<div class="badge" title="{{$ctrl.mb._name}}" ng-click="$ctrl.onClick()">'+
       '<img width="75px" height="75px" src="{{$ctrl.mbimage}}">' +
       '<span class="mbearneddate"><scoutdate date="$ctrl.mb._earned"></scoutdate></span>' +
+      '<span class="mbname" style="visibility: {{$ctrl.getVisibility()}}">{{$ctrl.mb._name}}</span>'+
     '</div>',
   controller: function ($scope) {
+    this.visible = false;
     this.$onInit = function() {
       this.mbimage = $scope.$parent.$ctrl.mbMap.get($scope.$ctrl.mb._name);
     };
+    this.onClick = function() {    
+      this.visible = !this.visible;  
+    };
+    this.getVisibility = function() {
+      var visible = 'hidden';
+      if (this.visible) {
+        visible = 'visible';
+      }
+      return visible;      
+    }
   },
   bindings: {
     mb: '='
