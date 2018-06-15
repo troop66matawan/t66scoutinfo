@@ -182,9 +182,24 @@
 }
 
 .scoutmb .eagleneeded {
-  width: 50%;
-  text-align: right;
+  display: inherit;
+  padding-right: 7px;
   font-family: "Roboto", sans-serif;
+}
+
+eagleneeded {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-left: auto;
+}
+
+.eagleneeded::after {
+  content: ", ";
+}
+
+.eagleneeded:last-child:after {
+  content: "";
 }
 
 .camping {
@@ -268,6 +283,14 @@
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
   font-family: "Roboto", sans-serif;
+}
+
+.trailtoeagle .table .td {
+  max-width: 100px;
+}
+
+.trailtoeagle .table .td:last-child {
+  max-width: initial;
 }
 
 .t66footer {

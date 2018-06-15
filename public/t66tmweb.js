@@ -446,7 +446,7 @@ app.component('meritbadge', {
       '<span class="mbname" style="visibility: {{$ctrl.getVisibility()}}">{{$ctrl.mb._name}}</span>'+
     '</div>',
   controller: function ($scope) {
-    this.visible = false;
+    this.visible = true;
     this.$onInit = function() {
       this.mbimage = $scope.$parent.$ctrl.mbMap.get($scope.$ctrl.mb._name);
     };

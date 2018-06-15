@@ -1,3 +1,7 @@
+@page {
+  size: letter landscape;
+}
+
 .t66tmweb {
   height: 100%;
 }
@@ -55,6 +59,7 @@
 }
 .infobox {
   display: flex;
+  flex-wrap: wrap;
   width: 75%;
   margin-left: 30px;
 }
@@ -63,6 +68,16 @@
   font-family: "Roboto", sans-serif;
   white-space: pre;
 }
+
+.infobox .infoitem {
+  flex-wrap: nowrap;
+  display: inherit;
+}
+
+.infobox .placeholder {
+  margin-left: auto;
+}
+
 .posdaterange {
   display: flex;
   width: 55%;
@@ -164,6 +179,21 @@
   display: block;
   page-break-inside: avoid;
 }
+
+.scoutmb .badges .meritbadge .badge .mbname{
+   position: absolute;
+   left: 2px;
+   top: 7px;
+   background: rgba(255,255,255,.6);
+   color: rgba(0,0,0,.9);
+   font-family: "Roboto", sans-serif;
+   font-size: 10px;
+   padding: 3px;
+   border-radius: 6px;
+   font-weight: bold;
+ }
+
+
 meritbadge {
   page-break-inside: avoid;
 }
@@ -190,9 +220,24 @@ meritbadge {
 }
 
 .scoutmb .eagleneeded {
-  width: 50%;
-  text-align: right;
+  display: inherit;
+  padding-right: 7px;
   font-family: "Roboto", sans-serif;
+}
+
+eagleneeded {
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+  margin-left: auto;
+}
+
+.eagleneeded::after {
+  content: ", ";
+}
+
+.eagleneeded:last-child:after {
+  content: "";
 }
 
 .camping {
@@ -276,6 +321,19 @@ meritbadge {
   border-bottom: 1px solid #d0d0d0;
   border-right: 1px solid #d0d0d0;
   font-family: "Roboto", sans-serif;
+}
+
+.trailtoeagle .table .td {
+  max-width: 100px;
+}
+
+.trailtoeagle eagleneeded {
+  width: 100%;
+}
+
+.trailtoeagle .table .td:last-child {
+  max-width: 700px;
+  min-width: 400px;
 }
 
 .t66footer {
