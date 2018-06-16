@@ -289,6 +289,9 @@ eagleneeded {
   max-width: 100px;
 }
 
+.trailtoeagle .bd {
+  font-size: 8pt;
+}
 .trailtoeagle .table .td:last-child {
   max-width: initial;
 }

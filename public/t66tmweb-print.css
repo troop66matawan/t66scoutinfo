@@ -331,6 +331,9 @@ eagleneeded {
   width: 100%;
 }
 
+.trailtoeagle .bd {
+  font-size: 8pt;
+}
 .trailtoeagle .table .td:last-child {
   max-width: 700px;
   min-width: 400px;
