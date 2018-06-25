@@ -375,6 +375,11 @@ eagleneeded {
   padding-right: 5px;
 }
 
+.porpercentage {
+  position: absolute;
+  bottom: 15px;
+  margin-bottom: -30px;
+}
 .reportdate {
   margin-top: 30px;
   display: flex;

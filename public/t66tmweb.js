@@ -7,7 +7,7 @@ app.run(['RankPatchFactory', function(RankPatchFactory) {
 app.component('scoutlist', {
   bindings: {
   },
-  controller: function ($scope, $window, $firebaseAuth) {
+  controller: function ($scope, $window, $firebaseAuth, activityService) {
     const _this = this;
     _this.scouts = [];
     _this.view = 1;
@@ -26,6 +26,7 @@ app.component('scoutlist', {
         // have logged in user, now get accessToken to access database
         authData.getIdToken().then(function(accessToken) {
           _this.getScouts(authData,accessToken);
+          activityService.getActivities(authData);
         });
       } else {
         console.log("Logged out");
@@ -256,7 +257,7 @@ app.component('scoutpor', {
     '<div class="header">Positions of Responsibility</div>' +
     '<div class="por">' +
       '<div class="pors" ng-repeat="por in $ctrl.scout._leadership | orderBy: \'_startDate.time\'">' +
-        '<position por="por"></position> ' +
+        '<position por="por" scout="$ctrl.scout"></position> ' +
       '</div>' +
     '</div>' +
   '</div>',
@@ -471,14 +472,20 @@ app.component('position', {
       '<img width="150px" height="150px" ng-src="{{$ctrl.porimage}}">' +
       '<span class="porstartdate"><scoutdate date="$ctrl.por._startDate"></scoutdate></span>'+
       '<span class="porenddate"><scoutdate date="$ctrl.por._endDate"></scoutdate></span>'+
+      '<div class="porpercentage">'+
+        '<div><span class="label">Camping %</span><span class="value">{{$ctrl.campingpercent}}</span></div>'+
       '</div>'+
     '</div>',
   bindings: {
-    por: '='
+    por: '=',
+    scout: '='
   },
-  controller: function ($scope) {
+  controller: function ($scope,activityService) {
     this.$onInit = function() {
       this.porimage = $scope.$parent.$ctrl.pormap.get($scope.$ctrl.por._position);
+      this.campingpercent = Math.trunc(100 * activityService.getScoutCampingPercentage($scope.$ctrl.scout._camping,
+        $scope.$ctrl.por._startDate.time,
+        $scope.$ctrl.por._endDate.time));
     };
   },
 });
