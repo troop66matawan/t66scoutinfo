@@ -296,6 +296,10 @@ eagleneeded {
   max-width: initial;
 }
 
+.leadershipreport .table .position {
+  min-width: 155px;
+}
+
 .t66footer {
   background: #d0c0b0;
   height: 150px;

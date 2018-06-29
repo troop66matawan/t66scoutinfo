@@ -18,6 +18,7 @@ app.component('scoutlist', {
     _this.photoReportMenuItem = {name: 'Scout Photo Report', value: 3};
     _this.scoutsNotAdvancing = {name: 'Scouts Not Advancing', value: 4};
     _this.exportToScoutbook = {name: 'Export to Scoutbook', value: 5};
+    _this.leadershipReport = {name: 'Leadership Attendance Report', value: 6};
 
 
     var firebaseAuthObject = $firebaseAuth(firebaseauth);
@@ -51,6 +52,7 @@ app.component('scoutlist', {
                  _this.menuOptions.push(_this.photoReportMenuItem);
                  _this.menuOptions.push(_this.scoutsNotAdvancing);
                  _this.menuOptions.push(_this.exportToScoutbook);
+                 _this.menuOptions.push(_this.leadershipReport);
 
                  _this.scouts = _this.firePropsToArray(snapshot.val());
 
@@ -131,6 +133,7 @@ app.component('scoutlist', {
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
     '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="$ctrl.scouts"></scoutsnotadvancing>' +
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
+    '<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {
@@ -251,48 +254,7 @@ app.component('rankpatch', {
     date: '<'
   }
 });
-app.component('scoutpor', {
-  template:
-  '<div class="scoutpor">'+
-    '<div class="header">Positions of Responsibility</div>' +
-    '<div class="por">' +
-      '<div class="pors" ng-repeat="por in $ctrl.scout._leadership | orderBy: \'_startDate.time\'">' +
-        '<position por="por" scout="$ctrl.scout"></position> ' +
-      '</div>' +
-    '</div>' +
-  '</div>',
-  bindings: {
-    scout: '='
-  },
-  controller: [function() {
-    const _this = this;
-    _this.pormap = new Map();
 
-    _this.initpormap = function(pormap){
-       pormap.set("Asst SPL", "images/por/aspl.jpg");
-       pormap.set("Asst Patrol Ldr", "images/por/asst_patrol_leader.jpg");
-       pormap.set("Bugler", "images/por/bugler.jpg");
-       pormap.set("Chaplain Aide", "images/por/chaplainaide.jpg");
-       pormap.set("Den Chief", "images/por/denchief.jpg");
-       pormap.set("Historian", "images/por/historian.jpg");
-       pormap.set("Instructor", "images/por/instructor.jpg");
-       pormap.set("Inst - First Aid", "images/por/instructor.jpg");
-       pormap.set("Inst - Cooking", "images/por/instructor.jpg");
-       pormap.set("Junior Asst SM", "images/por/jasm.jpg");
-       pormap.set("Librarian", "images/por/librarian.jpg");
-       pormap.set("O/A Rep", "images/por/oaTroopRep.jpg");
-       pormap.set("Patrol Leader", "images/por/patrol-leader.jpg");
-       pormap.set("Quartermaster", "images/por/quartermaster.jpg");
-       pormap.set("Scribe", "images/por/scribe.jpg");
-       pormap.set("Senior Patrol Ldr", "images/por/seniorpatrolleader.jpg");
-       pormap.set("Senior Patrol Ld", "images/por/seniorpatrolleader.jpg");
-       pormap.set("Troop Guide", "images/por/troopguide.jpg");
-       pormap.set("Troop Webmaster", "images/por/webmaster.jpg");
-    };
-
-    _this.initpormap(_this.pormap);
-  }]
-});
 app.component('scoutinfo', {
   template:
     '<div class="scoutinfo">'+
@@ -465,29 +427,6 @@ app.component('meritbadge', {
   bindings: {
     mb: '='
   }
-});
-app.component('position', {
-  template:
-    '<div class="position" title="{{$ctrl.por._position}}">'+
-      '<img width="150px" height="150px" ng-src="{{$ctrl.porimage}}">' +
-      '<span class="porstartdate"><scoutdate date="$ctrl.por._startDate"></scoutdate></span>'+
-      '<span class="porenddate"><scoutdate date="$ctrl.por._endDate"></scoutdate></span>'+
-      '<div class="porpercentage">'+
-        '<div><span class="label">Camping %</span><span class="value">{{$ctrl.campingpercent}}</span></div>'+
-      '</div>'+
-    '</div>',
-  bindings: {
-    por: '=',
-    scout: '='
-  },
-  controller: function ($scope,activityService) {
-    this.$onInit = function() {
-      this.porimage = $scope.$parent.$ctrl.pormap.get($scope.$ctrl.por._position);
-      this.campingpercent = Math.trunc(100 * activityService.getScoutCampingPercentage($scope.$ctrl.scout._camping,
-        $scope.$ctrl.por._startDate.time,
-        $scope.$ctrl.por._endDate.time));
-    };
-  },
 });
 
 app.component('camping', {
