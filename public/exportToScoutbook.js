@@ -4,7 +4,8 @@ app.component('exporttoscoutbook', {
   },
   template:   '<div class="exporttoscoutbook">'+
   '<div class="header">Export Data to Scoutbook</div>' +
-  '<div id="downloadAdvancement"><button ng-click="$ctrl.exportAdvancement()">Advancement</button></div>' +
+    '<div id="downloadAdvancement"><button ng-click="$ctrl.exportAdvancement()">Advancement</button></div>' +
+    '<div id="downloadLogs"><button ng-click="$ctrl.exportLogs()">Logs</button></div>' +
   '</div>',
   controller: [ function() {
     var _this = this;
@@ -90,6 +91,48 @@ app.component('exporttoscoutbook', {
         }
       });
       _this.downloadCsv(csvString,'advancement', 'downloadAdvancement' );
+    };
+
+    _this.createCSVLogs = function(scout,type,date,nights,days,miles,hours,frostpoints,locationName,notes){
+      var csv = scout._bsaID + ',';
+      csv += scout._firstName + ',';
+      csv += scout._lastName + ',';
+      csv += type + ',';
+      csv += (date.month +1) + '/'+date.date + '/' + (1900+date.year) + ',';
+      csv += nights + ',';
+      csv += days + ',';
+      csv += miles + ',';
+      csv += hours + ',';
+      csv += frostpoints + ',';
+      csv += locationName + ',';
+      csv += notes + ',';
+      csv += '\r\n';
+      return csv;
+    };
+
+    _this.exportLogs = function() {
+      csvString = _this.encodeCSV();
+      csvString += 'BSA Member ID,First Name,Last Name,Log Type,Date,Nights,Days,Miles,Hours,Frost' +
+        ' Points,Location/Name,Notes\r\n';
+      _this.scouts.forEach(function(scout) {
+        if (scout._bsaID !== undefined) {
+          if (scout._service && scout._service.length > 0) {
+            scout._service.forEach(function(service) {
+              csvString += _this.createCSVLogs(scout, "Service", service.activityDate, '', '', '', service.amount, '',
+                service.location, service.remarks);
+            });
+          }
+          if (scout._camping && scout._camping.length > 0) {
+            scout._camping.forEach(function(camping) {
+              var nights = parseFloat(camping.amount);
+              csvString += _this.createCSVLogs(scout, "Camping", camping.activityDate, nights, nights + 1, '', '', '',
+                camping.location, camping.remarks);
+            });
+          }
+        }
+      });
+      _this.downloadCsv(csvString,'logs', 'downloadLogs' );
+
     };
 
     function initTmMBMap(mbMap) {
