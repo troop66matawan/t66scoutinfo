@@ -50,23 +50,23 @@ app.component('trailtoeaglereport', {
     }
 
     _this.styleBackgroundMb = function(scout) {
-	var daysTo18 = _this.daysTo18(scout._dateOfBirth);
-	var needMB = _this.needEagleReq(scout).length;
+      var daysTo18 = _this.daysTo18(scout._dateOfBirth);
+      var needMB = _this.needEagleReq(scout).length;
 
-	if (daysTo18 < 30 && needMB > 0) {
-	    return "whiteonblack";
-	} else if (daysTo18 >= 30 && daysTo18 < 90 && needMB > 0) {
-	    return "whiteonred";
-	} else if (daysTo18 >= 90 && daysTo18 < 180 && needMB > 0) {
-	    return "blackonyellow";
-	}
-	return "";
+      if (daysTo18 < 30 && needMB > 0) {
+        return "whiteonblack";
+      } else if (daysTo18 >= 30 && daysTo18 < 90 && needMB > 0) {
+        return "whiteonred";
+      } else if (daysTo18 >= 90 && daysTo18 < 180 && needMB > 0) {
+        return "blackonyellow";
+      }
+      return "";
     };
 
     _this.styleBackgroundDate = function(scout) {
 	     var daysTo18 = _this.daysTo18(scout._dateOfBirth);
        var currentRank = RankAdvancement.getCurrentRankText(scout._rankAdvancement);
-       
+
        if (currentRank === "Life") {
          if (daysTo18 < 182) {
            return "whiteonred";
@@ -75,7 +75,7 @@ app.component('trailtoeaglereport', {
          }
       } else {
         return _this.styleBackgroundRank(scout);
-      }  
+      }
     };
 
     _this.styleBackgroundLdr = function(scout) {
@@ -89,13 +89,13 @@ app.component('trailtoeaglereport', {
 	}
 	return "";
     };
-    
+
     _this.styleBackgroundRank = function(scout) {
       var monthsTo18 = _this.monthsTo18(scout._dateOfBirth);
       var daysTo18 = _this.daysTo18(scout._dateOfBirth);
       var ldrDays = scout._rankAdvancement._neededLeadership;
       var currentRank = RankAdvancement.getCurrentRankText(scout._rankAdvancement);
-      
+
       if (currentRank === 'First Class' || currentRank === 'Second Class' || currentRank === 'Tenderfoot' || currentRank === 'Scout') {
         if ((monthsTo18 < 12) || (daysTo18 < (365 - ldrDays)) ) {
           return "whiteonblack";
@@ -103,7 +103,7 @@ app.component('trailtoeaglereport', {
           return "whiteonred";
         } if ((monthsTo18 < 16) || (daysTo18 < (16*30 - ldrDays)) ){
           return "blackonyellow";
-        } 
+        }
       } else if (currentRank === 'Star') {
         if ((monthsTo18 < 6) || (daysTo18 < (180 - ldrDays)) ) {
           return "whiteonblack";
@@ -111,9 +111,9 @@ app.component('trailtoeaglereport', {
           return "whiteonred";
         } if ((monthsTo18 < 12) || (daysTo18 < (365 - ldrDays)) ){
           return "blackonyellow";
-        } 
+        }
       }
-      
+
       return "";
     }
 
@@ -139,7 +139,7 @@ app.component('trailtoeaglereport', {
       var now = new Date();
 
       var diff = eighteen - now;
-      
+
       return Math.round((diff)/(1000*3600*24));
     };
 
