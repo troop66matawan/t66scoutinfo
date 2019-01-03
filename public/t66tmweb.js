@@ -288,6 +288,10 @@ app.component('scoutpor', {
        pormap.set("Senior Patrol Ld", "images/por/seniorpatrolleader.jpg");
        pormap.set("Troop Guide", "images/por/troopguide.jpg");
        pormap.set("Troop Webmaster", "images/por/webmaster.jpg");
+       pormap.set("Food Pantry Coord", "images/por/foodPantry.jpg");
+       pormap.set("Food Pantry Coor", "images/por/foodPantry.jpg");
+       pormap.set("Community Svc Coord", "images/por/comSvcPOR.jpg");
+
     };
 
     _this.initpormap(_this.pormap);
