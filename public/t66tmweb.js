@@ -293,6 +293,12 @@ app.component('scoutinfo', {
           '<div class="info">{{$ctrl.scout._patrol}}</div>'+
         '</div>' +
       '</div>' +
+      '<div class="infobox">' +
+        '<div class="infoitem">'+
+          '<div class="info label left">Date Joined Unit:</div>' +
+          '<div class="info"><scoutdate date="$ctrl.scout._joinedUnit"></scoutdate></div>' +
+        '</div>' +
+      '</div>' +
     '</div>',
   bindings: {
     scout: '='
