@@ -10,12 +10,13 @@ app.component('scoutsnotadvancing', {
   //		return "Last Name, First Name, Rank, Rank Date"
 
   '<div class="td">Last name</div><div class="td">First Name</div><div class="td">Rank</div>'+'' +
-  '<div class="td">Rank Date</div>'+
+  '<div class="td">Rank Date</div><div class="td">Date Joined Unit</div>'+
   '</div>'+
   '<div class="tr" ng-repeat="scout in $ctrl.scoutsNotAdvancing">'+
   '<div class="td">{{scout._lastName}}</div><div class="td">{{scout._firstName}}</div>'+'' +
   '<div class="td"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
   '<div class="td"><scoutdate date="$ctrl.getRankDate(scout._rankAdvancement)"></scoutdate></div>' +
+  '<div class="td"><scoutdate date="$ctrl.getJoinDate(scout)"></scoutdate></div>' +
   '</div>'+
   '</div>'+
   '</div>',
@@ -27,6 +28,10 @@ app.component('scoutsnotadvancing', {
       return RankAdvancement.getCurrentRankDate(rankAdv);
     };
 
+    _this.getJoinDate = function(scout) {
+      return scout._joinedUnit;
+    };
+
     _this.$onChanges = function(changes) {
       _this.scouts =  changes.scouts.currentValue;
       var numberOfScoutsNotAdvancing = 0;
@@ -36,7 +41,9 @@ app.component('scoutsnotadvancing', {
         var rankDate = RankAdvancement.getCurrentRankDate(rank);
         var currentRank = RankAdvancement.getCurrentRankText(rank);
 
-        if ((rankDate === undefined) || (rankDate && _this.olderThanMinAge(rankDate,1) && currentRank !== 'Eagle')) {
+
+        if ((rankDate === undefined ) ||
+          (rankDate && _this.olderThanMinAge(rankDate,1) && (currentRank !== 'Eagle' && currentRank !== 'Life'))) {
           _this.scoutsNotAdvancing.push(scout);
           ++numberOfScoutsNotAdvancing;
         }

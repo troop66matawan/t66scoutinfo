@@ -11,7 +11,8 @@ app.component('trailtoeaglereport', {
 
     '<div class="td">Last name</div><div class="td">First Name</div><div class="td">Rank</div>'+'' +
     '<div class="td bd">Birthday</div><div class="td">Months/Days to 18</div><div class="td">Leadership Remaining</div>'+
-    '<div class="td">Total Merit Badges</div><div class="td"># Eagle remaining</div>'+'' +
+    '<div class="td">Service Remain</div>' +
+    '<div class="td">Total MB</div><div class="td"># Eagle remaining</div>'+'' +
     '<div class="td">Eagle MB Remaining</div>'+
   '</div>'+
   '<div class="tr" ng-repeat="scout in $ctrl.trailToEagleScouts">'+
@@ -20,6 +21,7 @@ app.component('trailtoeaglereport', {
     '<div class="td bd"><scoutdate date="scout._dateOfBirth"></scoutdate></div>' +
     '<div class="td {{$ctrl.styleBackgroundDate(scout)}}">{{$ctrl.monthsTo18(scout._dateOfBirth)}} / {{$ctrl.daysTo18(scout._dateOfBirth)}}</div>' +
     '<div class="td {{$ctrl.styleBackgroundLdr(scout)}}"><leadershipneeded scout="scout"></leadershipneeded></div>'+
+    '<div class="td">{{scout._rankAdvancement._neededServiceHours}}</div>' +
     '<div class="td">{{scout.meritBadges.length}}</div><div class="td {{$ctrl.styleBackgroundMb(scout)}}">{{$ctrl.needEagleReq(scout).length}}</div>' +
     '<div class="td"><eagleneeded scout="scout"></eagleneeded></div>' +
   '</div>'+
@@ -50,23 +52,23 @@ app.component('trailtoeaglereport', {
     }
 
     _this.styleBackgroundMb = function(scout) {
-	var daysTo18 = _this.daysTo18(scout._dateOfBirth);
-	var needMB = _this.needEagleReq(scout).length;
+      var daysTo18 = _this.daysTo18(scout._dateOfBirth);
+      var needMB = _this.needEagleReq(scout).length;
 
-	if (daysTo18 < 30 && needMB > 0) {
-	    return "whiteonblack";
-	} else if (daysTo18 >= 30 && daysTo18 < 90 && needMB > 0) {
-	    return "whiteonred";
-	} else if (daysTo18 >= 90 && daysTo18 < 180 && needMB > 0) {
-	    return "blackonyellow";
-	}
-	return "";
+      if (daysTo18 < 30 && needMB > 0) {
+        return "whiteonblack";
+      } else if (daysTo18 >= 30 && daysTo18 < 90 && needMB > 0) {
+        return "whiteonred";
+      } else if (daysTo18 >= 90 && daysTo18 < 180 && needMB > 0) {
+        return "blackonyellow";
+      }
+      return "";
     };
 
     _this.styleBackgroundDate = function(scout) {
 	     var daysTo18 = _this.daysTo18(scout._dateOfBirth);
        var currentRank = RankAdvancement.getCurrentRankText(scout._rankAdvancement);
-       
+
        if (currentRank === "Life") {
          if (daysTo18 < 182) {
            return "whiteonred";
@@ -75,7 +77,7 @@ app.component('trailtoeaglereport', {
          }
       } else {
         return _this.styleBackgroundRank(scout);
-      }  
+      }
     };
 
     _this.styleBackgroundLdr = function(scout) {
@@ -89,13 +91,13 @@ app.component('trailtoeaglereport', {
 	}
 	return "";
     };
-    
+
     _this.styleBackgroundRank = function(scout) {
       var monthsTo18 = _this.monthsTo18(scout._dateOfBirth);
       var daysTo18 = _this.daysTo18(scout._dateOfBirth);
       var ldrDays = scout._rankAdvancement._neededLeadership;
       var currentRank = RankAdvancement.getCurrentRankText(scout._rankAdvancement);
-      
+
       if (currentRank === 'First Class' || currentRank === 'Second Class' || currentRank === 'Tenderfoot' || currentRank === 'Scout') {
         if ((monthsTo18 < 12) || (daysTo18 < (365 - ldrDays)) ) {
           return "whiteonblack";
@@ -103,7 +105,7 @@ app.component('trailtoeaglereport', {
           return "whiteonred";
         } if ((monthsTo18 < 16) || (daysTo18 < (16*30 - ldrDays)) ){
           return "blackonyellow";
-        } 
+        }
       } else if (currentRank === 'Star') {
         if ((monthsTo18 < 6) || (daysTo18 < (180 - ldrDays)) ) {
           return "whiteonblack";
@@ -111,9 +113,9 @@ app.component('trailtoeaglereport', {
           return "whiteonred";
         } if ((monthsTo18 < 12) || (daysTo18 < (365 - ldrDays)) ){
           return "blackonyellow";
-        } 
+        }
       }
-      
+
       return "";
     }
 
@@ -139,7 +141,7 @@ app.component('trailtoeaglereport', {
       var now = new Date();
 
       var diff = eighteen - now;
-      
+
       return Math.round((diff)/(1000*3600*24));
     };
 

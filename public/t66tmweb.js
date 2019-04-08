@@ -242,7 +242,7 @@ app.component('rankpatch', {
       var rv = false;
       if (_this.date && _this.date.time > 0)
         rv = true;
-      
+
       return rv;
     };
     _this.getRankPatch = function(rank,date) {
@@ -264,7 +264,7 @@ app.component('scoutinfo', {
       '<div class="infobox">' +
         '<div class="infoitem">'+
           '<div class="info label left">BSA ID:</div><div class="info left">{{$ctrl.scout._bsaID}}</div>' +
-        '</div>' +          
+        '</div>' +
         '<div class="info placeholder"></div>' +
         '<div class="infoitem">'+
           '<div class="info label right">DOB:</div>'+
@@ -413,15 +413,15 @@ app.component('meritbadge', {
     this.$onInit = function() {
       this.mbimage = $scope.$parent.$ctrl.mbMap.get($scope.$ctrl.mb._name);
     };
-    this.onClick = function() {    
-      this.visible = !this.visible;  
+    this.onClick = function() {
+      this.visible = !this.visible;
     };
     this.getVisibility = function() {
       var visible = 'hidden';
       if (this.visible) {
         visible = 'visible';
       }
-      return visible;      
+      return visible;
     }
   },
   bindings: {
