@@ -296,6 +296,10 @@ eagleneeded {
   max-width: initial;
 }
 
+.leadershipreport .table .position {
+  min-width: 155px;
+}
+
 .t66footer {
   background: #d0c0b0;
   height: 150px;
@@ -423,7 +427,16 @@ eagleneeded {
   padding-bottom: 3px;
   padding-right: 20px;
 }
-
+.leadershipreport .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
 .photoreport {
   display: flex;
   flex-wrap: wrap;
