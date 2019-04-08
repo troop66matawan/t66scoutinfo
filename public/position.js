@@ -73,6 +73,9 @@ angular.module('t66tmweb').service('porService', function() {
     pormap.set("Senior Patrol Ld", {image: "images/por/seniorpatrolleader.jpg", camping: 80});
     pormap.set("Troop Guide", {image: "images/por/troopguide.jpg", camping: 65 });
     pormap.set("Troop Webmaster", {image:"images/por/webmaster.jpg", camping: 65 });
+    pormap.set("Food Pantry Coord", {image:"images/por/foodPantry.jpg", camping: 65 });
+    pormap.set("Food Pantry Coor", {image:"images/por/foodPantry.jpg", camping: 65 });
+    pormap.set("Community Svc Coord", {image:"images/por/comSvcPOR.jpg", camping: 65 });
   };
 
   _this.initpormap(_this.pormap);
