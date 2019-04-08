@@ -287,6 +287,11 @@ app.component('scoutinfo', {
           '<div class="info label left">Service Project Hours Needed:</div>'+
           '<div class="info">{{$ctrl.scout._rankAdvancement._neededServiceHours}}</div>' +
         '</div>' +
+        '<div class="info placeholder"></div>' +
+        '<div class="infoitem">'+
+          '<div class="info label right">Patrol:</div>' +
+          '<div class="info">{{$ctrl.scout._patrol}}</div>'+
+        '</div>' +
       '</div>' +
     '</div>',
   bindings: {
