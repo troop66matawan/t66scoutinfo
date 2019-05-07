@@ -298,6 +298,7 @@ eagleneeded {
 
 .leadershipreport .table .position {
   min-width: 155px;
+  min-height: 155px;
 }
 
 .t66footer {
@@ -437,6 +438,67 @@ eagleneeded {
   padding-bottom: 3px;
   padding-right: 20px;
 }
+@media only screen and (min-width: 800px) {
+  .leadershipPerson {
+    display: flex;
+    width: 50%;
+  }
+  .leadershipDetails {
+    display: flex;
+    width: 50%;
+  }
+  .trailToEaglePerson {
+    display: flex;
+    width: 40%;
+  }
+  .trailToEagleRemain {
+    display: flex;
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .leadershipPerson {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  .leadershipreport .td {
+    min-height: 25px;
+  }
+  .leadershipDetails {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    min-width: 155px;
+  }
+  .trailtoeagle .table .td {
+    max-width: 100%;
+    min-height: 25px;
+    flex-basis: auto;
+  }
+  .trailToEaglePerson {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  .trailToEagleRemain {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  .leadershipDetails .position {
+    min-width: 150px;
+    min-height: 150px;
+    margin-top: 0px;
+    padding: 0px;
+  }
+  .leadershipDetails .td {
+    white-space: initial;
+    justify-content: center;
+  }
+
+}
+
 .photoreport {
   display: flex;
   flex-wrap: wrap;

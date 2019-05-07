@@ -2,27 +2,7 @@ angular.module('t66tmweb').component('leadershipreport', {
   bindings : {
     scouts: '<',
   },
-  template:   '<div class="leadershipreport">'+
-  '<div class="header">Scout Leadership Attendance Report</div>' +
-  '<div class="table">' +
-  '<div class="tr th">'+'' +
-    // Last Name, First Name, Rank, Rank Date, Leadership Position
-    '<div class="td">Last name</div><div class="td">First Name</div><div class="td">Rank</div>'+'' +
-    '<div class="td">Rank Date</div><div class="td position">Leadership Position</div>'+
-    '<div class="td">Camping (Attendance / Expected) %</div>'+
-  '</div>'+
-  '<div class="tr" ng-repeat="scout in $ctrl.currentleaderpositions">'+
-    '<div class="td">{{scout._lastName}}</div>' +
-    '<div class="td">{{scout._firstName}}</div>' +
-    '<div class="td"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
-    '<div class="td"><scoutdate date="$ctrl.getRankDate(scout._rankAdvancement)"></scoutdate></div>' +
-    '<div class="td position"><position por="scout.por" scout="scout"></position></div>' +
-    '<div class="td {{$ctrl.styleBackgroundCamping(scout.por,scout)}}">'+
-      '{{$ctrl.getCampingPercent(scout.por,scout)}} / {{$ctrl.getExpectedPercent(scout.por,scout)}}'+
-    '</div>' +
-  '</div>'+
-  '</div>'+
-  '</div>',
+  templateUrl:   'templates/leadershipReport.html',
   controller: ['RankAdvancement', 'activityService','porService', function(RankAdvancement, activityService, porService) {
     const _this = this;
     _this.currentleaderpositions = [];
