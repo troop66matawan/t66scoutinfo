@@ -63,6 +63,10 @@ angular.module('t66tmweb').service('activityService', function() {
     return scoutTrips.length / totalCamping.length;
   };
 
+  _this.getMeetings = function() {
+    return _this.meeting;
+  };
+  
   _this.getMeeting = function(startTime, endTime) {
     var meeting = [];
     for (var trip in _this.meeting) {

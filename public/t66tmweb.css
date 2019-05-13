@@ -554,3 +554,40 @@ eagleneeded {
   background: black;
   color: white;
  }
+
+.attendancereport .attendancephotolist {
+  display: flex;
+  flex-wrap: wrap;
+}
+.attendancereport .scoutphoto .ispresent {
+  position: relative;
+  bottom: 30px;
+  width: 24px;
+  color:green;
+  left: 65px;
+}
+.ispresent i.material-icons {
+  background-color: white;
+  border-radius: 45px;
+}
+.attendancereport .scoutname {
+  display: flex;
+  font-family: "Roboto", sans-serif;
+  font-size: smaller;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 100px;
+}
+.attendancereport .scoutname .firstname {
+  margin: 5px auto 5px auto;
+}
+.attendancereport .scoutname .lastname {
+  margin: 5px auto 5px auto;
+}
+.attendancereport .scoutname .sep {
+  margin: 1px;
+}
+.attendancereport .scoutphoto {
+  padding-left: 10px;
+  height: 110px;
+}
