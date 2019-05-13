@@ -323,6 +323,14 @@ eagleneeded {
   font-family: "Roboto", sans-serif;
 }
 
+.trailToEaglePerson {
+  display: flex;
+  width: 40%;
+}
+.trailToEagleRemain {
+  display: flex;
+  width: 60%;
+}
 .trailtoeagle .table .td {
   max-width: 100px;
 }
@@ -334,7 +342,7 @@ eagleneeded {
 .trailtoeagle .bd {
   font-size: 8pt;
 }
-.trailtoeagle .table .td:last-child {
+.neededmb {
   max-width: 700px;
   min-width: 350px;
 }
