@@ -67,7 +67,7 @@ app.component('currentrankdate', {
   template: '<div><scoutdate date="{{$ctrl.currentRankDate()}}"></div>' ,
   controller: function() {
     const _this = this;
-    
+
 
 
   }
@@ -78,21 +78,29 @@ app.component('leadershipneeded', {
     scout: '=',
   },
   template: '<div>{{$ctrl.adjustLeadershipSinceReportDate()}}</div>' ,
-  controller: function() {
+  controller: function(porService) {
     const _this = this;
 
     _this.adjustLeadershipSinceReportDate = function() {
       var result='';
       if (_this.scout && _this.scout._rankAdvancement) {
         var neededLeadership = _this.scout._rankAdvancement._neededLeadership;
-        var rptDate = _this.scout._reportDate;
-        var report = new Date(rptDate.time);
-        var now = new Date();
+        result = neededLeadership;
+        if (_this.scout._leadership && _this.scout._leadership.length > 0 ) {
+          _this.scout._leadership.forEach(function(por) {
+            if (porService.isPositionForRank(por._position) &&
+            porService.isCurrentPosition(_this.scout._reportDate, por._endDate)) {
+              var rptDate = _this.scout._reportDate;
+              var report = new Date(rptDate.time);
+              var now = new Date();
 
-        var diff = now - report;
+              var diff = now - report;
 
-        if (neededLeadership !== undefined) {
-          result = (neededLeadership - Math.round((diff) / (1000 * 3600 * 24)));
+              if (neededLeadership !== undefined) {
+                result = (neededLeadership - Math.round((diff) / (1000 * 3600 * 24)));
+              }
+            }
+          })
         }
       }
       return result;

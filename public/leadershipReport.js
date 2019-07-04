@@ -43,7 +43,8 @@ angular.module('t66tmweb').component('leadershipreport', {
 
         if (scout._leadership && scout._leadership.length > 0 ) {
           scout._leadership.forEach(function(por) {
-            if (_this.isCurrentPosition(scout._reportDate, por._endDate)) {
+            if (porService.isPositionForRank(por._position) &&
+              porService.isCurrentPosition(scout._reportDate, por._endDate)) {
               var scoutpor = {};
               scoutpor._lastName = scout._lastName;
               scoutpor._firstName = scout._firstName;
@@ -74,24 +75,6 @@ angular.module('t66tmweb').component('leadershipreport', {
       });
     };
 
-    _this.isCurrentPosition = function(reportDate,posEndDate) {
-      var rv = false;
-      function timeToDate(time) {
-        var date = new Date(time);
-        date.setHours(0);
-        date.setMinutes(0);
-        date.setSeconds(0);
-        date.setMilliseconds(0);
-        return date;
-      }
-      var reportTime = timeToDate(reportDate.time);
-      var posTime = timeToDate(posEndDate.time);
-
-      if (posTime.getTime() === reportTime.getTime()) {
-        rv = true;
-      }
-      return rv;
-    };
 
 
 

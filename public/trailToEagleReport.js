@@ -31,12 +31,15 @@ app.component('trailtoeaglereport', {
     _this.styleBackgroundMb = function(scout) {
       var daysTo18 = _this.daysTo18(scout._dateOfBirth);
       var needMB = _this.needEagleReq(scout).length;
+      var currentRank = RankAdvancement.getCurrentRankText(scout._rankAdvancement);
 
       if (daysTo18 < 30 && needMB > 0) {
         return "whiteonblack";
       } else if (daysTo18 >= 30 && daysTo18 < 90 && needMB > 0) {
         return "whiteonred";
       } else if (daysTo18 >= 90 && daysTo18 < 180 && needMB > 0) {
+        return "blackonyellow";
+      } else if (daysTo18 > 365 && currentRank !== 'Life' && needMB > 10 ) {
         return "blackonyellow";
       }
       return "";
@@ -80,7 +83,7 @@ app.component('trailtoeaglereport', {
           return "whiteonblack";
         } else if ((monthsTo18 < 14) || (daysTo18 < (14*30 - ldrDays)) ){
           return "whiteonred";
-        } if ((monthsTo18 < 16) || (daysTo18 < (16*30 - ldrDays)) ){
+        } if ((monthsTo18 <= 24) || (daysTo18 < (16*30 - ldrDays)) ){
           return "blackonyellow";
         }
       } else if (currentRank === 'Star') {
@@ -105,6 +108,7 @@ app.component('trailtoeaglereport', {
       var minAgeDate = new Date(dob.time);
       minAgeDate.setFullYear(minAgeDate.getFullYear()+_this.minAge);
       var now = new Date();
+      now.setDate(28);
 
       if (minAgeDate < now)
         rv = true;
