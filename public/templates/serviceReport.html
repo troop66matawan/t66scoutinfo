@@ -1,0 +1,34 @@
+<div class="report">
+  <div class="header">Scout Service Hours Report</div>
+  <div class="table">
+    <div class="tr th">
+      <div class="leadershipPerson">
+        <div class="td">Last name</div>
+        <div class="td">First Name</div>
+        <div class="td">Rank</div>
+        <div class="td">Rank Date</div>
+      </div>
+      <div class="leadershipDetails">
+        <div class="td">Service Hours Needed</div>
+      </div>
+    </div>
+
+    <div class="tr" ng-repeat="scout in $ctrl.scoutsNeedService">
+      <div class="leadershipPerson">
+        <div class="td">{{scout._lastName}}</div>
+        <div class="td">{{scout._firstName}}</div>
+        <div class="td">
+          <currentrank rankadv="scout._rankAdvancement"></currentrank>
+        </div>
+        <div class="td">
+          <scoutdate date="$ctrl.getRankDate(scout._rankAdvancement)"></scoutdate>
+        </div>
+      </div>
+      <div class="leadershipDetails">
+        <div>
+          {{scout._rankAdvancement._neededServiceHours}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

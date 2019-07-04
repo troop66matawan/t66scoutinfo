@@ -20,6 +20,7 @@ app.component('scoutlist', {
     _this.exportToScoutbook = {name: 'Export to Scoutbook', value: 5};
     _this.leadershipReport = {name: 'Leadership Attendance Report', value: 6};
     _this.attendanceReport = {name: 'Attendance Report', value: 7};
+    _this.serviceReport = {name: 'Service Report', value: 8};
 
 
     var firebaseAuthObject = $firebaseAuth(firebaseauth);
@@ -55,6 +56,7 @@ app.component('scoutlist', {
                  _this.menuOptions.push(_this.exportToScoutbook);
                  _this.menuOptions.push(_this.leadershipReport);
                  _this.menuOptions.push(_this.attendanceReport);
+                 _this.menuOptions.push(_this.serviceReport);
 
                  _this.scouts = _this.firePropsToArray(snapshot.val());
 
@@ -136,7 +138,8 @@ app.component('scoutlist', {
     '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="$ctrl.scouts"></scoutsnotadvancing>' +
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
     '<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
-    '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></aattendance-report>' +
+    '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></attendance-report>' +
+    '<service-report ng-if="$ctrl.view === 8" scouts="$ctrl.scouts"></service-report>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {

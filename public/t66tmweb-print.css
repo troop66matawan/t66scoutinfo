@@ -519,3 +519,31 @@ span {
   background: black;
   color: white;
  }
+.leadershipPerson {
+  display: flex;
+  width: 50%;
+}
+.leadershipDetails {
+  display: flex;
+  width: 50%;
+}
+.leadershipreport .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+.report .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}

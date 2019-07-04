@@ -438,6 +438,16 @@ eagleneeded {
   padding-bottom: 3px;
   padding-right: 20px;
 }
+.report .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
 @media only screen and (min-width: 800px) {
   .leadershipPerson {
     display: flex;
@@ -464,6 +474,9 @@ eagleneeded {
   }
   .leadershipreport .td {
     min-height: 25px;
+  }
+  .report .td {
+      min-height: 25px;
   }
   .leadershipDetails {
     display: flex;
@@ -590,4 +603,21 @@ eagleneeded {
 .attendancereport .scoutphoto {
   padding-left: 10px;
   height: 110px;
+}
+.report .scoutname {
+  display: flex;
+  font-family: "Roboto", sans-serif;
+  font-size: smaller;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 100px;
+}
+.report .scoutname .firstname {
+  margin: 5px auto 5px auto;
+}
+.report .scoutname .lastname {
+  margin: 5px auto 5px auto;
+}
+.report .scoutname .sep {
+  margin: 1px;
 }
