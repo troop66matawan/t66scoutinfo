@@ -7,8 +7,10 @@ app.run(['RankPatchFactory', function(RankPatchFactory) {
 app.component('scoutlist', {
   bindings: {
   },
-  controller: function ($scope, $window, $firebaseAuth, activityService) {
+  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService) {
     const _this = this;
+    $scope.MeetingAttendanceService = MeetingAttendanceService;
+
     _this.scouts = [];
     _this.view = 1;
     _this.menuOptions = [
@@ -21,6 +23,7 @@ app.component('scoutlist', {
     _this.leadershipReport = {name: 'Leadership Attendance Report', value: 6};
     _this.attendanceReport = {name: 'Attendance Report', value: 7};
     _this.serviceReport = {name: 'Service Report', value: 8};
+    _this.meetingAttendance = {name: 'Take Meeting Attendance', value: 9};
 
 
     var firebaseAuthObject = $firebaseAuth(firebaseauth);
@@ -47,6 +50,7 @@ app.component('scoutlist', {
            }
            if (response.hasOwnProperty('position')  &&
                 response.position === 'scoutmaster' || response.position === 'eaglecommittee') {
+             MeetingAttendanceService.initDB();
              var allScoutsRef = firedb.ref('scouts/');
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
@@ -57,6 +61,7 @@ app.component('scoutlist', {
                  _this.menuOptions.push(_this.leadershipReport);
                  _this.menuOptions.push(_this.attendanceReport);
                  _this.menuOptions.push(_this.serviceReport);
+                 _this.menuOptions.push(_this.meetingAttendance);
 
                  _this.scouts = _this.firePropsToArray(snapshot.val());
 
@@ -140,6 +145,8 @@ app.component('scoutlist', {
     '<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
     '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></attendance-report>' +
     '<service-report ng-if="$ctrl.view === 8" scouts="$ctrl.scouts"></service-report>' +
+    '<meeting-attendance ng-if="$ctrl.view === 9"' +
+    ' attendance="MeetingAttendanceService.getMeetingAttendance()"></meeting-attendance>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {

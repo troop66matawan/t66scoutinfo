@@ -1,0 +1,29 @@
+<div class="meetingattendance">
+  <div class="headerbar">
+    <div class="header">Scout Meeting Attendance</div>
+    <div class="setup"></div>
+  </div>
+  <div ng-if="$ctrl.haveMeeting() === true">
+    <div class="date">
+      <span class="month">{{$ctrl.date.getMonth()+1}}</span>
+      <span>/</span>
+      <span>{{$ctrl.date.getDate()}}</span>
+      <span>/</span>
+      <span>{{$ctrl.date.getFullYear()}}</span>
+    </div>
+    <div class="attendancephotolist" >
+      <div ng-repeat="scout in $ctrl.attendance | orderBy: $ctrl.sortBy">
+        <div class="scoutphoto" ng-click="$ctrl.btnClick(scout,$ctrl.date)">
+          <scoutimage class="scout" scout="scout"></scoutimage>
+          <div ng-show="$ctrl.isAttend(scout,$ctrl.date)" class="ispresent">
+            <i class="material-icons" >check_circle</i>
+          </div>
+        </div>
+        <scoutname scout="scout"></scoutname>
+      </div>
+    </div>
+  </div>
+  <div ng-if="$ctrl.haveMeeting() === false" class="noMeeting">
+    <div class="addMeeting" ng-click="$ctrl.addMeeting()">Add Meeting</div>
+  </div>
+</div>

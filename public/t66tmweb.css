@@ -621,3 +621,66 @@ eagleneeded {
 .report .scoutname .sep {
   margin: 1px;
 }
+.meetingattendance .attendancephotolist {
+  display: flex;
+  flex-wrap: wrap;
+}
+.meetingattendance .scoutphoto .ispresent {
+  position: relative;
+  bottom: 30px;
+  width: 24px;
+  color:green;
+  left: 65px;
+}
+.ispresent i.material-icons {
+  background-color: white;
+  border-radius: 45px;
+}
+.meetingattendance .scoutname {
+  display: flex;
+  font-family: "Roboto", sans-serif;
+  font-size: smaller;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 100px;
+}
+.meetingattendance .scoutname .firstname {
+  margin: 5px auto 5px auto;
+}
+.meetingattendance .scoutname .lastname {
+  margin: 5px auto 5px auto;
+}
+.attendancereport .scoutname .sep {
+  margin: 1px;
+}
+.meetingattendance .scoutphoto {
+  padding-left: 10px;
+  height: 110px;
+}
+.meetingattendance .noMeeting {
+  display: flex;
+  width: 100%;
+}
+.meetingattendance .addMeeting {
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid;
+  border-radius: 5px;
+  background: lightgrey;
+  margin-top: 10px;
+  padding: 2px;
+}
+.meetingattendance .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+}
+.meetingattendance .date {
+  margin: 15px;
+}
