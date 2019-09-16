@@ -3,6 +3,12 @@
     <div class="header">Scout Meeting Attendance</div>
     <div class="setup"></div>
   </div>
+  <div ng-if="$ctrl.position === 'scoutmaster'">
+    <div class="attendanceMtgChooser">
+      <select id="mtgselect" ng-model="$ctrl.selected" ng-change="$ctrl.setDate()"
+              ng-options="meeting as $ctrl.genDate(meeting) for meeting in $ctrl.dates"></select>
+    </div>
+  </div>
   <div ng-if="$ctrl.haveMeeting() === true">
     <div class="date">
       <span class="month">{{$ctrl.date.getMonth()+1}}</span>

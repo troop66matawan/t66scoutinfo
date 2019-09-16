@@ -51,6 +51,7 @@ app.component('scoutlist', {
            if (response.hasOwnProperty('position')  &&
                 response.position === 'scoutmaster' || response.position === 'eaglecommittee') {
              MeetingAttendanceService.initDB();
+             _this.position = response.position;
              var allScoutsRef = firedb.ref('scouts/');
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
@@ -91,6 +92,9 @@ app.component('scoutlist', {
              if (response.hasOwnProperty('access')){
               for (var scoutIndex in response.access) {
                 var scout = response.access[scoutIndex];
+                if (response.position === 'scribe') {
+                  _this.menuOptions.push(_this.meetingAttendance);
+                }
                 var scoutRef = firedb.ref('scouts/'+scout);
                 scoutRef.on('value', function(snapshot) {
                   $scope.$apply(function(){
@@ -146,6 +150,7 @@ app.component('scoutlist', {
     '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></attendance-report>' +
     '<service-report ng-if="$ctrl.view === 8" scouts="$ctrl.scouts"></service-report>' +
     '<meeting-attendance ng-if="$ctrl.view === 9"' +
+    ' position="$ctrl.position"' +
     ' attendance="MeetingAttendanceService.getMeetingAttendance()"></meeting-attendance>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
