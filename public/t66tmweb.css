@@ -653,6 +653,40 @@ eagleneeded {
 .attendancereport .scoutname .sep {
   margin: 1px;
 }
+
+.meetingattendance .headerbar {
+  display: flex;
+  background: black;
+}
+
+.meetingattendance .header {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.meetingattendance .headerbar .setup {
+  margin-right: 20px;
+  font-size: x-large;
+  color: white;
+}
+
+.meetingattendance .headerbar .setup .setupMenu {
+  position: absolute;
+  right: 70px;
+  z-index: 5;
+  background: white;
+  border: 1px solid black;
+  width: 150px;
+  height: 75px;
+  box-shadow: 5px 5px black;
+  color: black;
+  font-size: small;
+}
+.meetingattendance .headerbar .setup .setupMenu .sortentry {
+  cursor: pointer;
+  margin: 9px;
+}
+
 .meetingattendance .scoutphoto {
   padding-left: 10px;
   height: 110px;

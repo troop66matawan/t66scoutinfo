@@ -1,7 +1,19 @@
 <div class="meetingattendance">
   <div class="headerbar">
     <div class="header">Scout Meeting Attendance</div>
-    <div class="setup"></div>
+    <div class="setup">
+      <i ng-click="$ctrl.showSetup=!$ctrl.showSetup" class="fa fa-cog" aria-hidden="true"></i>
+      <div ng-if="$ctrl.showSetup" class="setupMenu">
+        <div class="sortentry" ng-click="$ctrl.sortBy='_lastName';$ctrl.showSetup=false" >
+          <i ng-show="$ctrl.sortBy==='_lastName'" class="fa fa-check" aria-hidden="true"></i>
+          <span>Sort by Last Name</span>
+        </div>
+        <div class="sortentry" ng-click="$ctrl.sortBy='_firstName';$ctrl.showSetup=false" >
+          <i ng-show="$ctrl.sortBy==='_firstName'" class="fa fa-check" aria-hidden="true"></i>
+          <span>Sort by First Name</span>
+        </div>
+      </div>
+    </div>
   </div>
   <div ng-if="$ctrl.position === 'scoutmaster'">
     <div class="attendanceMtgChooser">
@@ -29,7 +41,7 @@
       </div>
     </div>
   </div>
-  <div ng-if="$ctrl.haveMeeting() === false" class="noMeeting">
+  <div ng-if="$ctrl.haveMeeting() === false && $ctrl.isWed()" class="noMeeting">
     <div class="addMeeting" ng-click="$ctrl.addMeeting()">Add Meeting</div>
   </div>
 </div>

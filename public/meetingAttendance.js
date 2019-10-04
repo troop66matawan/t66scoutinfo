@@ -13,6 +13,7 @@ function MeetingAttendanceController(MeetingAttendanceService) {
   _this.$onInit = function() {
     _this.date = new Date();
     _this.dates = _this.getDates();
+    _this.showSetup = false;
   };
 
   _this.getDates = function() {
@@ -45,7 +46,16 @@ function MeetingAttendanceController(MeetingAttendanceService) {
     _this.date = new Date(_this.selected);
   };
   _this.haveMeeting = function() {
-    return MeetingAttendanceService.anyScoutsWithMeeting(new Date());
+    return MeetingAttendanceService.anyScoutsWithMeeting(_this.date);
+  };
+
+  _this.isWed = function() {
+    let wed = false;
+    const dayOfWeek = new Date().getDay();
+    if (dayOfWeek === 3) {
+      wed = true;
+    }
+    return wed;
   };
 
   _this.addMeeting = function() {
@@ -53,10 +63,12 @@ function MeetingAttendanceController(MeetingAttendanceService) {
   };
 
   _this.btnClick = function(scout,date) {
-    const meeting = MeetingAttendanceService.findMeeting(scout,date);
-    if (meeting !== undefined) {
-      meeting.present = !meeting.present;
-      MeetingAttendanceService.update(_this.attendance);
+    if (_this.isWed()) {
+      const meeting = MeetingAttendanceService.findMeeting(scout, date);
+      if (meeting !== undefined) {
+        meeting.present = !meeting.present;
+        MeetingAttendanceService.update(_this.attendance);
+      }
     }
   };
 
