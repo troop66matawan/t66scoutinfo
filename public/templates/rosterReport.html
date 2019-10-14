@@ -1,0 +1,27 @@
+<div class="rosterReport">
+  <style id='rosterReport'></style>
+  <div ng-repeat="patrol in $ctrl.patrols | orderBy: 'toString()'">
+    <div class="roster-report-patrol">
+      <div class="roster-report-patrol-name">{{patrol}}</div>
+      <div ng-repeat="scout in $ctrl.scouts | filter: { _patrol: patrol } | orderBy: '_lastName'">
+        <div class="roster-report-scout">
+          <div class="roster-report-scout-card">
+          <scoutname scout="scout"></scoutname>
+          <div class="infobox">
+            <div class="infoitem">
+              <div class="info label left">BSA ID:</div><div class="info left">{{scout._bsaID}}</div>
+            </div>
+            <div class="info placeholder"></div>
+            <div class="infoitem">
+              <div class="info label right">DOB:</div>
+              <div class="info"><scoutdate date="scout._dateOfBirth"></scoutdate></div>
+            </div>
+          </div>
+          <scoutcontact contact="$ctrl.getContact(scout)"></scoutcontact>
+        </div>
+          <scoutimage class="scoutinfoimage" scout="scout"></scoutimage>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

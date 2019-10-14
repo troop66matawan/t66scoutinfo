@@ -1,6 +1,7 @@
 @page {
   size: letter landscape;
 }
+@page rotated { size : portrait }
 
 .t66tmweb {
   height: 100%;
@@ -72,6 +73,15 @@
 .infobox .infoitem {
   flex-wrap: nowrap;
   display: inherit;
+}
+.infobox .info .infoaddress{
+  padding-right: 5px;
+}
+.infobox .info .infocity{
+  padding-right: 5px;
+}
+.infobox .info .infostate{
+  padding-right: 5px;
 }
 
 .infobox .placeholder {
@@ -546,4 +556,32 @@ span {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-right: 20px;
+}
+
+.roster-report {
+  page: rotated;
+}
+
+.roster-report-scout {
+  display: flex;
+}
+.roster-report-scout-card {
+  font-size: small;
+}
+
+.roster-report-scout-card .scoutname {
+  font-size: large;
+}
+.roster-report-patrol {
+  page-break-after: always;
+}
+
+.roster-report-patrol-name {
+  background-color: black;
+  color: white;
+  font-size: xx-large;
+}
+
+.roster-report-scout-card {
+  page-break-inside: avoid;
 }

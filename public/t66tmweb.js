@@ -7,7 +7,7 @@ app.run(['RankPatchFactory', function(RankPatchFactory) {
 app.component('scoutlist', {
   bindings: {
   },
-  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService) {
+  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService, ScoutService) {
     const _this = this;
     $scope.MeetingAttendanceService = MeetingAttendanceService;
 
@@ -24,6 +24,7 @@ app.component('scoutlist', {
     _this.attendanceReport = {name: 'Attendance Report', value: 7};
     _this.serviceReport = {name: 'Service Report', value: 8};
     _this.meetingAttendance = {name: 'Take Meeting Attendance', value: 9};
+    _this.rosterReport = {name: 'Roster', value: 10};
 
 
     var firebaseAuthObject = $firebaseAuth(firebaseauth);
@@ -39,6 +40,14 @@ app.component('scoutlist', {
       }
     });
 
+    _this.getContact = function(scout) {
+      var contact;
+      if (_this.contacts) {
+        contact = ScoutService.getContact(scout, _this.contacts);
+      }
+      return contact;
+    };
+
      _this.getScouts = function(user, accessToken) {
          //get list of available users
          var usersRef = firedb.ref('users/' + user.uid);
@@ -53,6 +62,7 @@ app.component('scoutlist', {
              MeetingAttendanceService.initDB();
              _this.position = response.position;
              var allScoutsRef = firedb.ref('scouts/');
+             var contactsRef = firedb.ref('scout_contact/');
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
                  _this.menuOptions.push(_this.trailToEagleReportMenuItem);
@@ -63,6 +73,7 @@ app.component('scoutlist', {
                  _this.menuOptions.push(_this.attendanceReport);
                  _this.menuOptions.push(_this.serviceReport);
                  _this.menuOptions.push(_this.meetingAttendance);
+                 _this.menuOptions.push(_this.rosterReport);
 
                  _this.scouts = _this.firePropsToArray(snapshot.val());
 
@@ -87,6 +98,11 @@ app.component('scoutlist', {
                  }
                });
                console.log(_this.scouts);
+             })
+             contactsRef.on('value', function(snapshot) {
+               $scope.$apply(function() {
+                 _this.contacts = snapshot.val();
+               });
              })
            } else {
              if (response.hasOwnProperty('access')){
@@ -140,7 +156,7 @@ app.component('scoutlist', {
   ' for' +
   ' scout' +
       ' in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
-      '<scoutdiv scout="$ctrl.selected"></scoutdiv>'+
+      '<scoutdiv scout="$ctrl.selected" contact="$ctrl.getContact($ctrl.selected)"></scoutdiv>'+
     '</div>' +
     '<trailtoeaglereport ng-if="$ctrl.view === 2" scouts="$ctrl.scouts" min-age="16"></trailtoeaglereport>' +
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
@@ -152,6 +168,7 @@ app.component('scoutlist', {
     '<meeting-attendance ng-if="$ctrl.view === 9"' +
     ' position="$ctrl.position"' +
     ' attendance="MeetingAttendanceService.getMeetingAttendance()"></meeting-attendance>' +
+    '<roster-report ng-if="$ctrl.view === 10" scouts="$ctrl.scouts" contacts="$ctrl.contacts"></roster-report>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {
@@ -161,7 +178,7 @@ app.component('scoutlist', {
 
 app.component('scoutdiv' , {
   template:
-    '<div><scoutinfo scout="$ctrl.scout"></scoutinfo>'+
+    '<div><scoutinfo scout="$ctrl.scout" contact="$ctrl.contact"></scoutinfo>'+
     '<scoutrank scout="$ctrl.scout"></scoutrank>'+
     '<scoutpor scout="$ctrl.scout"></scoutpor>' +
     '<scoutmb scout="$ctrl.scout"></scoutmb>'+
@@ -170,12 +187,15 @@ app.component('scoutdiv' , {
     '<reportdate scout="$ctrl.scout"></reportdate>' +
     '</div>',
   bindings: {
-    scout: '<'
+    scout: '<',
+    contact: '<'
   },
   controller: [function() {
     const _this = this;
     _this.$onChanges = function(changes) {
-      _this.scout = changes.scout.currentValue;
+      if (changes && changes.scout) {
+        _this.scout = changes.scout.currentValue;
+      }
     };
 
   }]
@@ -317,9 +337,11 @@ app.component('scoutinfo', {
           '<div class="info"><scoutdate date="$ctrl.scout._joinedUnit"></scoutdate></div>' +
         '</div>' +
       '</div>' +
+      '<scoutcontact ng-if="$ctrl.contact" contact="$ctrl.contact"></scoutcontact>' +
     '</div>',
   bindings: {
-    scout: '='
+    scout: '=',
+    contact: '='
   }
 });
 
