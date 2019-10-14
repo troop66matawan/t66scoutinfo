@@ -47,6 +47,16 @@
   font-family: "Roboto", sans-serif;
   white-space: pre;
 }
+.infobox .info .infoaddress{
+  padding-right: 5px;
+}
+.infobox .info .infocity{
+  padding-right: 5px;
+}
+.infobox .info .infostate{
+  padding-right: 5px;
+}
+
 .infobox .infoitem {
   flex-wrap: nowrap;
   display: inherit;
@@ -717,4 +727,14 @@ eagleneeded {
 }
 .meetingattendance .date {
   margin: 15px;
+}
+
+.roster-report-scout {
+  display: flex;
+}
+
+.roster-report-patrol-name {
+  background-color: black;
+  color: white;
+  font-size: xx-large;
 }

@@ -1,0 +1,29 @@
+<div class="scoutContact">
+  <div class="infobox">
+    <div class="infoitem">
+      <div class="info label left">Address:</div>
+      <div class="info left" style="display:flex">
+        <span class="infoaddress">{{$ctrl.contact._address1}}</span>
+        <span class="infocity">{{$ctrl.contact._city}}</span>
+        <span class="infostate">{{$ctrl.contact._state}}</span>
+        <span class="infozip">{{$ctrl.contact._zip}}</span>
+      </div>
+    </div>
+    <div class="info placeholder"></div>
+    <div class="infoitem">
+      <div class="info label right">Email:</div>
+      <div class="info">{{$ctrl.contact._email1}}</div>
+    </div>
+  </div>
+  <div class="infobox">
+    <div class="infoitem">
+      <div class="info label left">Home Phone:</div>
+      <div class="info left" style="display:flex">{{$ctrl.contact._homephone}}</div>
+    </div>
+    <div class="info placeholder"></div>
+    <div class="infoitem">
+      <div class="info label right">Cell Phone:</div>
+      <div class="info">{{$ctrl.contact._cellphone}}</div>
+    </div>
+  </div>
+</div>
