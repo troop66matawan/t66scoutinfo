@@ -105,14 +105,15 @@ app.component('trailtoeaglereport', {
 
     _this.olderThanMinAge = function(dob) {
       var rv = false;
-      var minAgeDate = new Date(dob.time);
-      minAgeDate.setFullYear(minAgeDate.getFullYear()+_this.minAge);
-      var now = new Date();
-      now.setDate(28);
+      if (dob !== undefined) {
+        var minAgeDate = new Date(dob.time);
+        minAgeDate.setFullYear(minAgeDate.getFullYear()+_this.minAge);
+        var now = new Date();
+        now.setDate(28);
 
-      if (minAgeDate < now)
-        rv = true;
-
+        if (minAgeDate < now)
+          rv = true;
+      }
       return rv;
     };
 
