@@ -15,7 +15,7 @@ app.component('currentrank', {
 app.service('RankAdvancement', function() {
 
   this.getCurrentRankText = function(rankadv) {
-    var rankDate = undefined;
+    var rankDate = '';
     if (rankadv) {
       if (rankadv.hasOwnProperty('_eagle')){
         rankDate = 'Eagle';

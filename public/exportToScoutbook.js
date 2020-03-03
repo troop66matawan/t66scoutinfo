@@ -7,7 +7,7 @@ app.component('exporttoscoutbook', {
     '<div id="downloadAdvancement"><button ng-click="$ctrl.exportAdvancement()">Advancement</button></div>' +
     '<div id="downloadLogs"><button ng-click="$ctrl.exportLogs()">Logs</button></div>' +
   '</div>',
-  controller: [ function() {
+  controller: [ 'CsvDownloadService', function(CsvDownloadService) {
     var _this = this;
     var csvString;
     _this.tmMbMap = new Map();
@@ -16,10 +16,6 @@ app.component('exporttoscoutbook', {
     _this.$onChanges = function(changes) {
       _this.scouts =  changes.scouts.currentValue;
       };
-
-    _this.encodeCSV = function() {
-      return 'data:text/csv;charset=utf-8,';
-    };
 
     _this.createCSVAdvancement = function(scout,type,advancement,date){
       var csv = scout._bsaID + ',';
@@ -42,19 +38,8 @@ app.component('exporttoscoutbook', {
       return scoutBookMbName;
     };
 
-    _this.downloadCsv = function(csvContent, name, htmlID) {
-      var encodedUri = encodeURI(csvContent);
-      var link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", name + ".csv");
-      link.innerHTML= "Click Here to download " + name;
-      document.getElementById(htmlID).appendChild(link); // Required for FF
-
-      link.click(); // This will download the data file named "my_data.csv".
-    };
-
     _this.exportAdvancement = function() {
-      csvString = _this.encodeCSV();
+      csvString = CsvDownloadService.encodeCSV();
       csvString += 'BSA Member ID,First Name,Last Name,Advancement Type,Advancement,Date Completed,Approved\r\n';
       _this.scouts.forEach(function(scout) {
         if (scout._bsaID !== undefined) {
@@ -90,7 +75,7 @@ app.component('exporttoscoutbook', {
           }
         }
       });
-      _this.downloadCsv(csvString,'advancement', 'downloadAdvancement' );
+      CsvDownloadService.downloadCsv(csvString,'advancement', 'downloadAdvancement' );
     };
 
     _this.createCSVLogs = function(scout,type,date,nights,days,miles,hours,frostpoints,locationName,notes){
@@ -111,7 +96,7 @@ app.component('exporttoscoutbook', {
     };
 
     _this.exportLogs = function() {
-      csvString = _this.encodeCSV();
+      csvString = CsvDownloadService.encodeCSV();
       csvString += 'BSA Member ID,First Name,Last Name,Log Type,Date,Nights,Days,Miles,Hours,Frost' +
         ' Points,Location/Name,Notes\r\n';
       _this.scouts.forEach(function(scout) {
@@ -131,7 +116,7 @@ app.component('exporttoscoutbook', {
           }
         }
       });
-      _this.downloadCsv(csvString,'logs', 'downloadLogs' );
+      CsvDownloadService.downloadCsv(csvString,'logs', 'downloadLogs' );
 
     };
 
