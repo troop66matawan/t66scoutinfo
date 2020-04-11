@@ -281,7 +281,7 @@ eagleneeded {
 
 .td {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   flex-grow: 1;
   flex-basis: 0;
   padding: 0.5em;
