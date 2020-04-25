@@ -1,0 +1,27 @@
+{
+  "name": "t66scoutinfo-scoutbook-importer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "firebase": "^7.14.2",
+    "firebase-admin": "^8.11.0",
+    "scoutbook-activities-importer": "github:troop66matawan/scoutbook-activities-importer#master",
+    "scoutbook-advancement-importer": "github:troop66matawan/scoutbook-advancement-importer#master",
+    "scoutbook-scouts-importer": "github:troop66matawan/scoutbook-scouts-importer#master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/troop66matawan/scoutbook-scouts-importer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/troop66matawan/t66scoutinfo/issues"
+  },
+  "homepage": "https://github.com/troop66matawan/t66scoutinfo/import#readme"
+}
