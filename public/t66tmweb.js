@@ -109,6 +109,7 @@ app.component('scoutlist', {
               for (var scoutIndex in response.access) {
                 var scout = response.access[scoutIndex];
                 if (response.position === 'scribe') {
+                  MeetingAttendanceService.initDB();
                   _this.menuOptions.push(_this.meetingAttendance);
                 }
                 var scoutRef = firedb.ref('scouts/'+scout);

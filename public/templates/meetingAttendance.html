@@ -12,6 +12,10 @@
           <i ng-show="$ctrl.sortBy==='_firstName'" class="fa fa-check" aria-hidden="true"></i>
           <span>Sort by First Name</span>
         </div>
+        <div class="sortentry" ng-click="$ctrl.groupByPatrol=!$ctrl.groupByPatrol;$ctrl.showSetup=false" >
+          <i ng-show="$ctrl.groupByPatrol" class="fa fa-check" aria-hidden="true"></i>
+          <span>Group By Patrol</span>
+        </div>
       </div>
     </div>
   </div>
@@ -19,6 +23,10 @@
     <div class="attendanceMtgChooser">
       <select id="mtgselect" ng-model="$ctrl.selected" ng-change="$ctrl.setDate()"
               ng-options="meeting as $ctrl.genDate(meeting) for meeting in $ctrl.dates"></select>
+      <div class="sortentry" ng-click="$ctrl.overrideWed=!$ctrl.overrideWed" >
+        <i ng-show="$ctrl.overrideWed" class="fa fa-check" aria-hidden="true"></i>
+        <span>Override Wednesday</span>
+      </div>
     </div>
   </div>
   <div ng-if="$ctrl.haveMeeting() === true">
@@ -29,7 +37,8 @@
       <span>/</span>
       <span>{{$ctrl.date.getFullYear()}}</span>
     </div>
-    <div class="attendancephotolist" >
+    <div ng-if="$ctrl.groupByPatrol === false">
+      <div class="attendancephotolist" >
       <div ng-repeat="scout in $ctrl.attendance | orderBy: $ctrl.sortBy">
         <div class="scoutphoto" ng-click="$ctrl.btnClick(scout,$ctrl.date)">
           <scoutimage class="scout" scout="scout"></scoutimage>
@@ -39,6 +48,25 @@
         </div>
         <scoutname scout="scout"></scoutname>
       </div>
+    </div>
+    </div>
+    <div ng-if="$ctrl.groupByPatrol === true">
+      <div ng-repeat="patrol in $ctrl.patrols | orderBy: 'toString()'">
+        <div class="roster-report-patrol">
+          <div class="roster-report-patrol-name">{{patrol}}</div>
+          <div class="attendancephotolist" >
+            <div ng-repeat="scout in $ctrl.attendance | filter: { _patrol: patrol } | orderBy: $ctrl.sortBy">
+              <div class="scoutphoto" ng-click="$ctrl.btnClick(scout,$ctrl.date)">
+                <scoutimage class="scout" scout="scout"></scoutimage>
+                <div ng-show="$ctrl.isAttend(scout,$ctrl.date)" class="ispresent">
+                  <i class="material-icons" >check_circle</i>
+                </div>
+              </div>
+              <scoutname scout="scout"></scoutname>
+            </div>
+          </div>
+        </div>
+    </div>
     </div>
   </div>
   <div ng-if="$ctrl.haveMeeting() === false && $ctrl.isWed()" class="noMeeting">

@@ -8,6 +8,10 @@ function MeetingAttendanceService() {
     _this.dbRef.on('value', function(curSnapshot) {
       _this.meetingAttendance = _this.firePropsToArray(curSnapshot.val());
     });
+    _this.patrolRef = firedb.ref('scoutPatrol');
+    _this.patrolRef.on('value', function(curSnapshot) {
+      _this.patrolMap = curSnapshot.val();
+    });
   };
   _this.firePropsToArray = function(fireprops) {
     const scoutArray = [];
@@ -104,4 +108,29 @@ function MeetingAttendanceService() {
     //console.debug(attendance);
     _this.dbRef.set(attendance);
   };
+
+  _this.getMeetingDbPatrols = function() {
+    var patrols = [];
+
+    if (_this.patrolMap) {
+      const scouts = Object.keys(_this.patrolMap);
+      scouts.forEach(function(scout) {
+        const patrolName = _this.patrolMap[scout];
+        if (patrolName !== undefined && patrols.indexOf(patrolName) === -1) {
+          patrols.push(patrolName);
+        }
+      });
+    }
+    return patrols;
+  };
+
+  _this.getPatrolForScout = function(scout) {
+    const key = scout._firstName + scout._lastName;
+    let patrol;
+    if (_this.patrolMap && _this.patrolMap[key]) {
+      patrol = _this.patrolMap[key];
+    }
+    return patrol;
+  };
+
 }

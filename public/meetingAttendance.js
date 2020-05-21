@@ -10,10 +10,17 @@ app.component('meetingAttendance', {
 function MeetingAttendanceController(MeetingAttendanceService) {
   const _this = this;
   _this.sortBy = "_firstName";
+  _this.groupByPatrol = false;
   _this.$onInit = function() {
+    _this.recordedBy = document.getElementById('name').textContent;
+    _this.patrols = MeetingAttendanceService.getMeetingDbPatrols();
+    _this.attendance.forEach(function(scout) {
+      scout._patrol = MeetingAttendanceService.getPatrolForScout(scout);
+    });
     _this.date = new Date();
     _this.dates = _this.getDates();
     _this.showSetup = false;
+    _this.overrideWed = false;
   };
 
   _this.getDates = function() {
@@ -55,6 +62,9 @@ function MeetingAttendanceController(MeetingAttendanceService) {
     if (dayOfWeek === 3) {
       wed = true;
     }
+    if (_this.overrideWed === true) {
+      wed = true;
+    }
     return wed;
   };
 
@@ -67,6 +77,9 @@ function MeetingAttendanceController(MeetingAttendanceService) {
       const meeting = MeetingAttendanceService.findMeeting(scout, date);
       if (meeting !== undefined) {
         meeting.present = !meeting.present;
+        if (meeting.present) {
+          meeting.recordedBy =  _this.recordedBy;
+        }
         MeetingAttendanceService.update(_this.attendance);
       }
     }
