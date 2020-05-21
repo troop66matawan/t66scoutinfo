@@ -14,9 +14,11 @@ function MeetingAttendanceController(MeetingAttendanceService) {
   _this.$onInit = function() {
     _this.recordedBy = document.getElementById('name').textContent;
     _this.patrols = MeetingAttendanceService.getMeetingDbPatrols();
-    _this.attendance.forEach(function(scout) {
-      scout._patrol = MeetingAttendanceService.getPatrolForScout(scout);
-    });
+    if (_this.attendance) {
+      _this.attendance.forEach(function (scout) {
+        scout._patrol = MeetingAttendanceService.getPatrolForScout(scout);
+      });
+    }
     _this.date = new Date();
     _this.dates = _this.getDates();
     _this.showSetup = false;

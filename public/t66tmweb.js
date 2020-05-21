@@ -13,9 +13,8 @@ app.component('scoutlist', {
 
     _this.scouts = [];
     _this.view = 1;
-    _this.menuOptions = [
-      {name: 'Individual Scout Data', value: 1},
-    ];
+    _this.menuOptions = [];
+    _this.indivScoutDataMenuItem = {name: 'Individual Scout Data', value: 1};
     _this.trailToEagleReportMenuItem =       {name: 'Trail to Eagle Advancement Report', value: 2};
     _this.photoReportMenuItem = {name: 'Scout Photo Report', value: 3};
     _this.scoutsNotAdvancing = {name: 'Scouts Not Advancing', value: 4};
@@ -106,15 +105,16 @@ app.component('scoutlist', {
              })
            } else {
              if (response.hasOwnProperty('access')){
+               let scoutDataMenu = false;
               for (var scoutIndex in response.access) {
                 var scout = response.access[scoutIndex];
-                if (response.position === 'scribe') {
-                  MeetingAttendanceService.initDB();
-                  _this.menuOptions.push(_this.meetingAttendance);
-                }
                 var scoutRef = firedb.ref('scouts/'+scout);
                 scoutRef.on('value', function(snapshot) {
                   $scope.$apply(function(){
+                    if (scoutDataMenu === false) {
+                      _this.menuOptions.push(_this.indivScoutDataMenuItem);
+                      scoutDataMenu = true;
+                    }
                     _this.scouts.push(snapshot.val());
                     if (_this.scouts && _this.scouts.length > 0) {
                       _this.selected = _this.scouts[0];
@@ -122,6 +122,12 @@ app.component('scoutlist', {
                   });
                 });
               }
+             }
+             if (response.position === 'scribe') {
+               $scope.$apply(function() {
+                 MeetingAttendanceService.initDB();
+                 _this.menuOptions.push(_this.meetingAttendance);
+               });
              }
            }
            console.log(snapshot.val());

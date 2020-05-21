@@ -5,7 +5,7 @@ app.component('slideInMenu', {
     menuOptions: '<',
     view: '='
   },
-  template: '<div ng-show="$ctrl.menuOptions.length > 1" id="slideinmenu">' +
+  template: '<div id="slideinmenu">' +
   '<div id="btn"><i class="material-icons" ng-click="$ctrl.btnClick()">menu</i></div>' +
   '<div id="box">' +
     '<div id="items" >' +
