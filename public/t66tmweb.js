@@ -64,6 +64,7 @@ app.component('scoutlist', {
              var contactsRef = firedb.ref('scout_contact/');
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
+                 _this.menuOptions.push(_this.indivScoutDataMenuItem);
                  _this.menuOptions.push(_this.trailToEagleReportMenuItem);
                  _this.menuOptions.push(_this.photoReportMenuItem);
                  _this.menuOptions.push(_this.scoutsNotAdvancing);
