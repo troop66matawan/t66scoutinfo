@@ -7,10 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "firebase": "^7.14.2",
-    "firebase-admin": "^8.11.0",
+    "firebase": "^7.22.0",
+    "firebase-admin": "^8.13.0",
+    "ia-activity-importer": "github:troop66matawan/ia-activity-importer#main",
     "scoutbook-activities-importer": "github:troop66matawan/scoutbook-activities-importer#master",
     "scoutbook-advancement-importer": "github:troop66matawan/scoutbook-advancement-importer#master",
+    "scoutbook-leadership-importer": "github:troop66matawan/scoutbook-leadership-importer#main",
     "scoutbook-scouts-importer": "github:troop66matawan/scoutbook-scouts-importer#master"
   },
   "repository": {
