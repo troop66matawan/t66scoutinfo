@@ -109,23 +109,42 @@ app.component('leadershipneeded', {
 });
 
 app.service('EagleRequired', function() {
+  const TROOPMASTER_EAGLES = [
+    'Camping',
+    'Cit In Community',
+    'Cit In Nation',
+    'Cit In World',
+    'Communication',
+    'Cooking',
+    'Family Life',
+    'First Aid',
+    'Personal Fitness',
+    'Personal Management',
+  ];
+  const SCOUTBOOK_EAGLES = [
+    'Camping',
+    'Citizenship in the Community',
+    'Citizenship in the Nation',
+    'Citizenship in the World',
+    'Communication',
+    'Cooking',
+    'Family Life',
+    'First Aid',
+    'Personal Fitness',
+    'Personal Management',
+  ];
 
-  this.needEagleReq = function(scout) {
+  this.needEagleReq = function(scout, isScoutbook) {
     if (!scout) {
       return;
     }
     var need = new Array();
-    var eagles = new Array();
-    eagles.push("Camping");
-    eagles.push("Cit In Community");
-    eagles.push("Cit In Nation");
-    eagles.push("Cit In World");
-    eagles.push('Communication');
-    eagles.push('Cooking');
-    eagles.push('Family Life');
-    eagles.push('First Aid');
-    eagles.push('Personal Fitness');
-    eagles.push('Personal Management');
+    let eagles;
+    if (isScoutbook) {
+      eagles = SCOUTBOOK_EAGLES;
+    } else {
+      eagles = TROOPMASTER_EAGLES;
+    }
 
     var option1 = new Array();
     option1.push('Cycling');
@@ -133,11 +152,19 @@ app.service('EagleRequired', function() {
     option1.push('Hiking');
 
     var option2 = new Array();
-    option2.push('Environmental Sci');
+    if (isScoutbook) {
+      option2.push('Environmental Science')
+    } else {
+      option2.push('Environmental Sci');
+    }
     option2.push('Sustainability');
 
     var option3 = new Array();
-    option3.push('Emergency Prep');
+    if (isScoutbook) {
+      option3.push('Emergency Preparedness');
+    } else {
+      option3.push('Emergency Prep');
+    }
     option3.push('Lifesaving');
 
 
@@ -145,48 +172,54 @@ app.service('EagleRequired', function() {
     //eagles.forEach(function(mb) {
     for (i=0;i<eagles.length;i++) {
       mb = eagles[i];
-      var found = false;
-      if (scout && scout.meritBadges) {
-        for (j=0;j<scout.meritBadges.length;j++) {
-          if (scout.meritBadges[j]._name === mb) {
-            found = true;
-            continue;
-          }
-        }
-      }
+      var found = this.matchMeritBadges(mb, scout, isScoutbook);
+
       if (!found) {
         need.push(mb);
       }
     }
 
-    var need1 = this.checkEagleOptions(option1, scout.meritBadges);
+    var need1 = this.checkEagleOptions(option1, scout, isScoutbook);
     if (need1 !== '') {
       need.push(need1);
     }
-    var need2 = this.checkEagleOptions(option2, scout.meritBadges);
+    var need2 = this.checkEagleOptions(option2, scout, isScoutbook);
     if (need2 !== '') {
       need.push(need2);
     }
-    var need3 = this.checkEagleOptions(option3, scout.meritBadges);
+    var need3 = this.checkEagleOptions(option3, scout, isScoutbook);
     if (need3 !== '') {
       need.push(need3);
     }
     return need;
   }
 
-  this.checkEagleOptions = function(optionSet, mbs) {
+  this.matchMeritBadges = function(mb, scout, isScoutbook) {
+    if (isScoutbook) {
+      if (scout && scout._advancement && scout._advancement._meritBadges && scout._advancement._meritBadges.hasOwnProperty(mb)) {
+        const meritbadge = scout._advancement._meritBadges[mb];
+        if (meritbadge._isApproved) {
+          return true;
+        }
+      }
+    } else {
+      if (scout && scout.meritBadges) {
+        for (j=0;j<scout.meritBadges.length;j++) {
+          if (scout.meritBadges[j]._name === mb) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+  this.checkEagleOptions = function(optionSet, scout, isScoutbook) {
     var need='';
     var found = false;
 
-    if (mbs) {
-      for (i=0;i<optionSet.length;i++) {
-        option = optionSet[i];
-        for (j=0;j<mbs.length;j++) {
-          if (mbs[j]._name === option)
-            found = true;
-          continue;
-        }
-      }
+    for (let i=0;(i<optionSet.length && !found);i++) {
+      const option = optionSet[i];
+      found = this.matchMeritBadges(option,scout, isScoutbook);
     }
     if (found == false) {
       for (i=0;i<optionSet.length;i++) {

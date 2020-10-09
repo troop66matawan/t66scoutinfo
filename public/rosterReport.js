@@ -4,21 +4,25 @@ app.component('rosterReport', {
     contacts: '<'
   },
   templateUrl: 'templates/rosterReport.html',
-  controller: ['ScoutService','CsvDownloadService','RankAdvancement',RosterReportController]
+  controller: ['ScoutbookDBService','CsvDownloadService','RankAdvancement', "ScoutbookLeadershipService", RosterReportController]
 });
 
-function RosterReportController(ScoutService, CsvDownloadService,RankAdvancement) {
+function RosterReportController(ScoutbookDBService, CsvDownloadService,RankAdvancement,ScoutbookLeadershipService ) {
   var _this = this;
 
   _this.$onInit = function() {
-    _this.patrols = ScoutService.getPatrols(_this.scouts);
+    _this.patrols = ScoutbookDBService.getPatrols(_this.scouts);
     var styleElement = document.getElementById('rosterReport');
     styleElement.append('@media print { @page { size: letter portrait; } }');
   };
 
   _this.getContact = function(scout) {
-    return ScoutService.getContact(scout, _this.contacts);
+    return ScoutbookDBService.getContact(scout);
   };
+
+  _this.getCurrentLeadership = function(scout) {
+    return ScoutbookLeadershipService.getCurrentLeadershipPositions(scout);
+  }
 
   _this.exportRoster = function() {
     var csvString = CsvDownloadService.encodeCSV();

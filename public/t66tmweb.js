@@ -7,23 +7,26 @@ app.run(['RankPatchFactory', function(RankPatchFactory) {
 app.component('scoutlist', {
   bindings: {
   },
-  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService, ScoutService) {
+  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService, ScoutService, ScoutbookDBService) {
     const _this = this;
     $scope.MeetingAttendanceService = MeetingAttendanceService;
+    $scope.ScoutbookDBService = ScoutbookDBService;
 
     _this.scouts = [];
     _this.view = 1;
     _this.menuOptions = [];
     _this.indivScoutDataMenuItem = {name: 'Individual Scout Data', value: 1};
-    _this.trailToEagleReportMenuItem =       {name: 'Trail to Eagle Advancement Report', value: 2};
+    //_this.trailToEagleReportMenuItem =       {name: 'Trail to Eagle Advancement Report', value: 2};
     _this.photoReportMenuItem = {name: 'Scout Photo Report', value: 3};
     _this.scoutsNotAdvancing = {name: 'Scouts Not Advancing', value: 4};
     _this.exportToScoutbook = {name: 'Export to Scoutbook', value: 5};
     _this.leadershipReport = {name: 'Leadership Attendance Report', value: 6};
     _this.attendanceReport = {name: 'Attendance Report', value: 7};
-    _this.serviceReport = {name: 'Service Report', value: 8};
+  //  _this.serviceReport = {name: 'Service Report', value: 8};
     _this.meetingAttendance = {name: 'Take Meeting Attendance', value: 9};
     _this.rosterReport = {name: 'Roster', value: 10};
+    _this.trailToEagleReportMenuItem2 =       {name: 'Trail to Eagle Advancement Report v2', value: 2};
+
 
 
     var firebaseAuthObject = $firebaseAuth(firebaseauth);
@@ -59,19 +62,20 @@ app.component('scoutlist', {
            if (response.hasOwnProperty('position')  &&
                 response.position === 'scoutmaster' || response.position === 'eaglecommittee') {
              MeetingAttendanceService.initDB();
+             ScoutbookDBService.initDB();
              _this.position = response.position;
              var allScoutsRef = firedb.ref('scouts/');
              var contactsRef = firedb.ref('scout_contact/');
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
                  _this.menuOptions.push(_this.indivScoutDataMenuItem);
-                 _this.menuOptions.push(_this.trailToEagleReportMenuItem);
+                 _this.menuOptions.push(_this.trailToEagleReportMenuItem2);
                  _this.menuOptions.push(_this.photoReportMenuItem);
                  _this.menuOptions.push(_this.scoutsNotAdvancing);
                  _this.menuOptions.push(_this.exportToScoutbook);
                  _this.menuOptions.push(_this.leadershipReport);
                  _this.menuOptions.push(_this.attendanceReport);
-                 _this.menuOptions.push(_this.serviceReport);
+//                 _this.menuOptions.push(_this.serviceReport);
                  _this.menuOptions.push(_this.meetingAttendance);
                  _this.menuOptions.push(_this.rosterReport);
 
@@ -166,17 +170,19 @@ app.component('scoutlist', {
       ' in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
       '<scoutdiv scout="$ctrl.selected" contact="$ctrl.getContact($ctrl.selected)"></scoutdiv>'+
     '</div>' +
-    '<trailtoeaglereport ng-if="$ctrl.view === 2" scouts="$ctrl.scouts" min-age="16"></trailtoeaglereport>' +
+    '<trailtoeaglereportv2 ng-if="$ctrl.view === 2" scouts="ScoutbookDBService.scouts" min-age="16"></trailtoeaglereportv2>' +
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
     '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="$ctrl.scouts"></scoutsnotadvancing>' +
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
     '<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
     '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></attendance-report>' +
+/*
     '<service-report ng-if="$ctrl.view === 8" scouts="$ctrl.scouts"></service-report>' +
+*/
     '<meeting-attendance ng-if="$ctrl.view === 9"' +
     ' position="$ctrl.position"' +
     ' attendance="MeetingAttendanceService.getMeetingAttendance()"></meeting-attendance>' +
-    '<roster-report ng-if="$ctrl.view === 10" scouts="$ctrl.scouts" contacts="$ctrl.contacts"></roster-report>' +
+    '<roster-report ng-if="$ctrl.view === 10" scouts="ScoutbookDBService.scouts"></roster-report>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {
@@ -422,13 +428,14 @@ app.component('scoutimage', {
 app.component('eagleneeded', {
   template: '<div class="eagleneeded" ng-repeat="eagle in $ctrl.needEagleReq($ctrl.scout)">{{eagle}}</div>',
   bindings: {
-    scout: '='
+    scout: '=',
+    isScoutbook: '<'
   },
   controller: ['EagleRequired', function(EagleRequired) {
     const _this = this;
 
     _this.needEagleReq = function(scout) {
-       return EagleRequired.needEagleReq(scout);
+       return EagleRequired.needEagleReq(scout, _this.isScoutbook);
     };
    }]
 });

@@ -1,0 +1,48 @@
+<div class="trailtoeagle">
+  <div class="header">Trail to Eagle Advancement Report</div>
+  <div class="table">
+    <div class="tr th">
+      <div class="trailToEaglePerson">
+        <div class="td">Last name</div>
+        <div class="td">First Name</div>
+        <div class="td">Rank</div>
+        <div class="td bd">Birthday</div>
+        <div class="td">Months/Days to 18</div>
+      </div>
+      <div class="trailToEagleRemain">
+        <div class="td">Leadership Remaining</div>
+          <!--        <div class="td">Service Remain</div> -->
+        <div class="td">Total MB</div>
+        <div class="td"># Eagle remaining</div>
+        <div class="td neededmb">Eagle MB Remaining</div>
+      </div>
+    </div>
+    <div class="tr" ng-repeat="scout in $ctrl.trailToEagleScouts">
+      <div class="trailToEaglePerson">
+        <div class="td">{{scout._lastName}}</div>
+        <div class="td">{{scout._firstName}}</div>
+        <div class="td {{$ctrl.styleBackgroundRank(scout)}}">
+          {{$ctrl.getCurrentRank(scout)}}
+        </div>
+        <div class="td bd">
+          <div>{{scout._dob}}</div>
+        </div>
+        <div class="td {{$ctrl.styleBackgroundDate(scout)}}"><div >{{$ctrl.monthsTo18(scout._dateOfBirth)}}</div> /
+          <div>{{$ctrl.daysTo18(scout._dateOfBirth)}}</div>
+        </div>
+      </div>
+      <div class="trailToEagleRemain">
+        <div class="td {{$ctrl.styleBackgroundLdr(scout)}}">
+          {{$ctrl.getLeadershipRemaining(scout)}}
+        </div>
+<!--        <div class="td">{{scout._rankAdvancement._neededServiceHours}}</div> -->
+        <div class="td">{{$ctrl.getTotalMeritBadges(scout)}}</div>
+        <div class="td {{$ctrl.styleBackgroundMb(scout)}}">{{$ctrl.needEagleReq(scout).length}}</div>
+        <div class="td neededmb">
+          <eagleneeded scout="scout" is-scoutbook="true"></eagleneeded>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>

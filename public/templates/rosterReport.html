@@ -2,23 +2,30 @@
   <style id='rosterReport'></style>
   <div ng-repeat="patrol in $ctrl.patrols | orderBy: 'toString()'">
     <div class="roster-report-patrol">
-      <div class="roster-report-patrol-name">{{patrol}}</div>
-      <div ng-repeat="scout in $ctrl.scouts | filter: { _patrol: patrol } | orderBy: '_lastName'">
-        <div class="roster-report-scout">
+      <div ng-if="patrol !== ''" class="roster-report-patrol-name">{{patrol}}</div>
+      <div ng-if="patrol === ''" class="roster-report-patrol-name">UNASSIGNED</div>
+      <div ng-repeat="scout in $ctrl.scouts | filter: { _patrolName: patrol } | orderBy: '_lastName'">
+        <div ng-if='patrol !== "" || patrol === "" && scout._patrolName === ""'  class="roster-report-scout">
           <div class="roster-report-scout-card">
-          <scoutname scout="scout"></scoutname>
-          <div class="infobox">
-            <div class="infoitem">
-              <div class="info label left">BSA ID:</div><div class="info left">{{scout._bsaID}}</div>
+            <scoutname scout="scout"></scoutname>
+            <div class="infobox">
+              <div class="infoitem">
+                <div class="info label left">BSA ID:</div><div class="info left">{{scout._bsaId}}</div>
+              </div>
+              <div class="info placeholder"></div>
+              <div class="infoitem">
+                <div class="info label right">DOB:</div>
+                <div class="info">{{scout._dob}}</div>
+              </div>
             </div>
-            <div class="info placeholder"></div>
-            <div class="infoitem">
-              <div class="info label right">DOB:</div>
-              <div class="info"><scoutdate date="scout._dateOfBirth"></scoutdate></div>
+            <scoutcontact contact="$ctrl.getContact(scout)"></scoutcontact>
+            <div class="infobox">
+              <div class="infoitem">
+                <div class="info label left">Current Leadership:</div>
+                <div class="info left" ng-repeat="position in $ctrl.getCurrentLeadership(scout)">{{position._position}}</div>
+              </div>
             </div>
           </div>
-          <scoutcontact contact="$ctrl.getContact(scout)"></scoutcontact>
-        </div>
           <scoutimage class="scoutinfoimage" scout="scout"></scoutimage>
         </div>
       </div>
