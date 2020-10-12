@@ -562,8 +562,12 @@ span {
   page: rotated;
 }
 
+div#rosterDownload{
+  display:none;
+}
 .roster-report-scout {
   display: flex;
+  page-break-inside: avoid;
 }
 .roster-report-scout-card {
   font-size: small;
@@ -575,11 +579,20 @@ span {
 .roster-report-patrol {
   page-break-after: always;
 }
+.roster-report-patrol.disabled {
+  display: none;
+}
+
+.roster-report-patrol-header {
+  background-color: black;
+  display: flex;
+}
 
 .roster-report-patrol-name {
   background-color: black;
   color: white;
   font-size: xx-large;
+  flex-grow: 9
 }
 
 .roster-report-scout-card {

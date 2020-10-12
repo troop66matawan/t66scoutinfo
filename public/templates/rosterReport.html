@@ -1,10 +1,13 @@
 <div class="rosterReport">
   <style id='rosterReport'></style>
   <div ng-repeat="patrol in $ctrl.patrols | orderBy: 'toString()'">
-    <div class="roster-report-patrol">
-      <div ng-if="patrol !== ''" class="roster-report-patrol-name">{{patrol}}</div>
+    <div class="roster-report-patrol" ng-class="{disabled:!$ctrl.enabledPatrol[patrol]}">
+      <div ng-if="patrol !== ''" class="roster-report-patrol-header" >
+        <input type="checkbox" ng-model="$ctrl.enabledPatrol[patrol]">
+        <div class="roster-report-patrol-name">{{patrol}}</div>
+     </div>
       <div ng-if="patrol === ''" class="roster-report-patrol-name">UNASSIGNED</div>
-      <div ng-repeat="scout in $ctrl.scouts | filter: { _patrolName: patrol } | orderBy: '_lastName'">
+      <div ng-if="$ctrl.enabledPatrol[patrol]" ng-repeat="scout in $ctrl.scouts | filter: { _patrolName: patrol } | orderBy: '_lastName'">
         <div ng-if='patrol !== "" || patrol === "" && scout._patrolName === ""'  class="roster-report-scout">
           <div class="roster-report-scout-card">
             <scoutname scout="scout"></scoutname>

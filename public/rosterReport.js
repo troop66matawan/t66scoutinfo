@@ -11,7 +11,11 @@ function RosterReportController(ScoutbookDBService, CsvDownloadService,RankAdvan
   var _this = this;
 
   _this.$onInit = function() {
+    _this.enabledPatrol={};
     _this.patrols = ScoutbookDBService.getPatrols(_this.scouts);
+    _this.patrols.forEach(function(patrol){
+      _this.enabledPatrol[patrol] = true;
+    })
     var styleElement = document.getElementById('rosterReport');
     styleElement.append('@media print { @page { size: letter portrait; } }');
   };

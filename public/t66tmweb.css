@@ -733,8 +733,14 @@ eagleneeded {
   display: flex;
 }
 
+.roster-report-patrol-header {
+  background-color: black;
+  display: flex;
+}
+
 .roster-report-patrol-name {
   background-color: black;
   color: white;
   font-size: xx-large;
+  flex-grow: 9
 }
