@@ -92,7 +92,7 @@ function ScoutbookDBService(ScoutbookDBConstant) {
                 rank = ScoutbookDBConstant.ADVANCEMENT.STAR;
             } else if (rankadv.hasOwnProperty(ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS) && rankadv[ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS]._isApproved){
                 rank = ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS;
-            } else if (rankadv.hasOwnProperty(ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS && rankadv[ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS]._isApproved)){
+            } else if (rankadv.hasOwnProperty(ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS) && rankadv[ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS]._isApproved){
                 rank = ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS;
             } else if (rankadv.hasOwnProperty(ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT) && rankadv[ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT]._isApproved){
                 rank = ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT;

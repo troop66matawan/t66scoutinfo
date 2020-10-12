@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "firebase": "^7.22.0",
+    "firebase": "^7.23.0",
     "firebase-admin": "^8.13.0",
     "ia-activity-importer": "github:troop66matawan/ia-activity-importer#main",
     "scoutbook-activities-importer": "github:troop66matawan/scoutbook-activities-importer#master",

@@ -22,7 +22,7 @@ app.component('scoutlist', {
     _this.exportToScoutbook = {name: 'Export to Scoutbook', value: 5};
     _this.leadershipReport = {name: 'Leadership Attendance Report', value: 6};
     _this.attendanceReport = {name: 'Attendance Report', value: 7};
-  //  _this.serviceReport = {name: 'Service Report', value: 8};
+    _this.serviceReport = {name: 'Service Report', value: 8};
     _this.meetingAttendance = {name: 'Take Meeting Attendance', value: 9};
     _this.rosterReport = {name: 'Roster', value: 10};
     _this.trailToEagleReportMenuItem2 =       {name: 'Trail to Eagle Advancement Report v2', value: 2};
@@ -75,7 +75,7 @@ app.component('scoutlist', {
                  _this.menuOptions.push(_this.exportToScoutbook);
                  _this.menuOptions.push(_this.leadershipReport);
                  _this.menuOptions.push(_this.attendanceReport);
-//                 _this.menuOptions.push(_this.serviceReport);
+                 _this.menuOptions.push(_this.serviceReport);
                  _this.menuOptions.push(_this.meetingAttendance);
                  _this.menuOptions.push(_this.rosterReport);
 
@@ -176,9 +176,7 @@ app.component('scoutlist', {
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
     '<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
     '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></attendance-report>' +
-/*
-    '<service-report ng-if="$ctrl.view === 8" scouts="$ctrl.scouts"></service-report>' +
-*/
+    '<service-report ng-if="$ctrl.view === 8" scouts="ScoutbookDBService.scouts"></service-report>' +
     '<meeting-attendance ng-if="$ctrl.view === 9"' +
     ' position="$ctrl.position"' +
     ' attendance="MeetingAttendanceService.getMeetingAttendance()"></meeting-attendance>' +
