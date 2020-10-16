@@ -24,6 +24,15 @@ function RosterReportController(ScoutbookDBService, CsvDownloadService,RankAdvan
     return ScoutbookDBService.getContact(scout);
   };
 
+  _this.getParents = function(scout) {
+    const contact = _this.getContact(scout);
+    let parents;
+    if (contact && Array.isArray(contact._parents) && contact._parents.length > 0) {
+      parents = contact._parents;
+    }
+    return parents;
+  }
+
   _this.getCurrentLeadership = function(scout) {
     return ScoutbookLeadershipService.getCurrentLeadershipPositions(scout);
   }

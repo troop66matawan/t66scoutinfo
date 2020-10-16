@@ -737,6 +737,17 @@ eagleneeded {
   background-color: black;
   display: flex;
 }
+.roster-report-parent-name {
+  display: flex;
+  margin-left: 10px;
+  font-size: small;
+  font-weight: bolder;
+}
+.roster-report-parent-card {
+  position: relative;
+  top: 50px;
+  font-size: smaller;
+}
 
 .roster-report-patrol-name {
   background-color: black;
