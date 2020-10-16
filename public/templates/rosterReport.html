@@ -13,6 +13,17 @@
             <scoutname scout="scout"></scoutname>
             <div class="infobox">
               <div class="infoitem">
+                <div class="info label left">Current Rank:</div><div class="info left">{{$ctrl.getRankText(scout)}}</div>
+              </div>
+              <div class="info placeholder"></div>
+              <div class="infoitem">
+                <div class="info label right">Rank Date:</div>
+                <div class="info">{{$ctrl.getRankDate(scout)}}</div>
+              </div>
+            </div>
+
+            <div class="infobox">
+              <div class="infoitem">
                 <div class="info label left">BSA ID:</div><div class="info left">{{scout._bsaId}}</div>
               </div>
               <div class="info placeholder"></div>

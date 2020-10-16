@@ -24,6 +24,19 @@ function RosterReportController(ScoutbookDBService, CsvDownloadService,RankAdvan
     return ScoutbookDBService.getContact(scout);
   };
 
+  _this.getRankText = function(scout) {
+    return ScoutbookDBService.getCurrentRankText(scout);
+  };
+
+  _this.getRankDate = function(scout){
+    let rankDate = '';
+    const currentRank = ScoutbookDBService.getCurrentRank(scout);
+    const rankDateObj = ScoutbookDBService.getRankDate(scout,currentRank);
+    if (rankDateObj !== undefined) {
+      rankDate = rankDateObj.getMonth() + 1 + '/' + rankDateObj.getDate() + '/' + rankDateObj.getFullYear();
+    }
+    return rankDate;
+  }
   _this.getParents = function(scout) {
     const contact = _this.getContact(scout);
     let parents;
