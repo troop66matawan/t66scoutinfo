@@ -69,7 +69,7 @@ function ScoutbookDBService(ScoutbookDBConstant) {
 
     _this.getRankObj = function(scout, rank) {
         let currank;
-        if (scout && scout._advancement && scout._advancement.hasOwnProperty(rank) && scout._advancement[rank]._isApproved) {
+        if (scout && scout._advancement && scout._advancement.hasOwnProperty(rank) ) {
             currank = scout._advancement[rank];
         }
         return currank;
@@ -78,7 +78,7 @@ function ScoutbookDBService(ScoutbookDBConstant) {
     _this.getRankDate = function(scout, rank) {
         let rankDate;
         const curRank = _this.getRankObj(scout,rank);
-        if (curRank) {
+        if (curRank && curRank._isApproved) {
             rankDate = new Date(curRank._completionDate);
         }
         return rankDate;
@@ -106,7 +106,36 @@ function ScoutbookDBService(ScoutbookDBConstant) {
         }
         return rank;
     }
-
+    _this.getNextRank = function(scout) {
+        var rank= ScoutbookDBConstant.ADVANCEMENT.SCOUT;
+        const curRank = _this.getCurrentRank(scout);
+        if (curRank){
+            switch (curRank) {
+                case ScoutbookDBConstant.ADVANCEMENT.SCOUT:
+                    rank = ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT;
+                    break;
+                case ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT:
+                    rank = ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS;
+                    break;
+                case ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS:
+                    rank = ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS;
+                    break;
+                case ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS:
+                    rank = ScoutbookDBConstant.ADVANCEMENT.STAR;
+                    break;
+                case ScoutbookDBConstant.ADVANCEMENT.STAR:
+                    rank = ScoutbookDBConstant.ADVANCEMENT.LIFE;
+                    break;
+                case ScoutbookDBConstant.ADVANCEMENT.LIFE:
+                case ScoutbookDBConstant.ADVANCEMENT.EAGLE:
+                    rank = ScoutbookDBConstant.ADVANCEMENT.EAGLE;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return rank;
+    }
     _this.getCurrentRankText = function(scout) {
         var rankText = '';
         if (scout && scout._advancement) {
@@ -129,4 +158,11 @@ function ScoutbookDBService(ScoutbookDBConstant) {
         }
         return rankText;
     };
+    _this.getRequirement = function(rankObj, requirementID) {
+        let requirement;
+        if (rankObj && rankObj._requirements && rankObj._requirements._requirement) {
+           requirement = rankObj._requirements._requirement[requirementID];
+        }
+        return requirement;
+    }
 }

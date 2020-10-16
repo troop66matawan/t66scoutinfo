@@ -31,8 +31,20 @@ function ScoutbookActivityService(ScoutbookDBConstant, ScoutbookDBService) {
         const neededService={total: -1, conservation: -1};
         if (scout) {
             const currentRank = ScoutbookDBService.getCurrentRank(scout);
+            const nextRank = ScoutbookDBService.getNextRank(scout);
+            const rankObj = ScoutbookDBService.getRankObj(scout,nextRank);
+            if (rankObj && rankObj._version) {
+                const req =  _this.SERVICE_REQUIREMENT[nextRank];
+                if (req && req[rankObj._version] !== undefined) {
+                    const requirement = ScoutbookDBService.getRequirement(rankObj, req[rankObj._version]);
+                    if (requirement && requirement._isApproved === true) {
+                        neededService.total =0;
+                        neededService.conservation=0;
+                    }
+                }
+            }
             const service = _this.getScoutServiceActivities(scout);
-            if (currentRank && service) {
+            if (currentRank && service && neededService.conservation !== 0 && neededService.total !== 0) {
                 let requiredService = neededService;
                 switch (currentRank) {
                     case ScoutbookDBConstant.ADVANCEMENT.SCOUT:
