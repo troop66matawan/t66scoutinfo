@@ -60,7 +60,11 @@ function ScoutbookDBService(ScoutbookDBConstant) {
     };
 
     _this.getContact = function(scout) {
-        return scout;
+        let contact = scout._contactInfo;
+        if (contact === undefined) {
+            contact = scout;
+        }
+        return contact;
     }
 
     _this.getRankObj = function(scout, rank) {
