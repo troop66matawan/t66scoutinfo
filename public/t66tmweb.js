@@ -172,7 +172,7 @@ app.component('scoutlist', {
     '</div>' +
     '<trailtoeaglereportv2 ng-if="$ctrl.view === 2" scouts="ScoutbookDBService.scouts" min-age="16"></trailtoeaglereportv2>' +
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
-    '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="$ctrl.scouts"></scoutsnotadvancing>' +
+    '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="ScoutbookDBService.scouts"></scoutsnotadvancing>' +
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
     '<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
     '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></attendance-report>' +

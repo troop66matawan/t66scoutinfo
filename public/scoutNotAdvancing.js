@@ -3,47 +3,45 @@ app.component('scoutsnotadvancing', {
     scouts: '<',
     minAge: '<'
   },
-  template:   '<div class="scoutsnotadvancing">'+
-  '<div class="header">Scouts Not Advancing Report</div>' +
-  '<div class="table">' +
-  '<div class="tr th">'+'' +
-  //		return "Last Name, First Name, Rank, Rank Date"
-
-  '<div class="td">Last name</div><div class="td">First Name</div><div class="td">Rank</div>'+'' +
-  '<div class="td">Rank Date</div><div class="td">Date Joined Unit</div>'+
-  '</div>'+
-  '<div class="tr" ng-repeat="scout in $ctrl.scoutsNotAdvancing">'+
-  '<div class="td">{{scout._lastName}}</div><div class="td">{{scout._firstName}}</div>'+'' +
-  '<div class="td"><currentrank rankadv="scout._rankAdvancement"></currentrank></div>'+
-  '<div class="td"><scoutdate date="$ctrl.getRankDate(scout._rankAdvancement)"></scoutdate></div>' +
-  '<div class="td"><scoutdate date="$ctrl.getJoinDate(scout)"></scoutdate></div>' +
-  '</div>'+
-  '</div>'+
-  '</div>',
-  controller: ['RankAdvancement', function(RankAdvancement) {
+  templateUrl:  'templates/scoutNotAdvancing.html',
+  controller: ['ScoutbookDBService', function(ScoutbookDBService) {
     const _this = this;
     _this.scoutsNotAdvancing = [];
 
-    _this.getRankDate = function(rankAdv) {
-      return RankAdvancement.getCurrentRankDate(rankAdv);
+    _this.getCurrentRankText = function(scout) {
+      return ScoutbookDBService.getCurrentRankText(scout);
+    }
+    _this.getRankDate = function(scout) {
+      let date;
+      const currentRank = ScoutbookDBService.getCurrentRank(scout);
+      const rankDate = ScoutbookDBService.getRankDate(scout, currentRank);
+      if (rankDate) {
+        date = rankDate.getMonth()+1 + '/' + rankDate.getDate()+'/'+rankDate.getFullYear();
+      }
+      return date;
     };
 
     _this.getJoinDate = function(scout) {
-      return scout._joinedUnit;
+      let date;
+      const joinDate = ScoutbookDBService.getDate(scout._dateJoinedBSA);
+      if (joinDate) {
+        date = joinDate.getMonth()+1 + '/' + joinDate.getDate()+'/'+joinDate.getFullYear();
+      }
+      return date;
     };
 
     _this.$onChanges = function(changes) {
       _this.scouts =  changes.scouts.currentValue;
       var numberOfScoutsNotAdvancing = 0;
       _this.scouts.forEach(function(scout) {
-        var rank = scout._rankAdvancement;
 
-        var rankDate = RankAdvancement.getCurrentRankDate(rank);
-        var currentRank = RankAdvancement.getCurrentRankText(rank);
+        var currentRank = ScoutbookDBService.getCurrentRank(scout);
+        var currentRankText = ScoutbookDBService.getCurrentRankText(scout);
+        var rankDate = ScoutbookDBService.getRankDate(scout,currentRank);
 
 
         if ((rankDate === undefined ) ||
-          (rankDate && _this.olderThanMinAge(rankDate,1) && (currentRank !== 'Eagle' && currentRank !== 'Life'))) {
+          (rankDate && _this.olderThanMinAge(rankDate,1) && (currentRankText !== 'Eagle' && currentRankText !== 'Life'))) {
           _this.scoutsNotAdvancing.push(scout);
           ++numberOfScoutsNotAdvancing;
         }
@@ -51,26 +49,27 @@ app.component('scoutsnotadvancing', {
 
       // sort by birthday descending
       _this.scoutsNotAdvancing.sort(function(a,b) {
-        var aDate = RankAdvancement.getCurrentRankDate(a._rankAdvancement);
-        var bDate = RankAdvancement.getCurrentRankDate(b._rankAdvancement);
+        const aRank = ScoutbookDBService.getCurrentRank(a);
+        const bRank = ScoutbookDBService.getCurrentRank(b);
+        var aDate = ScoutbookDBService.getRankDate(a,aRank);
+        var bDate = ScoutbookDBService.getRankDate(b,bRank);
         var aTime, bTime;
         if (aDate === undefined) {
           aTime = 0;
         } else {
-          aTime = aDate.time;
+          aTime = aDate.getTime();
         }
         if (bDate === undefined) {
           bTime =0;
         } else {
-          bTime = bDate.time;
+          bTime = bDate.getTime();
         }
         return  aTime - bTime;
       });
     };
 
-    _this.olderThanMinAge = function(rankDate, minAge) {
+    _this.olderThanMinAge = function(minAgeDate, minAge) {
       var rv = false;
-      var minAgeDate = new Date(rankDate.time);
       minAgeDate.setFullYear(minAgeDate.getFullYear()+minAge);
       var now = new Date();
 

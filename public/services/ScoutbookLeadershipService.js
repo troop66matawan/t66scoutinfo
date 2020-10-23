@@ -73,6 +73,9 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
                     const curRankPositions = [];
                     for (let posI = 0; posI < positions.length; posI++) {
                         const position = positions[posI];
+                        if (position._position.startsWith('Assistant Patrol Leader')) {
+                            continue;
+                        }
                         const startDate = new Date(position._startDate);
                         let endDate = new Date();
                         if (position._endDate && position._endDate.length > 0) {
@@ -141,7 +144,7 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
                         let calendarTenureDate = new Date(rankDate.getTime());
                         let month = rankDate.getMonth();
                         if ((month + neededTenure) > 11) {
-                            calendarTenureDate.setMonth(month+neededTenure-11);
+                            calendarTenureDate.setMonth(month+neededTenure-12);
                             calendarTenureDate.setFullYear(calendarTenureDate.getFullYear()+1);
                         } else {
                             calendarTenureDate.setMonth(month+neededTenure);

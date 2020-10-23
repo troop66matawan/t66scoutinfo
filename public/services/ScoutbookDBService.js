@@ -35,9 +35,14 @@ function ScoutbookDBService(ScoutbookDBConstant) {
     _this.getDate = function(scoutbookDate) {
         let date;
         if (scoutbookDate) {
-            const splits = scoutbookDate.split('/');
+            let splits = scoutbookDate.split('/');
             if (splits.length === 3) {
                 date = new Date(splits[2], splits[0] - 1, splits[1]);
+            } else {
+                splits = scoutbookDate.split('-');
+                if (splits.length === 3) {
+                    date = new Date(splits[0], splits[1] - 1, splits[2]);
+                }
             }
         }
         return date;
