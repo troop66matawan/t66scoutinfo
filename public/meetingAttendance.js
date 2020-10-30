@@ -41,6 +41,9 @@ function MeetingAttendanceController(MeetingAttendanceService) {
     for (const meeting of dateMap.keys()) {
       dates.push(meeting);
     }
+    dates.sort(function(a,b) {
+      return b - a;
+    });
     return dates;
   };
   this.genDate = function(activityDate) {
@@ -58,10 +61,12 @@ function MeetingAttendanceController(MeetingAttendanceService) {
     return MeetingAttendanceService.anyScoutsWithMeeting(_this.date);
   };
 
+  /* meetings moving to Sunday - change day of week */
   _this.isWed = function() {
     let wed = false;
     const dayOfWeek = new Date().getDay();
-    if (dayOfWeek === 3) {
+//    if (dayOfWeek === 3) { // Wednesday
+    if (dayOfWeek === 0) { // Sunday
       wed = true;
     }
     if (_this.overrideWed === true) {
