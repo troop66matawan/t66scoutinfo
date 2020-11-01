@@ -44,7 +44,7 @@ function ScoutbookActivityService(ScoutbookDBConstant, ScoutbookDBService) {
                 }
             }
             const service = _this.getScoutServiceActivities(scout);
-            if (currentRank && service && neededService.conservation !== 0 && neededService.total !== 0) {
+            if (currentRank && neededService.conservation !== 0 && neededService.total !== 0) {
                 let requiredService = neededService;
                 switch (currentRank) {
                     case ScoutbookDBConstant.ADVANCEMENT.SCOUT:
@@ -57,7 +57,7 @@ function ScoutbookActivityService(ScoutbookDBConstant, ScoutbookDBService) {
                     default:
                         break;
                 }
-                let serviceList = service;
+                let serviceList = service | [];
                 switch (currentRank) {
                     case ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS:
                     case ScoutbookDBConstant.ADVANCEMENT.STAR:
@@ -66,7 +66,7 @@ function ScoutbookActivityService(ScoutbookDBConstant, ScoutbookDBService) {
                     default:
                         break;
                 }
-                if (serviceList.length > 0 && (requiredService.total > 0 || requiredService.conservation >0)) {
+                if (requiredService.total > 0 || requiredService.conservation >0) {
                     neededService.total = requiredService.total;
                     neededService.conservation = requiredService.conservation;
 
