@@ -1,0 +1,27 @@
+<div class="service">
+    <div class="header">Service</div> 
+    <div class="table"> 
+        <div class="tr th">
+            <div class="td">Date</div>
+            <div class="td">Conservation</div>
+            <div class="td">Location</div>
+            <div class="td">Remarks</div>
+            <div class="td">Hours</div>
+        </div>
+        <div ng-if="$ctrl.scout._activities && $ctrl.scout._activities._service"
+             class="tr"
+             ng-repeat="trip in $ctrl.scout._activities._service">
+            <div class="td"><date date="trip._date"></date></div>
+            <div class="td"><div ng-class="{conservation:trip._conservation === true}"></div></div>
+            <div class="td">{{trip._location}}</div>
+            <div class="td">{{trip._notes}}</div>
+            <div class="td">{{trip._count}}</div>
+        </div>
+        <div class="tr">
+            <div class="td"></div>
+            <div class="td"></div>
+            <div class="td" style="justify-content: flex-end;">Total Hours</div>
+            <div class="td">{{$ctrl.totalNights()}}</div>
+        </div>
+    </div>
+</div>

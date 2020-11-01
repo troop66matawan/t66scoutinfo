@@ -167,8 +167,8 @@ app.component('scoutlist', {
   ' scout._firstName)' +
   ' for' +
   ' scout' +
-      ' in $ctrl.scouts | orderBy: $ctrl.orderBy()">	</select>' +
-      '<scoutdiv scout="$ctrl.selected" contact="$ctrl.getContact($ctrl.selected)"></scoutdiv>'+
+      ' in ScoutbookDBService.scouts | orderBy: $ctrl.orderBy()">	</select>' +
+      '<scoutdiv scout="$ctrl.selected" ></scoutdiv>'+
     '</div>' +
     '<trailtoeaglereportv2 ng-if="$ctrl.view === 2" scouts="ScoutbookDBService.scouts" min-age="16"></trailtoeaglereportv2>' +
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
@@ -188,30 +188,7 @@ app.component('scoutlist', {
   // }
 });
 
-app.component('scoutdiv' , {
-  template:
-    '<div><scoutinfo scout="$ctrl.scout" contact="$ctrl.contact"></scoutinfo>'+
-    '<scoutrank scout="$ctrl.scout"></scoutrank>'+
-    '<scoutpor scout="$ctrl.scout"></scoutpor>' +
-    '<scoutmb scout="$ctrl.scout"></scoutmb>'+
-    '<camping scout="$ctrl.scout"></camping>' +
-    '<service scout="$ctrl.scout"></service>' +
-    '<reportdate scout="$ctrl.scout"></reportdate>' +
-    '</div>',
-  bindings: {
-    scout: '<',
-    contact: '<'
-  },
-  controller: [function() {
-    const _this = this;
-    _this.$onChanges = function(changes) {
-      if (changes && changes.scout) {
-        _this.scout = changes.scout.currentValue;
-      }
-    };
 
-  }]
-});
 app.component('scoutdate', {
   template: '<div>{{$ctrl.dateToString($ctrl.date)}}</div>',
   bindings: {
@@ -250,7 +227,7 @@ app.factory('RankPatchFactory', function() {
   rankPatch.getPatchUrl = function(rank,date) {
     var getrank = rank;
     if (rank === "_scout" ) {
-      if (date && date.year < 116) {//2016
+      if (date && date.getFullYear() < 2016) {//2016
         getrank += "_old";
       }
     }
@@ -264,13 +241,13 @@ app.component('scoutrank', {
   '<div class="scoutrank">'+
     '<div class="header">Ranks</div>' +
     '<div class="ranks">'+
-      '<rankpatch rank="_scout"  date="$ctrl.scout._rankAdvancement._scout"></rankpatch>'+
-      '<rankpatch rank="_tenderfoot"  date="$ctrl.scout._rankAdvancement._tenderfoot"></rankpatch>'+
-      '<rankpatch rank="_2ndClass"  date="$ctrl.scout._rankAdvancement._2ndClass"></rankpatch>'+
-      '<rankpatch rank="_1stClass"  date="$ctrl.scout._rankAdvancement._1stClass"></rankpatch>'+
-      '<rankpatch rank="_star"  date="$ctrl.scout._rankAdvancement._star"></rankpatch>'+
-      '<rankpatch rank="_life"  date="$ctrl.scout._rankAdvancement._life"></rankpatch>'+
-      '<rankpatch rank="_eagle"  date="$ctrl.scout._rankAdvancement._eagle"></rankpatch>'+
+      '<rankpatch rank="_scout"  date="$ctrl.scout._advancement[\'scout\']"></rankpatch>'+
+      '<rankpatch rank="_tenderfoot"  date="$ctrl.scout._advancement[\'tenderfoot\']"></rankpatch>'+
+      '<rankpatch rank="_2ndClass"  date="$ctrl.scout._advancement[\'Second Class\']"></rankpatch>'+
+      '<rankpatch rank="_1stClass"  date="$ctrl.scout._advancement[\'First Class\']"></rankpatch>'+
+      '<rankpatch rank="_star"  date="$ctrl.scout._advancement[\'Star Scout\']"></rankpatch>'+
+      '<rankpatch rank="_life"  date="$ctrl.scout._advancement[\'Life Scout\']"></rankpatch>'+
+      '<rankpatch rank="_eagle"  date="$ctrl.scout._advancement[\'Eagle Scout\']"></rankpatch>'+
     '</div>' +
   '</div>',
   bindings: {
@@ -282,7 +259,7 @@ app.component('rankpatch', {
   template:
   '<div ng-if="$ctrl.isValidDate()" class="rankpatch">'+
    '<img class="rank" ng-src="{{$ctrl.getRankPatch($ctrl.rank,$ctrl.date)}}">' +
-   '<span class="rankdate"><scoutdate date="$ctrl.date"></scoutdate></span>'+
+   '<span class="rankdate"><date date="$ctrl.date._completionDate"></date></span>'+
   '</div>',
   controller: ['RankPatchFactory', function(RankPatchFactory) {
     const _this = this;
@@ -290,70 +267,19 @@ app.component('rankpatch', {
 
     _this.isValidDate = function() {
       var rv = false;
-      if (_this.date && _this.date.time > 0)
+      if (_this.date && _this.date._completionDate)
         rv = true;
 
       return rv;
     };
     _this.getRankPatch = function(rank,date) {
-      return _this.rpf.getPatchUrl(rank,date);
+      const dateObj = new Date(date);
+      return _this.rpf.getPatchUrl(rank,dateObj);
     }
   }],
   bindings: {
     rank: '@',
     date: '<'
-  }
-});
-
-app.component('scoutinfo', {
-  template:
-    '<div class="scoutinfo">'+
-      '<div class="name"><scoutname scout="$ctrl.scout"></scoutname>' +
-      ' <scoutimage class="scoutinfoimage" scout="$ctrl.scout"></scoutimage>'+
-      '</div>'+
-      '<div class="infobox">' +
-        '<div class="infoitem">'+
-          '<div class="info label left">BSA ID:</div><div class="info left">{{$ctrl.scout._bsaID}}</div>' +
-        '</div>' +
-        '<div class="info placeholder"></div>' +
-        '<div class="infoitem">'+
-          '<div class="info label right">DOB:</div>'+
-          '<div class="info"><scoutdate date="$ctrl.scout._dateOfBirth"></scoutdate></div>' +
-        '</div>' +
-      '</div>'+
-      '<div class="infobox">' +
-      '<div class="infoitem">'+
-        '<div class="info label left">Leadership Days Needed:</div>'+
-        '<div class="info"><leadershipneeded scout="$ctrl.scout"></leadershipneeded></div>' +
-      '</div>'+
-      '<div class="info placeholder"></div>' +
-      '<div class="infoitem">'+
-          '<div class="info label right">Current Rank:</div>' +
-          '<div class="info"><currentrank rankadv="$ctrl.scout._rankAdvancement"></currentrank></div>'+
-        '</div>' +
-      '</div>' +
-      '<div class="infobox">' +
-        '<div class="infoitem">'+
-          '<div class="info label left">Service Project Hours Needed:</div>'+
-          '<div class="info">{{$ctrl.scout._rankAdvancement._neededServiceHours}}</div>' +
-        '</div>' +
-        '<div class="info placeholder"></div>' +
-        '<div class="infoitem">'+
-          '<div class="info label right">Patrol:</div>' +
-          '<div class="info">{{$ctrl.scout._patrol}}</div>'+
-        '</div>' +
-      '</div>' +
-      '<div class="infobox">' +
-        '<div class="infoitem">'+
-          '<div class="info label left">Date Joined Unit:</div>' +
-          '<div class="info"><scoutdate date="$ctrl.scout._joinedUnit"></scoutdate></div>' +
-        '</div>' +
-      '</div>' +
-      '<scoutcontact ng-if="$ctrl.contact" contact="$ctrl.contact"></scoutcontact>' +
-    '</div>',
-  bindings: {
-    scout: '=',
-    contact: '='
   }
 });
 

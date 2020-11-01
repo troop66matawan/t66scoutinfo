@@ -1,0 +1,45 @@
+<div class="scoutinfo">
+    <div class="name">
+        <scoutname scout="$ctrl.scout"></scoutname>
+        <scoutimage class="scoutinfoimage" scout="$ctrl.scout"></scoutimage>
+    </div>
+    <div class="infobox"> 
+        <div class="infoitem">
+            <div class="info label left">BSA ID:</div><div class="info left">{{$ctrl.scout._bsaId}}</div>
+        </div>
+        <div class="info placeholder"></div> 
+        <div class="infoitem">
+            <div class="info label right">DOB:</div>
+            <div class="info">{{$ctrl.scout._dob}}</div>
+            </div> 
+        </div>
+    <div class="infobox"> 
+        <div class="infoitem">
+            <div class="info label left">Leadership Days Needed:</div>
+            <div class="info">{{ScoutbookLeadershipService.getTenureRemaining($ctrl.scout)}}</div>
+        </div>
+        <div class="info placeholder"></div> 
+        <div class="infoitem">
+            <div class="info label right">Current Rank:</div> 
+            <div class="info">{{ScoutbookDBService.getCurrentRankText($ctrl.scout)}}</div>
+        </div>
+    </div>
+    <div class="infobox"> 
+        <div class="infoitem">
+            <div class="info label left">Service Project Hours Needed:</div>
+            <div class="info">??</div>
+        </div>
+        <div class="info placeholder"></div> 
+        <div class="infoitem">
+            <div class="info label right">Patrol:</div> 
+            <div class="info">{{$ctrl.scout._patrolName}}</div>
+        </div>
+    </div>
+    <div class="infobox"> 
+        <div class="infoitem">
+            <div class="info label left">Date Joined Unit:</div> 
+            <div class="info">{{$ctrl.scout._dateJoinedBSA}}</div>
+        </div>
+    </div>
+    <scoutcontact ng-if="$ctrl.getContact()" contact="$ctrl.getContact()"></scoutcontact>
+</div>
