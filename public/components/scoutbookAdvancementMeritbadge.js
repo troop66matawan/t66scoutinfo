@@ -16,9 +16,9 @@ function ScoutbookAdvancementMeritbadge  (EagleRequired, $scope) {
         // This is the change listener, called when the value returned from the above function changes
         function(newValue, oldValue) {
             if ( newValue !== oldValue ) {
+                _this.meritBadges = [];
                 if (_this.scout && _this.scout._advancement && _this.scout._advancement._meritBadges) {
                     const mbKeys = Object.keys(_this.scout._advancement._meritBadges);
-                    _this.meritBadges = [];
                     for (let i=0; i< mbKeys.length;i++) {
                         _this.meritBadges.push(_this.scout._advancement._meritBadges[mbKeys[i]]);
                     }
