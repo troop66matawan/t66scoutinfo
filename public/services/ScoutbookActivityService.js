@@ -57,7 +57,7 @@ function ScoutbookActivityService(ScoutbookDBConstant, ScoutbookDBService) {
                     default:
                         break;
                 }
-                let serviceList = service | [];
+                let serviceList = service || [];
                 switch (currentRank) {
                     case ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS:
                     case ScoutbookDBConstant.ADVANCEMENT.STAR:

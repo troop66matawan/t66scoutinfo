@@ -7,7 +7,7 @@ app.component('scoutinfo', {
     controller: ScoutInfoController
 });
 
-function ScoutInfoController(ScoutbookDBService, $scope, ScoutbookLeadershipService) {
+function ScoutInfoController(ScoutbookDBService, $scope, ScoutbookLeadershipService, ScoutbookActivityService) {
     const _this = this;
     $scope.ScoutbookDBService = ScoutbookDBService;
     $scope.ScoutbookLeadershipService = ScoutbookLeadershipService;
@@ -21,5 +21,22 @@ function ScoutInfoController(ScoutbookDBService, $scope, ScoutbookLeadershipServ
             }
         }
         return contact;
+    }
+
+    _this.getTotalService = function() {
+        let totalService = '';
+        const neededService = ScoutbookActivityService.getScoutServiceNeeededForNextRank(_this.scout);
+        if (neededService && neededService.total > -1) {
+            totalService = neededService.total;
+        }
+        return totalService;
+    }
+    _this.getConservationService = function() {
+        let conservation = '';
+        const neededService = ScoutbookActivityService.getScoutServiceNeeededForNextRank(_this.scout);
+        if (neededService && neededService.conservation > -1) {
+            conservation = neededService.conservation;
+        }
+        return conservation;
     }
 }

@@ -4,8 +4,8 @@ app.component('trailtoeaglereportv2', {
     minAge: '<'
   },
   templateUrl: 'templates/trailToEagleReport2.html',
-  controller: ['EagleRequired','RankAdvancement','ScoutbookDBConstant','ScoutbookDBService', 'ScoutbookLeadershipService',
-    function(EagleRequired,RankAdvancement,ScoutbookDBConstant,ScoutbookDBService,ScoutbookLeadershipService) {
+  controller: ['EagleRequired','RankAdvancement','ScoutbookDBConstant','ScoutbookDBService', 'ScoutbookLeadershipService', 'ScoutbookActivityService',
+    function(EagleRequired,RankAdvancement,ScoutbookDBConstant,ScoutbookDBService,ScoutbookLeadershipService, ScoutbookActivityService) {
     const _this = this;
     _this.trailToEagleScouts = [];
 
@@ -46,6 +46,20 @@ app.component('trailtoeaglereportv2', {
 
     _this.getLeadershipRemaining = function(scout) {
       return ScoutbookLeadershipService.getTenureRemaining(scout);
+    }
+
+    _this.getNeededService = function(scout) {
+      let serviceRequired = '';
+      const neededService = ScoutbookActivityService.getScoutServiceNeeededForNextRank(scout);
+      if (neededService) {
+        if (neededService.total > 0) {
+          serviceRequired = `Total: ${neededService.total}`;
+        }
+        if (neededService.conservation > 0) {
+          serviceRequired += ` Conservation: ${neededService.conservation}`
+        }
+      }
+      return serviceRequired;
     }
     _this.getTotalMeritBadges = function(scout) {
       let mbCount = 0;

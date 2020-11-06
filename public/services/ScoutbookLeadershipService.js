@@ -60,7 +60,7 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
     }
 
     _this.getTenureRemaining = function(scout) {
-        let tenureRemaining;
+        let tenureRemaining=0;
         const currentRank = ScoutbookDBService.getCurrentRank(scout);
         if (currentRank) {
             const neededTenure = _this.LEADERSHIP_TENURE_MONTHS[currentRank];
@@ -101,9 +101,10 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
                         }
                     }
                     let tenurePeriods = [];
+                    const now = new Date().getTime();
                     curRankPositions.forEach(function(pos) {
                         let posStart = new Date(pos._startDate).getTime();
-                        let posEnd = new Date();
+                        let posEnd = now;
                         if (posStart < rankTime) {
                             posStart = rankTime;
                         }
@@ -116,7 +117,7 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
                             let updated = false;
                             for (let i=0; (i < tenurePeriods.length && updated === false); i++) {
                                 const tenurePos = tenurePeriods[i];
-                                if (posStart < tenurePos.start && posEnd < tenurePos.end){
+                                if (posStart < tenurePos.start && posEnd <= tenurePos.end){
                                     // move start
                                     tenurePos.start = posStart;
                                     updated = true;

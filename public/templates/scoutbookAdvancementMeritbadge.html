@@ -1,0 +1,15 @@
+<div class="scoutmb">
+    <div class="header" >Merit Badges</div> 
+    <div class="badges">
+        <div class="meritbadge" ng-repeat="mb in $ctrl.meritBadges">
+            <meritbadge name="mb._type" earned-date="mb._completionDate"></meritbadge>
+        </div>
+    </div>
+    <div class="summary">
+        <div class="label">Total Merit Badges</div><div class="sep"></div><div class="val">{{$ctrl.meritBadges.length}}</div>
+    </div>
+    <div class="summary"> 
+        <div class="label">Need Eagle</div><div class="sep"></div><div class="val">{{$ctrl.needEagleReq($ctrl.scout).length}}</div>
+    </div>
+    <eagleneeded scout="$ctrl.scout" is-scoutbook="true"></eagleneeded>
+</div>

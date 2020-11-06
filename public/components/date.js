@@ -12,7 +12,7 @@ function DateController(){
         let dateString = '';
         if (_this.date && _this.date.length > 0) {
             const date = new Date(_this.date);
-            dateString =  date.getMonth()+1 + '/' + date.getDay() + '/' + date.getFullYear();
+            dateString =  date.getMonth()+1 + '/' + date.getDate() + '/' + date.getFullYear();
         }
         return dateString;
     }

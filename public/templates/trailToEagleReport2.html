@@ -11,7 +11,7 @@
       </div>
       <div class="trailToEagleRemain">
         <div class="td">Leadership Remaining</div>
-          <!--        <div class="td">Service Remain</div> -->
+        <div class="td">Service Remain</div>
         <div class="td">Total MB</div>
         <div class="td"># Eagle remaining</div>
         <div class="td neededmb">Eagle MB Remaining</div>
@@ -35,7 +35,7 @@
         <div class="td {{$ctrl.styleBackgroundLdr(scout)}}">
           {{$ctrl.getLeadershipRemaining(scout)}}
         </div>
-<!--        <div class="td">{{scout._rankAdvancement._neededServiceHours}}</div> -->
+        <div class="td">{{$ctrl.getNeededService(scout)}}</div>
         <div class="td">{{$ctrl.getTotalMeritBadges(scout)}}</div>
         <div class="td {{$ctrl.styleBackgroundMb(scout)}}">{{$ctrl.needEagleReq(scout).length}}</div>
         <div class="td neededmb">

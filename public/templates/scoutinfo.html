@@ -26,8 +26,8 @@
     </div>
     <div class="infobox"> 
         <div class="infoitem">
-            <div class="info label left">Service Project Hours Needed:</div>
-            <div class="info">??</div>
+            <div class="info label left">Total Service Project Hours Needed:</div>
+            <div class="info">{{$ctrl.getTotalService()}}</div>
         </div>
         <div class="info placeholder"></div> 
         <div class="infoitem">
@@ -35,7 +35,12 @@
             <div class="info">{{$ctrl.scout._patrolName}}</div>
         </div>
     </div>
-    <div class="infobox"> 
+    <div class="infobox">
+        <div class="infoitem">
+            <div class="info label left">Conservation Service Project Hours Needed:</div>
+            <div class="info">{{$ctrl.getConservationService()}}</div>
+        </div>
+        <div class="info placeholder"></div>
         <div class="infoitem">
             <div class="info label left">Date Joined Unit:</div> 
             <div class="info">{{$ctrl.scout._dateJoinedBSA}}</div>

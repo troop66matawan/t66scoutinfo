@@ -1,0 +1,5 @@
+<div class="badge" title="{{$ctrl.name}}" ng-click="$ctrl.onClick()">
+    <img width="75px" height="75px" src="{{$ctrl.mbimage}}"> 
+    <span class="mbearneddate"><date date="$ctrl.earnedDate"></date></span>
+    <span class="mbname" style="visibility: {{$ctrl.getVisibility()}}">{{$ctrl.name}}</span>
+</div>
