@@ -65,8 +65,8 @@ function MeetingAttendanceController(MeetingAttendanceService) {
   _this.isWed = function() {
     let wed = false;
     const dayOfWeek = new Date().getDay();
-//    if (dayOfWeek === 3) { // Wednesday
-    if (dayOfWeek === 0) { // Sunday
+    if (dayOfWeek === 3) { // Wednesday
+//    if (dayOfWeek === 0) { // Sunday
       wed = true;
     }
     if (_this.overrideWed === true) {
