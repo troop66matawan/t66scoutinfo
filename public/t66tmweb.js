@@ -241,13 +241,13 @@ app.component('scoutrank', {
   '<div class="scoutrank">'+
     '<div class="header">Ranks</div>' +
     '<div class="ranks">'+
-      '<rankpatch rank="_scout"  date="$ctrl.scout._advancement[\'scout\']"></rankpatch>'+
-      '<rankpatch rank="_tenderfoot"  date="$ctrl.scout._advancement[\'tenderfoot\']"></rankpatch>'+
-      '<rankpatch rank="_2ndClass"  date="$ctrl.scout._advancement[\'Second Class\']"></rankpatch>'+
-      '<rankpatch rank="_1stClass"  date="$ctrl.scout._advancement[\'First Class\']"></rankpatch>'+
-      '<rankpatch rank="_star"  date="$ctrl.scout._advancement[\'Star Scout\']"></rankpatch>'+
-      '<rankpatch rank="_life"  date="$ctrl.scout._advancement[\'Life Scout\']"></rankpatch>'+
-      '<rankpatch rank="_eagle"  date="$ctrl.scout._advancement[\'Eagle Scout\']"></rankpatch>'+
+      '<rankpatch rank="_scout"  advancement="$ctrl.scout._advancement[\'scout\']"></rankpatch>'+
+      '<rankpatch rank="_tenderfoot"  advancement="$ctrl.scout._advancement[\'tenderfoot\']"></rankpatch>'+
+      '<rankpatch rank="_2ndClass"  advancement="$ctrl.scout._advancement[\'Second Class\']"></rankpatch>'+
+      '<rankpatch rank="_1stClass"  advancement="$ctrl.scout._advancement[\'First Class\']"></rankpatch>'+
+      '<rankpatch rank="_star"  advancement="$ctrl.scout._advancement[\'Star Scout\']"></rankpatch>'+
+      '<rankpatch rank="_life"  advancement="$ctrl.scout._advancement[\'Life Scout\']"></rankpatch>'+
+      '<rankpatch rank="_eagle"  advancement="$ctrl.scout._advancement[\'Eagle Scout\']"></rankpatch>'+
     '</div>' +
   '</div>',
   bindings: {
@@ -255,33 +255,7 @@ app.component('scoutrank', {
   },
 
 });
-app.component('rankpatch', {
-  template:
-  '<div ng-if="$ctrl.isValidDate()" class="rankpatch">'+
-   '<img class="rank" ng-src="{{$ctrl.getRankPatch($ctrl.rank,$ctrl.date)}}">' +
-   '<span class="rankdate"><date date="$ctrl.date._completionDate"></date></span>'+
-  '</div>',
-  controller: ['RankPatchFactory', function(RankPatchFactory) {
-    const _this = this;
-    _this.rpf = RankPatchFactory;
 
-    _this.isValidDate = function() {
-      var rv = false;
-      if (_this.date && _this.date._completionDate)
-        rv = true;
-
-      return rv;
-    };
-    _this.getRankPatch = function(rank,date) {
-      const dateObj = new Date(date);
-      return _this.rpf.getPatchUrl(rank,dateObj);
-    }
-  }],
-  bindings: {
-    rank: '@',
-    date: '<'
-  }
-});
 
 app.component('scoutname', {
   template:

@@ -758,3 +758,46 @@ eagleneeded {
   font-size: xx-large;
   flex-grow: 9
 }
+
+.rankRequirement {
+  background-color: white;
+  border: 2px solid black;
+  margin: 10px;
+}
+
+.rankRequirement .rankName {
+  font-weight: bold;
+  font-size: large;
+}
+
+.scoutbookRequirement {
+  display: flex;
+}
+
+.reqComplete {
+  color: blue;
+}
+
+.reqApproved {
+  color: green;
+}
+
+.requirementBody {
+  display: block;
+  text-align: initial;
+  margin-left: 9px;
+}
+
+.requirementCompleted,.requirementApproved {
+  font-size: small;
+}
+.requirementCompleted .row,.requirementApproved .row {
+  display: flex;
+}
+.requirementCompleted span,.requirementApproved span {
+  margin-right: 4px;
+}
+
+.right {
+  float: right;
+}

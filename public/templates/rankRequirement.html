@@ -1,0 +1,7 @@
+<div class="rankRequirement">
+    <div class="right material-icons" ng-click="$ctrl.onClose()">close</div>
+    <div class="rankName">{{$ctrl.requirements._rank}}</div>
+    <div ng-repeat="requirement in $ctrl.rankRequirements">
+        <scoutbook-requirement requirement="requirement"></scoutbook-requirement>
+    </div>
+</div>

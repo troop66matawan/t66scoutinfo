@@ -1,0 +1,32 @@
+<div class="scoutbookRequirement">
+    <i class="material-icons requirementCheckbox"
+       ng-class="{reqComplete:$ctrl.isComplete(),reqApproved:$ctrl.isApproved()}">
+        {{$ctrl.getCheckboxType()}}
+    </i>
+    <div class="requirementNumber">
+        {{$ctrl.requirement._id}}
+    </div>
+    <div class="requirementBody">
+        <div class="requirementText">
+            {{$ctrl.requirement._requirementText}}
+        </div>
+        <div class="requirementCompleted"
+             ng-if="$ctrl.isComplete()">
+            <div class="row">
+                <span>Completed on </span>
+                <scoutbook-date date="$ctrl.completionDate"></scoutbook-date>
+            </div>
+            <div class="row" ng-if="$ctrl.requirement._markedCompleted !== undefined">
+                <span>Marked Completed by {{$ctrl.requirement._markedCompleted._markedBy}} on</span>
+                <scoutbook-date date="$ctrl.markedDate"></scoutbook-date>
+            </div>
+        </div>
+        <div class="requirementApproved"
+             ng-if="$ctrl.isApproved()">
+            <div class="row">
+                <span>Marked Approved by {{$ctrl.requirement._markedApproved._markedBy}} on</span>
+                <scoutbook-date date="$ctrl.approvedDate"></scoutbook-date>
+            </div>
+        </div>
+    </div>
+</div>

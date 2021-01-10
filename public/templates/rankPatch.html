@@ -1,0 +1,16 @@
+<div>
+    <div ng-if="$ctrl.isValidDate()" class="rankpatch">
+        <img class="rank" ng-src="{{$ctrl.getRankPatch($ctrl.rank,$ctrl.advancement._completionDate)}}">
+        <span class="rankdate">
+            <date date="$ctrl.advancement._completionDate"></date>
+        </span>
+    </div>
+    <div class="rankpatch"
+         ng-if="!$ctrl.isValidDate() && $ctrl.advancement._requirements">
+        <img style="opacity:50%" class="rank"
+             ng-click="$ctrl.openRequirements()"
+             ng-src="{{$ctrl.getRankPatch($ctrl.rank,$ctrl.advancement._completionDate)}}">
+        <rank-requirement ng-if="$ctrl.showRequirements"
+                           requirements="$ctrl.advancement._requirements" on-close="$ctrl.closeRequirements()"></rank-requirement>
+    </div>
+</div>
