@@ -47,6 +47,7 @@ function mergeContactInfo(scouts, pathToContactCSV) {
                 const firstName = contactRecord['First Name'];
                 const nickName = contactRecord['Nickname'];
                 const bsaID = contactRecord['BSA ID#'];
+                const dob = contactRecord['Date of Birth'];
 
                 contact._address1 = contactRecord['Home Address Line 1'];
                 contact._address2 = contactRecord['Home Address Line 2'];
@@ -101,6 +102,9 @@ function mergeContactInfo(scouts, pathToContactCSV) {
 
                 if (scout) {
                     scout._contactInfo = contact;
+                    if (scout.dob === undefined || scout.dob === '') {
+                        scout.dob = dob;
+                    }
                 }
             });
             return scouts;
@@ -123,7 +127,12 @@ if (process.argv.length !== 8) {
                                         .then(function(scoutsWithLeadership) {
                                             mergeContactInfo(scoutsWithLeadership, process.argv[7])
                                                 .then(function(finalScouts){
-                                                    t66scoutbookDb.update(finalScouts);
+                                                    t66scoutbookDb.update(finalScouts)
+                                                        .then(function(){
+                                                            process.exit(0);
+                                                        },function(){
+                                                            process.exit(1);
+                                                        });
                                                 });
                                         });
                                 })
