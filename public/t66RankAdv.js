@@ -193,6 +193,19 @@ app.service('EagleRequired', function() {
     }
     return need;
   }
+  this.scoutbookIsEagleRequired  = function(mb){
+    const eagleOptions = [
+      'Cycling',
+      'Swimming',
+      'Hiking',
+      'Environmental Science',
+      'Sustainability',
+      'Emergency Preparedness',
+      'Lifesaving',
+    ];
+    const eagleReq = eagleOptions.concat(SCOUTBOOK_EAGLES);
+    return (eagleReq.indexOf(mb) !== -1)
+  };
 
   this.matchMeritBadges = function(mb, scout, isScoutbook) {
     if (isScoutbook) {
