@@ -83,6 +83,12 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         return currank;
     };
 
+    /**
+     *
+     * @param scout - Scout Object
+     * @param rank - Rank String
+     * @returns {Date}
+     */
     _this.getRankDate = function(scout, rank) {
         let rankDate;
         const curRank = _this.getRankObj(scout,rank);
