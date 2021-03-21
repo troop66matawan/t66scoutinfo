@@ -7,10 +7,11 @@ app.run(['RankPatchFactory', function(RankPatchFactory) {
 app.component('scoutlist', {
   bindings: {
   },
-  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService, ScoutService, ScoutbookDBService) {
+  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService, ScoutService, ScoutbookDBService, ScoutbookReqtAnalysisService) {
     const _this = this;
     $scope.MeetingAttendanceService = MeetingAttendanceService;
     $scope.ScoutbookDBService = ScoutbookDBService;
+    $scope.ScoutbookReqtAnalysisService = ScoutbookReqtAnalysisService;
 
     _this.scouts = [];
     _this.view = 1;
@@ -25,6 +26,7 @@ app.component('scoutlist', {
     _this.serviceReport = {name: 'Service Report', value: 8};
     _this.meetingAttendance = {name: 'Take Meeting Attendance', value: 9};
     _this.rosterReport = {name: 'Roster', value: 10};
+    _this.requirementsAnalysis = {name: 'Requirements Analysis', value: 11};
     _this.trailToEagleReportMenuItem2 =       {name: 'Trail to Eagle Advancement Report v2', value: 2};
 
 
@@ -62,7 +64,13 @@ app.component('scoutlist', {
            if (response.hasOwnProperty('position')  &&
                 response.position === 'scoutmaster' || response.position === 'eaglecommittee') {
              MeetingAttendanceService.initDB();
-             ScoutbookDBService.initDB();
+             ScoutbookDBService.initDB()
+                 .then(function(scouts) {
+                   ScoutbookReqtAnalysisService.initialize();
+                   scouts.forEach(function(scout) {
+                     ScoutbookReqtAnalysisService.analyze(scout);
+                   });
+                 });
              _this.position = response.position;
              var allScoutsRef = firedb.ref('scouts/');
              var contactsRef = firedb.ref('scout_contact/');
@@ -78,6 +86,7 @@ app.component('scoutlist', {
                  _this.menuOptions.push(_this.serviceReport);
                  _this.menuOptions.push(_this.meetingAttendance);
                  _this.menuOptions.push(_this.rosterReport);
+                 _this.menuOptions.push(_this.requirementsAnalysis);
 
                  _this.scouts = _this.firePropsToArray(snapshot.val());
 
@@ -181,6 +190,7 @@ app.component('scoutlist', {
     ' position="$ctrl.position"' +
     ' attendance="MeetingAttendanceService.getMeetingAttendance()"></meeting-attendance>' +
     '<roster-report ng-if="$ctrl.view === 10" scouts="ScoutbookDBService.scouts"></roster-report>' +
+    '<requirements-analysis ng-if="$ctrl.view === 11" results="ScoutbookReqtAnalysisService.results"></requirements-analysis>' +
     '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
   '</div>',
   // bindings: {

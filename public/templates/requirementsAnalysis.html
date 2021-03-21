@@ -1,0 +1,13 @@
+<div class="requirement-analysis">
+    <div ng-repeat="reqt in $ctrl.results">
+        <div style="display:flex;justify-content: space-between">
+            <div>
+                <span style="margin-right: 3px">{{reqt.scout._firstName}}</span>
+                <span>{{reqt.scout._lastName}}</span>
+            </div>
+            <div>{{reqt.scout._patrolName}}</div>
+            <div>{{reqt.rank}}</div>
+            <div>{{reqt.requirement}}</div>
+        </div>
+    </div>
+</div>

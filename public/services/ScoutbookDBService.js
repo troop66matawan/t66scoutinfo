@@ -1,5 +1,5 @@
 angular.module('t66tmweb')
-    .service('ScoutbookDBService', ['ScoutbookDBConstant',ScoutbookDBService])
+    .service('ScoutbookDBService', ['ScoutbookDBConstant', '$q', ScoutbookDBService])
     .constant('ScoutbookDBConstant', {
         ADVANCEMENT: {
             SCOUT: 'scout',
@@ -12,14 +12,17 @@ angular.module('t66tmweb')
         }
     });
 
-function ScoutbookDBService(ScoutbookDBConstant) {
+function ScoutbookDBService(ScoutbookDBConstant, $q) {
     const _this = this;
     _this.initDB = function() {
+        const defer = $q.defer();
         _this.dbRef = firedb.ref('scoutbookDb');
         _this.dbRef.on('value', function(curSnapshot) {
             _this.scouts = _this.firePropsToArray(curSnapshot.val());
             console.log(_this.scouts);
+            defer.resolve(_this.scouts);
         });
+        return defer.promise;
     };
     _this.firePropsToArray = function(fireprops) {
         const scoutArray = [];
@@ -170,4 +173,18 @@ function ScoutbookDBService(ScoutbookDBConstant) {
         }
         return requirement;
     }
+    _this.getCamping = function(scout) {
+        let camping;
+        if (scout && scout._activities && scout._activities._camping) {
+            camping = scout._activities._camping;
+        }
+        return camping;
+    };
+    _this.getService = function(scout) {
+        let service;
+        if (scout && scout._activities && scout._activities._service) {
+            service = scout._activities._service;
+        }
+        return service;
+    };
 }
