@@ -6,7 +6,8 @@ app.component('scoutdiv' , {
     controller: ScoutDivController
 });
 
-function ScoutDivController() {
+function ScoutDivController($scope, ScoutbookReqtAnalysisService) {
+    $scope.ScoutbookReqtAnalysisService = ScoutbookReqtAnalysisService;
     const _this = this;
     _this.$onChanges = function(changes) {
         if (changes && changes.scout) {

@@ -2,7 +2,9 @@ app.component('requirementsAnalysis', {
     controller: RequirementsAnalysis,
     templateUrl: 'templates/requirementsAnalysis.html',
     bindings: {
-        results: '<'
+        results: '<',
+        firstName: '<',
+        lastName: '<'
     }
 });
 

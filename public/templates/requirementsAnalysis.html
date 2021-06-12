@@ -1,6 +1,6 @@
 <div class="report">
-    <div class="header">Possible Requirement Completion Report</div>
-    <div style='margin-bottom: 7px' ng-repeat="reqt in $ctrl.results | orderBy: ['rank', 'requirement', 'scout._lastName', 'scout._firstName']">
+    <div class="header">Possible Requirement Completion</div>
+    <div style='margin-bottom: 7px' ng-repeat="reqt in $ctrl.results | filter: {scout: {_firstName : $ctrl.firstName, _lastName: $ctrl.lastName}} | orderBy: ['rank', 'requirement', 'scout._lastName', 'scout._firstName']">
         <div style="display:flex;justify-content: space-between">
             <div style="flex:1">
                 <span style="margin-right: 3px">{{reqt.scout._firstName}}</span>
