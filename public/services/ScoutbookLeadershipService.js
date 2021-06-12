@@ -114,20 +114,24 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
                         if (tenurePeriods.length === 0) {
                             tenurePeriods.push({start: posStart, end: posEnd});
                         } else {
-                            let updated = false;
-                            for (let i=0; (i < tenurePeriods.length && updated === false); i++) {
+                            let updatedOrSame = false;
+                            for (let i=0; (i < tenurePeriods.length && updatedOrSame === false); i++) {
                                 const tenurePos = tenurePeriods[i];
+                                if (posStart === tenurePos.start && posEnd === tenurePos.end) {
+                                    updatedOrSame = true;
+                                    continue;
+                                }
                                 if (posStart < tenurePos.start && posEnd <= tenurePos.end){
                                     // move start
                                     tenurePos.start = posStart;
-                                    updated = true;
+                                    updatedOrSame = true;
                                 } else if (posStart > tenurePos.start && posEnd < tenurePos.end) {
                                     // move end
                                     tenurePos.end = posEnd;
-                                    updated = true;
+                                    updatedOrSame = true;
                                 }
                             }
-                            if (!updated) {
+                            if (!updatedOrSame) {
                                 tenurePeriods.push({start: posStart, end: posEnd});
                             }
                         }
