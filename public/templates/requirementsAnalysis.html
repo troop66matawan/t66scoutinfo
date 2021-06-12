@@ -1,13 +1,15 @@
-<div class="requirement-analysis">
-    <div ng-repeat="reqt in $ctrl.results">
+<div class="report">
+    <div class="header">Possible Requirement Completion Report</div>
+    <div style='margin-bottom: 7px' ng-repeat="reqt in $ctrl.results | orderBy: ['rank', 'requirement', 'scout._lastName', 'scout._firstName']">
         <div style="display:flex;justify-content: space-between">
-            <div>
+            <div style="flex:1">
                 <span style="margin-right: 3px">{{reqt.scout._firstName}}</span>
                 <span>{{reqt.scout._lastName}}</span>
             </div>
-            <div>{{reqt.scout._patrolName}}</div>
-            <div>{{reqt.rank}}</div>
-            <div>{{reqt.requirement}}</div>
+            <div style="flex:1">{{reqt.scout._patrolName}}</div>
+            <div style="flex:1">{{reqt.rank}}</div>
+            <div style="flex:1">{{reqt.requirement}}</div>
+            <div style="flex:6">{{reqt.requirementText}}</div>
         </div>
     </div>
 </div>

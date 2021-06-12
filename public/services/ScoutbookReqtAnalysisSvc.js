@@ -23,7 +23,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     });
                 }
                 if (campingCount >= 1 ) {
-                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT, requirement: '1b'})
+                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT, requirement: '1b', requirementText: req1b._requirementText})
                 }
             }
         }
@@ -44,7 +44,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     });
                 }
                 if (serviceHours >= 1) {
-                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT, requirement: '7b'})
+                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT, requirement: '7b', requirementText: req7b._requirementText})
                 }
             }
         }
@@ -84,7 +84,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 // TODO: Get outdoor events from calendar that are not camping or service
                 if (campingCount >= 2 && (campingCount + outdoorService) >= 3 &&
                     (campingCount + outdoorService + otherActivity >= 5)) {
-                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS, requirement: '1a'})
+                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS, requirement: '1a', requirementText: req1a._requirementText})
                 }
             }
         }
@@ -105,7 +105,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     });
                 }
                 if (serviceHours >= 3) {
-                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS, requirement: '8e'})
+                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS, requirement: '8e', requirementText: req8e._requirementText})
                 }
             }
         }
@@ -145,7 +145,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 // TODO: Get outdoor events from calendar that are not camping or service
                 if (campingCount >= 3 && (campingCount + outdoorService) >= 6  &&
                     (campingCount + outdoorService + otherActivity) >= 10) {
-                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS, requirement: '1a'})
+                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS, requirement: '1a', requirementText: req1a._requirementText})
                 }
             }
         }
@@ -166,7 +166,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     });
                 }
                 if (serviceHours >= 6) {
-                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS, requirement: '9d'})
+                    _this.results.push({scout: scout, rank: ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS, requirement: '9d', requirementText: req8e._requirementText})
                 }
             }
         }
@@ -186,7 +186,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const now = new Date();
                     const months = ScoutbookLeadershipService.getMonthsDiff(firstClassDate, now);
                     if (months >= 4) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -205,7 +205,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const mbCount = _this.countMeritBadges(scout);
 
                     if (mbCount.eagle >= 4 && (mbCount.eagle + mbCount.other) >= 6) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -234,7 +234,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     }
 
                     if (serviceHours >= 6) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -253,7 +253,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const remainingLeadership = ScoutbookLeadershipService.getTenureRemaining(scout);
 
                     if (remainingLeadership === 0) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -274,7 +274,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const now = new Date();
                     const months = ScoutbookLeadershipService.getMonthsDiff(starDate, now);
                     if (months >= 6) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -293,7 +293,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const mbCount = _this.countMeritBadges(scout);
 
                     if (mbCount.eagle >= 7 && (mbCount.eagle + mbCount.other) >= 11) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -314,7 +314,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const conservationHours = ScoutbookActivityService.getConservationHours(currentRankService);
 
                     if (totalHours >= 6 && conservationHours >= 3) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -333,7 +333,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const remainingLeadership = ScoutbookLeadershipService.getTenureRemaining(scout);
 
                     if (remainingLeadership === 0) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -354,7 +354,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const now = new Date();
                     const months = ScoutbookLeadershipService.getMonthsDiff(lifeDate, now);
                     if (months >= 6) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -374,7 +374,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const mbCount = _this.countMeritBadges(scout);
 
                     if ( (mbCount.eagle + mbCount.other) >= 21 && eagleNeeded.length === 0) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
@@ -393,7 +393,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                     const remainingLeadership = ScoutbookLeadershipService.getTenureRemaining(scout);
 
                     if (remainingLeadership === 0) {
-                        _this.results.push({scout: scout, rank: rank, requirement: reqID});
+                        _this.results.push({scout: scout, rank: rank, requirement: reqID, requirementText: req._requirementText});
                     }
                 }
             }
