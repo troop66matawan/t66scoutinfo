@@ -20,8 +20,16 @@ app.component('trailtoeaglereportv2', {
         } else {
           scout._dateOfBirth = new Date();
         }
+        let exclude = false;
+        let patrolName = scout._patrolName;
+        if (patrolName !== undefined) {
+          patrolName = patrolName.toLowerCase();
+        }
+        if (patrolName === 'inactive') {
+          exclude = true;
+        }
 
-        if ( rank && (
+        if ( exclude === false && rank && (
             (!rank.hasOwnProperty(ScoutbookDBConstant.ADVANCEMENT.EAGLE) ||
                 (rank.hasOwnProperty(ScoutbookDBConstant.ADVANCEMENT.EAGLE) && !rank[ScoutbookDBConstant.ADVANCEMENT.EAGLE]._isApproved)) &&
             (rank.hasOwnProperty(ScoutbookDBConstant.ADVANCEMENT.LIFE) && rank[ScoutbookDBConstant.ADVANCEMENT.LIFE]._isApproved)  ||
