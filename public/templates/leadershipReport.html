@@ -18,12 +18,8 @@
       <div class="leadershipPerson">
         <div class="td">{{scout._lastName}}</div>
         <div class="td">{{scout._firstName}}</div>
-        <div class="td">
-          <currentrank rankadv="scout._rankAdvancement"></currentrank>
-        </div>
-        <div class="td">
-          <scoutdate date="$ctrl.getRankDate(scout._rankAdvancement)"></scoutdate>
-        </div>
+        <div class="td">{{$ctrl.getCurrentRank(scout)}}</div>
+        <div class="td">{{$ctrl.getCurrentRankDate(scout)}}</div>
       </div>
       <div class="leadershipDetails">
         <div class="td position">

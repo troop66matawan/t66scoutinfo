@@ -183,7 +183,8 @@ app.component('scoutlist', {
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
     '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="ScoutbookDBService.scouts"></scoutsnotadvancing>' +
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
-    '<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
+    //'<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +
+    '<scoutbook-leadership-report ng-if="$ctrl.view === 6" scouts="ScoutbookDBService.scouts"></scoutbook-leadership-report>' +
     '<attendance-report ng-if="$ctrl.view === 7" scouts="$ctrl.scouts"></attendance-report>' +
     '<service-report ng-if="$ctrl.view === 8" scouts="ScoutbookDBService.scouts"></service-report>' +
     '<meeting-attendance ng-if="$ctrl.view === 9"' +
