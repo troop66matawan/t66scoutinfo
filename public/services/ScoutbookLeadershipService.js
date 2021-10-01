@@ -121,11 +121,16 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
                                     updatedOrSame = true;
                                     continue;
                                 }
-                                if (posStart < tenurePos.start && posEnd <= tenurePos.end){
+                                // If the new position overlaps an existing tenurePosition
+                                // (starts before tenure Position, end after tenurePos starts)
+                                if (posStart <= tenurePos.start && (posEnd >= tenurePos.start)){
                                     // move start
                                     tenurePos.start = posStart;
                                     updatedOrSame = true;
-                                } else if (posStart > tenurePos.start && posEnd < tenurePos.end) {
+                                }
+                                // If the new position overlaps an existing tenurePosition
+                                // (starts after tenure Position starts, but before it ends)
+                                if (posStart > tenurePos.start && posStart <= tenurePos.end) {
                                     // move end
                                     tenurePos.end = posEnd;
                                     updatedOrSame = true;
