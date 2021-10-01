@@ -23,6 +23,8 @@ function MeetingAttendanceController(MeetingAttendanceService) {
     _this.dates = _this.getDates();
     _this.showSetup = false;
     _this.overrideWed = false;
+    _this.includeInactive = false;
+    _this.includeAgedOut = false;
   };
 
   _this.getDates = function() {
@@ -95,4 +97,16 @@ function MeetingAttendanceController(MeetingAttendanceService) {
   _this.isAttend = function(scout,date) {
     return MeetingAttendanceService.isScoutAttend(scout,date);
   };
+
+  _this.shouldShow = function(scout) {
+    let show = true;
+    const patrol = MeetingAttendanceService.getPatrolForScout(scout);
+    if (_this.includeInactive === false && patrol === 'Inactive') {
+      show = false;
+    }
+    if (_this.includeAgedOut === false && patrol === 'AgedOut') {
+      show = false;
+    }
+    return show;
+  }
 }
