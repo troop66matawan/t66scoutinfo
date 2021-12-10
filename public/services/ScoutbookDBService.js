@@ -83,6 +83,27 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         return currank;
     };
 
+    _this.getActiveScouts = function(scouts) {
+        let activeScouts = [];
+        for (let i=0; (scouts instanceof Array) && i < scouts.length; ++i) {
+            let patrolName = scouts[i]._patrolName;
+            if (patrolName !== 'Inactive' && patrolName !== 'AgedOut' && patrolName && patrolName.length > 0) {
+                activeScouts.push(scouts[i]);
+            }
+        }
+        return activeScouts;
+    }
+
+    _this.getInactiveScouts = function(scouts) {
+        let inactiveScouts = [];
+        for (let i=0; (scouts instanceof Array) && i < scouts.length; ++i) {
+            let patrolName = scouts[i]._patrolName;
+            if (patrolName === 'Inactive' || patrolName === 'AgedOut') {
+                inactiveScouts.push(scouts[i]);
+            }
+        }
+        return inactiveScouts;
+    }
     /**
      *
      * @param scout - Scout Object

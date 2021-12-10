@@ -28,6 +28,7 @@ app.component('scoutlist', {
     _this.rosterReport = {name: 'Roster', value: 10};
     _this.requirementsAnalysis = {name: 'Requirements Analysis', value: 11};
     _this.trailToEagleReportMenuItem2 =       {name: 'Trail to Eagle Advancement Report v2', value: 2};
+    _this.inactiveScoutDataMenuItem = {name: 'Inactive Scout Data', value: 12};
 
 
 
@@ -77,6 +78,7 @@ app.component('scoutlist', {
              allScoutsRef.on('value', function(snapshot) {
                $scope.$apply(function(){
                  _this.menuOptions.push(_this.indivScoutDataMenuItem);
+                 _this.menuOptions.push(_this.inactiveScoutDataMenuItem);
                  _this.menuOptions.push(_this.trailToEagleReportMenuItem2);
                  _this.menuOptions.push(_this.photoReportMenuItem);
                  _this.menuOptions.push(_this.scoutsNotAdvancing);
@@ -176,10 +178,18 @@ app.component('scoutlist', {
   ' scout._firstName)' +
   ' for' +
   ' scout' +
-      ' in ScoutbookDBService.scouts | orderBy: $ctrl.orderBy()">	</select>' +
+      ' in ScoutbookDBService.getActiveScouts(ScoutbookDBService.scouts) | orderBy: $ctrl.orderBy()">	</select>' +
       '<scoutdiv scout="$ctrl.selected" ></scoutdiv>'+
+  '</div>' +
+    '<div ng-if="$ctrl.view ===12">' +
+    '<select id="inactivescoutselect" ng-model="$ctrl.selected" ng-options="scout as $ctrl.genName(scout._lastName,' +
+    ' scout._firstName)' +
+    ' for' +
+    ' scout' +
+    ' in ScoutbookDBService.getInactiveScouts(ScoutbookDBService.scouts) | orderBy: $ctrl.orderBy()">	</select>' +
+    '<scoutdiv scout="$ctrl.selected" ></scoutdiv>'+
     '</div>' +
-    '<trailtoeaglereportv2 ng-if="$ctrl.view === 2" scouts="ScoutbookDBService.scouts" min-age="16"></trailtoeaglereportv2>' +
+  '<trailtoeaglereportv2 ng-if="$ctrl.view === 2" scouts="ScoutbookDBService.scouts" min-age="16"></trailtoeaglereportv2>' +
     '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
     '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="ScoutbookDBService.scouts"></scoutsnotadvancing>' +
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +

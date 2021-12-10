@@ -31,7 +31,8 @@ app.component('scoutsnotadvancing', {
     };
 
     _this.$onChanges = function(changes) {
-      _this.scouts =  changes.scouts.currentValue;
+
+      _this.scouts =  ScoutbookDBService.getActiveScouts(changes.scouts.currentValue);
       var numberOfScoutsNotAdvancing = 0;
       _this.scouts.forEach(function(scout) {
 
