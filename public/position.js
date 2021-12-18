@@ -55,34 +55,34 @@ angular.module('t66tmweb').service('porService', function() {
   _this.pormap = new Map();
 
   _this.initpormap = function(pormap){
-    pormap.set("Asst SPL", {image: "images/por/aspl.jpg", camping: 75, forRank: true });
-    pormap.set("Assistant Senior Patrol Leader", {image: "images/por/aspl.jpg", camping: 75, forRank: true });
-    pormap.set("Asst Patrol Ldr", {image:"images/por/asst_patrol_leader.jpg", camping: 0, forRank: false });
-    pormap.set("Assistant Patrol Leader", {image:"images/por/asst_patrol_leader.jpg", camping: 0, forRank: false });
-    pormap.set("Bugler", {image:"images/por/bugler.jpg", camping: 65, forRank: true });
-    pormap.set("Chaplain Aide", {image:"images/por/chaplainaide.jpg", camping: 65, forRank: true });
-    pormap.set("Den Chief", {image:"images/por/denchief.jpg", camping: 65, forRank: true });
-    pormap.set("Historian", {image:"images/por/historian.jpg", camping: 65, forRank: true });
-    pormap.set("Instructor", {image:"images/por/instructor.jpg", camping: 65, forRank: true });
-    pormap.set("Inst - First Aid", {image:"images/por/instructor.jpg", camping: 65, forRank: true });
-    pormap.set("Inst - Cooking", {image:"images/por/instructor.jpg", camping: 65, forRank: true });
-    pormap.set("Junior Asst SM", {image:"images/por/jasm.jpg", camping: 65, forRank: true });
-    pormap.set("Junior Assistant Scoutmaster", {image:"images/por/jasm.jpg", camping: 65, forRank: true });
-    pormap.set("Librarian", {image:"images/por/librarian.jpg", camping: 65, forRank: true });
-    pormap.set("O/A Rep", {image:"images/por/oaTroopRep.jpg", camping: 75, forRank: true  });
-    pormap.set("OA Unit Representative", {image:"images/por/oaTroopRep.jpg", camping: 75, forRank: true  });
-    pormap.set("Patrol Leader", {image:"images/por/patrol-leader.jpg", camping:75, forRank: true });
-    pormap.set("Quartermaster", {image:"images/por/quartermaster.jpg", camping: 80, forRank: true });
-    pormap.set("Scribe", {image:"images/por/scribe.jpg", camping: 65, forRank: true });
-    pormap.set("Senior Patrol Ldr", {image: "images/por/seniorpatrolleader.jpg", camping: 80, forRank: true});
-    pormap.set("Senior Patrol Leader", {image: "images/por/seniorpatrolleader.jpg", camping: 80, forRank: true});
-    pormap.set("Senior Patrol Ld", {image: "images/por/seniorpatrolleader.jpg", camping: 80, forRank: true});
-    pormap.set("Troop Guide", {image: "images/por/troopguide.jpg", camping: 65, forRank: true });
-    pormap.set("Troop Webmaster", {image:"images/por/webmaster.jpg", camping: 65, forRank: true });
-    pormap.set("Webmaster", {image:"images/por/webmaster.jpg", camping: 65, forRank: true });
-    pormap.set("Food Pantry Coord", {image:"images/por/foodPantry.jpg", camping: 65, forRank: true });
-    pormap.set("Food Pantry Coor", {image:"images/por/foodPantry.jpg", camping: 65, forRank: true });
-    pormap.set("Community Svc Coord", {image:"images/por/comSvcPOR.jpg", camping: 65, forRank: true });
+    pormap.set("Asst SPL", {image: "images/por/aspl.jpg", camping: 75, meeting: 75, forRank: true });
+    pormap.set("Assistant Senior Patrol Leader", {image: "images/por/aspl.jpg", camping: 75, meeting: 75, forRank: true });
+    pormap.set("Asst Patrol Ldr", {image:"images/por/asst_patrol_leader.jpg", camping: 0, meeting: 0, forRank: false });
+    pormap.set("Assistant Patrol Leader", {image:"images/por/asst_patrol_leader.jpg", camping: 0, meeting: 0, forRank: false });
+    pormap.set("Bugler", {image:"images/por/bugler.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Chaplain Aide", {image:"images/por/chaplainaide.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Den Chief", {image:"images/por/denchief.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Historian", {image:"images/por/historian.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Instructor", {image:"images/por/instructor.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Inst - First Aid", {image:"images/por/instructor.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Inst - Cooking", {image:"images/por/instructor.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Junior Asst SM", {image:"images/por/jasm.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Junior Assistant Scoutmaster", {image:"images/por/jasm.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Librarian", {image:"images/por/librarian.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("O/A Rep", {image:"images/por/oaTroopRep.jpg", camping: 75, meeting: 75, forRank: true  });
+    pormap.set("OA Unit Representative", {image:"images/por/oaTroopRep.jpg", camping: 75, meeting: 75, forRank: true  });
+    pormap.set("Patrol Leader", {image:"images/por/patrol-leader.jpg", camping:75, meeting: 75, forRank: true });
+    pormap.set("Quartermaster", {image:"images/por/quartermaster.jpg", camping: 80, meeting: 65, forRank: true });
+    pormap.set("Scribe", {image:"images/por/scribe.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Senior Patrol Ldr", {image: "images/por/seniorpatrolleader.jpg", camping: 80,  meeting: 80,forRank: true});
+    pormap.set("Senior Patrol Leader", {image: "images/por/seniorpatrolleader.jpg", camping: 80,  meeting: 80,forRank: true});
+    pormap.set("Senior Patrol Ld", {image: "images/por/seniorpatrolleader.jpg", camping: 80,  meeting: 80,forRank: true});
+    pormap.set("Troop Guide", {image: "images/por/troopguide.jpg", camping: 65,  meeting: 65,forRank: true });
+    pormap.set("Troop Webmaster", {image:"images/por/webmaster.jpg", camping: 65,  meeting: 65,forRank: true });
+    pormap.set("Webmaster", {image:"images/por/webmaster.jpg", camping: 65,  meeting: 65,forRank: true });
+    pormap.set("Food Pantry Coord", {image:"images/por/foodPantry.jpg", camping: 65, meeting: 65, forRank: true });
+    pormap.set("Food Pantry Coor", {image:"images/por/foodPantry.jpg", camping: 65,  meeting: 65,forRank: true });
+    pormap.set("Community Svc Coord", {image:"images/por/comSvcPOR.jpg", camping: 65,  meeting: 65,forRank: true });
   };
 
   _this.isCurrentPosition = function(reportDate,posEndDate) {
@@ -126,6 +126,10 @@ angular.module('t66tmweb').service('porService', function() {
   _this.getExpectedCampingAttendance = function(porName) {
     return _this.pormap.get(_this.getTrimmedName(porName)).camping;
   };
+
+  _this.getExpectedMeetingPercent = function(porName) {
+    return _this.pormap.get(_this.getTrimmedName(porName)).meeting;
+  }
 
   _this.isPositionForRank = function(porName) {
     var rv = false;

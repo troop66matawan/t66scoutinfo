@@ -96,7 +96,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         let activeScouts = [];
         for (let i=0; (scouts instanceof Array) && i < scouts.length; ++i) {
             let patrolName = scouts[i]._patrolName;
-            if (patrolName !== 'Inactive' && patrolName !== 'AgedOut') {
+            if (patrolName !== 'Inactive' && patrolName !== 'AgedOut' && patrolName !== undefined) {
                 activeScouts.push(scouts[i]);
             }
         }
@@ -245,6 +245,18 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         }
         return Math.round(campingPercent * 100);
     };
+    
+    _this.getMeetingPercent = function(scout) {
+        let meetingPercent = 0;
+        const totalMeeting = _this.calendar.meeting.length;
+        const scoutKey = _this.getCalendarKey(scout);
+        const scoutAttend = _this.calendar.attendance[scoutKey];
+        if (scoutAttend) {
+            const attendmeeting = scoutAttend.meeting.length;
+            meetingPercent = attendmeeting/totalMeeting ;
+        }
+        return Math.round(meetingPercent * 100);
+    }
 
     _this.getTotalPercent = function(scout) {
         let totalPercent = 0;

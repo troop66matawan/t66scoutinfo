@@ -25,8 +25,11 @@ angular.module('t66tmweb').component('scoutbookLeadershipReport', {
     }
 
     _this.getCampingPercent = function(por,scout) {
-      //return  '?';
       return ScoutbookDBService.getCampingPercent(scout);
+    };
+
+    _this.getMeetingPercent = function(por, scout) {
+      return ScoutbookDBService.getMeetingPercent(scout);
     };
 
     _this.getTotalAttendance = function(por, scout) {
@@ -55,6 +58,10 @@ angular.module('t66tmweb').component('scoutbookLeadershipReport', {
       return porService.getExpectedCampingAttendance(por._position);
     };
 
+    _this.getExpectedMeetingPercent = function( por, scout) {
+      return porService.getExpectedMeetingPercent(por._position);
+    }
+
     _this.styleBackgroundCamping = function(por,scout) {
       var campingPercent = _this.getCampingPercent(por,scout);
       var expectedCampingPercent = porService.getExpectedCampingAttendance(por._position);
@@ -72,7 +79,23 @@ angular.module('t66tmweb').component('scoutbookLeadershipReport', {
 
       return style;
     };
+    _this.styleBackgroundMeeting = function(por,scout) {
+      var meetingPercent = _this.getMeetingPercent(por,scout);
+      var expectedMeetingPercent = porService.getExpectedMeetingPercent(por._position);
+      var style = "";
 
+      if (meetingPercent < expectedMeetingPercent) {
+        if ((meetingPercent + 10) >= expectedMeetingPercent) {
+          style = 'blackonyellow';
+        } else if (meetingPercent + 20 >= expectedMeetingPercent) {
+          style = 'whiteonred';
+        } else {
+          style = 'whiteonblack';
+        }
+      }
+
+      return style;
+    };
     _this.$onChanges = function(changes) {
       _this.scouts =  changes.scouts.currentValue;
       _this.scouts.forEach(function(scout) {

@@ -71,50 +71,44 @@ app.component('scoutlist', {
                    scouts.forEach(function(scout) {
                      ScoutbookReqtAnalysisService.analyze(scout);
                    });
+                   _this.menuOptions.push(_this.indivScoutDataMenuItem);
+                   _this.menuOptions.push(_this.inactiveScoutDataMenuItem);
+                   _this.menuOptions.push(_this.trailToEagleReportMenuItem2);
+                   _this.menuOptions.push(_this.photoReportMenuItem);
+                   _this.menuOptions.push(_this.scoutsNotAdvancing);
+                   _this.menuOptions.push(_this.exportToScoutbook);
+                   _this.menuOptions.push(_this.leadershipReport);
+                   _this.menuOptions.push(_this.attendanceReport);
+                   _this.menuOptions.push(_this.serviceReport);
+                   _this.menuOptions.push(_this.meetingAttendance);
+                   _this.menuOptions.push(_this.rosterReport);
+                   _this.menuOptions.push(_this.requirementsAnalysis);
+
+                   _this.scouts = ScoutbookDBService.getActiveScouts(scouts);
+
+                   _this.scouts.sort(function(a,b) {
+                     if (a._lastName < b._lastName) {
+                       return -1;
+                     } else if (a._lastName > b._lastName) {
+                       return 1;
+                     } else {
+                       if (a._firstname < b._firstName) {
+                         return -1;
+                       } else if (a._firstName > b._firstName) {
+                         return 1;
+                       } else {
+                         return 0;
+                       }
+                     }
+                   });
+
+                   if (_this.scouts && _this.scouts.length > 0) {
+                     _this.selected = _this.scouts[0];
+                   }
                  });
              ScoutbookDBService.initCalendar();
              _this.position = response.position;
-             var allScoutsRef = firedb.ref('scouts/');
              var contactsRef = firedb.ref('scout_contact/');
-             allScoutsRef.on('value', function(snapshot) {
-               $scope.$apply(function(){
-                 _this.menuOptions.push(_this.indivScoutDataMenuItem);
-                 _this.menuOptions.push(_this.inactiveScoutDataMenuItem);
-                 _this.menuOptions.push(_this.trailToEagleReportMenuItem2);
-                 _this.menuOptions.push(_this.photoReportMenuItem);
-                 _this.menuOptions.push(_this.scoutsNotAdvancing);
-                 _this.menuOptions.push(_this.exportToScoutbook);
-                 _this.menuOptions.push(_this.leadershipReport);
-                 _this.menuOptions.push(_this.attendanceReport);
-                 _this.menuOptions.push(_this.serviceReport);
-                 _this.menuOptions.push(_this.meetingAttendance);
-                 _this.menuOptions.push(_this.rosterReport);
-                 _this.menuOptions.push(_this.requirementsAnalysis);
-
-                 _this.scouts = _this.firePropsToArray(snapshot.val());
-
-                 _this.scouts.sort(function(a,b) {
-                   if (a._lastName < b._lastName) {
-                     return -1;
-                   } else if (a._lastName > b._lastName) {
-                     return 1;
-                   } else {
-                     if (a._firstname < b._firstName) {
-                       return -1;
-                     } else if (a._firstName > b._firstName) {
-                       return 1;
-                     } else {
-                       return 0;
-                     }
-                   }
-                 });
-
-                 if (_this.scouts && _this.scouts.length > 0) {
-                   _this.selected = _this.scouts[0];
-                 }
-               });
-               console.log(_this.scouts);
-             })
              contactsRef.on('value', function(snapshot) {
                $scope.$apply(function() {
                  _this.contacts = snapshot.val();
