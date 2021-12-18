@@ -39,4 +39,7 @@ function ScoutInfoController(ScoutbookDBService, $scope, ScoutbookLeadershipServ
         }
         return conservation;
     }
+    _this.getTotalAttendance = function() {
+        return ScoutbookDBService.getTotalPercent(_this.scout);
+    }
 }

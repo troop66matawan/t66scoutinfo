@@ -72,6 +72,7 @@ app.component('scoutlist', {
                      ScoutbookReqtAnalysisService.analyze(scout);
                    });
                  });
+             ScoutbookDBService.initCalendar();
              _this.position = response.position;
              var allScoutsRef = firedb.ref('scouts/');
              var contactsRef = firedb.ref('scout_contact/');

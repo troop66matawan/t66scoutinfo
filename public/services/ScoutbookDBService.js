@@ -24,6 +24,15 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         });
         return defer.promise;
     };
+    _this.initCalendar = function() {
+        const defer = $q.defer();
+        _this.calendarRef = firedb.ref('scoutbookCal');
+        _this.calendarRef.on('value', function(curSnapshot) {
+            _this.calendar = curSnapshot.val();
+            defer.resolve(_this.calendar);
+        });
+        return defer.promise;
+    }
     _this.firePropsToArray = function(fireprops) {
         const scoutArray = [];
         for (const scoutName in fireprops) {
@@ -87,7 +96,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         let activeScouts = [];
         for (let i=0; (scouts instanceof Array) && i < scouts.length; ++i) {
             let patrolName = scouts[i]._patrolName;
-            if (patrolName !== 'Inactive' && patrolName !== 'AgedOut' && patrolName && patrolName.length > 0) {
+            if (patrolName !== 'Inactive' && patrolName !== 'AgedOut') {
                 activeScouts.push(scouts[i]);
             }
         }
@@ -214,4 +223,45 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         }
         return service;
     };
+    _this.getCalendarKey = function(scout) {
+        if (scout) {
+            let firstName = scout._nickname;
+            if (firstName === undefined || firstName && firstName.length === 0) {
+                firstName = scout._firstName;
+            }
+            return `${firstName} ${scout._lastName}`;
+        } else {
+            return '';
+        }
+    }
+    _this.getCampingPercent = function(scout) {
+        let campingPercent = 0;
+        const totalCamping = _this.calendar.camping.length;
+        const scoutKey = _this.getCalendarKey(scout);
+        const scoutAttend = _this.calendar.attendance[scoutKey];
+        if (scoutAttend) {
+            const attendCamping = scoutAttend.camping.length;
+            campingPercent = attendCamping/totalCamping ;
+        }
+        return Math.round(campingPercent * 100);
+    };
+
+    _this.getTotalPercent = function(scout) {
+        let totalPercent = 0;
+        if (scout) {
+            const totalCamping = _this.calendar.camping.length;
+            const totalMeeting = _this.calendar.meeting.length;
+            const totalOther = _this.calendar.other.length;
+            const scoutKey = _this.getCalendarKey(scout);
+            const scoutAttend = _this.calendar.attendance[scoutKey];
+            if (scoutAttend) {
+                const attendCamping = scoutAttend.camping ? scoutAttend.camping.length : 0;
+                const attendMeeting = scoutAttend.meeting ? scoutAttend.meeting.length : 0;
+                const attendOther = scoutAttend.other ? scoutAttend.other.length : 0;
+                totalPercent = (attendCamping + attendMeeting + attendOther) /
+                    (totalCamping + totalMeeting + totalOther);
+            }
+        }
+        return Math.round(totalPercent * 100);
+    }
 }

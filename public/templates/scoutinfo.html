@@ -47,4 +47,10 @@
         </div>
     </div>
     <scoutcontact ng-if="$ctrl.getContact()" contact="$ctrl.getContact()"></scoutcontact>
+    <div class="infobox">
+        <div class="infoitem">
+            <div class=" info label left">Current Total Attendance Percentage:</div>
+            <div class="info">{{$ctrl.getTotalAttendance()}}</div>
+        </div>
+    </div>
 </div>

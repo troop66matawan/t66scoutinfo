@@ -11,6 +11,7 @@
       <div class="leadershipDetails">
         <div class="td positionhdr">Leadership Position</div>
         <div class="td">Camping (Attendance / Expected) %</div>
+        <div class="td">Total Attendance (min 50%)</div>
       </div>
     </div>
 
@@ -28,6 +29,7 @@
         <div class="td {{$ctrl.styleBackgroundCamping(scout.por,scout)}}">
           {{$ctrl.getCampingPercent(scout.por,scout)}} / {{$ctrl.getExpectedPercent(scout.por,scout)}}
         </div>
+        <div class="td {{$ctrl.styleBackgroundTotal(scout.por, scout)}}">{{$ctrl.getTotalAttendance(scout.por, scout)}}</div>
       </div>
     </div>
   </div>

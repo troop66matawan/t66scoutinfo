@@ -25,8 +25,31 @@ angular.module('t66tmweb').component('scoutbookLeadershipReport', {
     }
 
     _this.getCampingPercent = function(por,scout) {
-      return  '?';
+      //return  '?';
+      return ScoutbookDBService.getCampingPercent(scout);
     };
+
+    _this.getTotalAttendance = function(por, scout) {
+      return ScoutbookDBService.getTotalPercent(scout);
+    }
+
+    _this.styleBackgroundTotal = function(por, scout) {
+      const expectedTotal = 50;
+      let totalPercent = ScoutbookDBService.getTotalPercent(scout);
+      let style;
+
+      if (totalPercent < expectedTotal) {
+        if ((totalPercent + 10) >= expectedTotal) {
+          style = 'blackonyellow';
+        } else if (totalPercent + 20 >= expectedTotal) {
+          style = 'whiteonred';
+        } else {
+          style = 'whiteonblack';
+        }
+      }
+
+      return style;
+    }
 
     _this.getExpectedPercent = function(por,scout) {
       return porService.getExpectedCampingAttendance(por._position);
@@ -60,6 +83,7 @@ angular.module('t66tmweb').component('scoutbookLeadershipReport', {
               var scoutpor = {};
               scoutpor._lastName = scout._lastName;
               scoutpor._firstName = scout._firstName;
+              scoutpor._nickname = scout._nickname;
               scoutpor._advancement = scout._advancement;
               if (scout._activities && scout._activities._camping) {
                 scoutpor._camping = scout._activities._camping;
