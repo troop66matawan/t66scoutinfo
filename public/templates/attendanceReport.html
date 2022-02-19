@@ -1,5 +1,39 @@
 <div class="attendancereport">
-  <div class="header">Scout Meeting Attendance Report</div>
+  <div class="header">Scout Attendance Report</div>
+  <div class="table">
+    <div class="tr th">
+      <div class="leadershipPerson">
+        <div class="td">Last name</div>
+        <div class="td">First Name</div>
+        <div class="td">Rank</div>
+        <div class="td">Rank Date</div>
+      </div>
+      <div class="leadershipDetails">
+        <div class="td">Camping  %</div>
+        <div class="td">Meeting  %</div>
+        <div class="td">Total Attendance (min 50%)</div>
+      </div>
+    </div>
+
+    <div class="tr" ng-repeat="scout in $ctrl.scouts">
+      <div class="leadershipPerson">
+        <div class="td">{{scout._lastName}}</div>
+        <div class="td">{{scout._firstName}}</div>
+        <div class="td">{{$parent.ScoutbookDBService.getCurrentRank(scout)}}</div>
+        <div class="td">{{$ctrl.getCurrentRankDate(scout)}}</div>
+      </div>
+      <div class="leadershipDetails">
+        <div class="td">
+          {{$parent.ScoutbookDBService.getCampingPercent(scout)}}
+        </div>
+        <div class="td">
+          {{$parent.ScoutbookDBService.getMeetingPercent(scout)}}
+        </div>
+        <div class="td">{{$parent.ScoutbookDBService.getTotalPercent( scout)}}</div>
+      </div>
+    </div>
+  </div>
+  <!--
   <div class="attendanceMtgChooser">
     <select id="mtgselect" ng-model="$ctrl.selected"
             ng-options="meeting as $ctrl.genDate(meeting.activityDate) for meeting in $ctrl.meetings"></select>
@@ -15,4 +49,5 @@
       <scoutname scout="scout"></scoutname>
     </div>
   </div>
+  -->
 </div>

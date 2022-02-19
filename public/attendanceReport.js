@@ -3,32 +3,26 @@ app.component('attendanceReport', {
     scouts: '<'
   },
   templateUrl: 'templates/attendanceReport.html',
-  controller: ['activityService',AttendanceReportController]
+  controller: ['ScoutbookDBService','$scope',AttendanceReportController]
 });
 
-function AttendanceReportController(activityService) {
+function AttendanceReportController(ScoutbookDBService, $scope) {
+  const _this = this;
 
   this.$onInit = function() {
-    this.meetings = activityService.getMeetings();
+    $scope.ScoutbookDBService = ScoutbookDBService;
+  };
+  _this.getCurrentRankDate = function(scout) {
+    let curRankDate = undefined;
+    let date = '';
+    const curRank = ScoutbookDBService.getCurrentRank(scout);
+    if (curRank) {
+      curRankDate = ScoutbookDBService.getRankDate(scout,curRank);
+    }
+    if (curRankDate) {
+      date = curRankDate.getMonth()+1 + '/' + curRankDate.getDate()+'/'+curRankDate.getFullYear();
+    }
+    return date;
   };
 
-  this.genDate = function(activityDate) {
-    if (activityDate !== undefined && activityDate.hasOwnProperty('month') &&
-      activityDate.hasOwnProperty('date') && activityDate.hasOwnProperty('year')) {
-      return (activityDate.month + 1) + '/' + activityDate.date + '/' + (activityDate.year + 1900);
-    } else {
-      return '';
-    }
-  };
-
-  this.isScoutAttend = function(scout,meeting) {
-    if (scout._meeting === undefined) {
-      return false;
-    } else {
-      return (scout._meeting.some(attendMeeting => (
-        attendMeeting.activityDate.month === meeting.activityDate.month &&
-        attendMeeting.activityDate.date === meeting.activityDate.date &&
-        attendMeeting.activityDate.year === meeting.activityDate.year)));
-    }
-  }
 }

@@ -239,7 +239,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         const totalCamping = _this.calendar.camping.length;
         const scoutKey = _this.getCalendarKey(scout);
         const scoutAttend = _this.calendar.attendance[scoutKey];
-        if (scoutAttend) {
+        if (scoutAttend && scoutAttend.camping) {
             const attendCamping = scoutAttend.camping.length;
             campingPercent = attendCamping/totalCamping ;
         }
@@ -251,7 +251,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         const totalMeeting = _this.calendar.meeting.length;
         const scoutKey = _this.getCalendarKey(scout);
         const scoutAttend = _this.calendar.attendance[scoutKey];
-        if (scoutAttend) {
+        if (scoutAttend && scoutAttend.meeting) {
             const attendmeeting = scoutAttend.meeting.length;
             meetingPercent = attendmeeting/totalMeeting ;
         }
