@@ -25,4 +25,20 @@ function AttendanceReportController(ScoutbookDBService, $scope) {
     return date;
   };
 
+  _this.styleBackground= function(scout, campingPercent) {
+    var expectedCampingPercent = 50;
+    var style = "";
+
+    if (campingPercent < expectedCampingPercent) {
+      if ((campingPercent + 10) >= expectedCampingPercent) {
+        style = 'blackonyellow';
+      } else if (campingPercent + 20 >= expectedCampingPercent) {
+        style = 'whiteonred';
+      } else {
+        style = 'whiteonblack';
+      }
+    }
+
+    return style;
+  };
 }

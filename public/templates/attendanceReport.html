@@ -23,31 +23,17 @@
         <div class="td">{{$ctrl.getCurrentRankDate(scout)}}</div>
       </div>
       <div class="leadershipDetails">
-        <div class="td">
+        <div class="td {{$ctrl.styleBackground(scout, $parent.ScoutbookDBService.getCampingPercent(scout))}}">
           {{$parent.ScoutbookDBService.getCampingPercent(scout)}}
         </div>
-        <div class="td">
+        <div class="td {{$ctrl.styleBackground(scout, $parent.ScoutbookDBService.getMeetingPercent(scout))}}">
           {{$parent.ScoutbookDBService.getMeetingPercent(scout)}}
         </div>
-        <div class="td">{{$parent.ScoutbookDBService.getTotalPercent( scout)}}</div>
-      </div>
-    </div>
-  </div>
-  <!--
-  <div class="attendanceMtgChooser">
-    <select id="mtgselect" ng-model="$ctrl.selected"
-            ng-options="meeting as $ctrl.genDate(meeting.activityDate) for meeting in $ctrl.meetings"></select>
-  </div>
-  <div class="attendancephotolist">
-    <div ng-repeat="scout in $ctrl.scouts | orderBy: '_firstName'">
-      <div class="scoutphoto">
-        <scoutimage class="scout" scout="scout"></scoutimage>
-        <div ng-show="$ctrl.isScoutAttend(scout,$ctrl.selected)" class="ispresent">
-          <i class="material-icons" ng-click="$ctrl.btnClick()">check_circle</i>
+        <div class="td {{$ctrl.styleBackground(scout, $parent.ScoutbookDBService.getTotalPercent( scout))}}">
+          {{$parent.ScoutbookDBService.getTotalPercent( scout)}}
         </div>
       </div>
-      <scoutname scout="scout"></scoutname>
     </div>
   </div>
-  -->
+
 </div>
