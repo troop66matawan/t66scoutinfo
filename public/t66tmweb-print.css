@@ -533,6 +533,10 @@ span {
   display: flex;
   width: 50%;
 }
+.leadershipPerson .td {
+  align-content: center
+}
+
 .leadershipDetails {
   display: flex;
   width: 50%;

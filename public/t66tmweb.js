@@ -29,6 +29,7 @@ app.component('scoutlist', {
     _this.requirementsAnalysis = {name: 'Requirements Analysis', value: 11};
     _this.trailToEagleReportMenuItem2 =       {name: 'Trail to Eagle Advancement Report v2', value: 2};
     _this.inactiveScoutDataMenuItem = {name: 'Inactive Scout Data', value: 12};
+    _this.leadershipRoster = {name: 'Leadership Roster', value: 13};
 
 
 
@@ -83,6 +84,7 @@ app.component('scoutlist', {
                    _this.menuOptions.push(_this.meetingAttendance);
                    _this.menuOptions.push(_this.rosterReport);
                    _this.menuOptions.push(_this.requirementsAnalysis);
+                   _this.menuOptions.push(_this.leadershipRoster);
 
                    _this.scouts = ScoutbookDBService.getActiveScouts(scouts);
 
@@ -197,7 +199,8 @@ app.component('scoutlist', {
     ' attendance="MeetingAttendanceService.getMeetingAttendance()"></meeting-attendance>' +
     '<roster-report ng-if="$ctrl.view === 10" scouts="ScoutbookDBService.scouts"></roster-report>' +
     '<requirements-analysis ng-if="$ctrl.view === 11" results="ScoutbookReqtAnalysisService.results"></requirements-analysis>' +
-    '<div class="t66footer"><img src="images/Troop%2066%20Logo_trans.png"></div>' +
+    '<leadership-roster ng-if="$ctrl.view === 13" scouts="ScoutbookDBService.scouts"></leadership-roster>' +
+    '<div class="t66footer"><img src="images/T66_Logo_22.png"></div>' +
   '</div>',
   // bindings: {
   //   scouts: '@'

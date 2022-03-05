@@ -1,0 +1,34 @@
+<div class="leadershipreport">
+  <div class="header">Scout Leadership Roster</div>
+  <div class="table">
+    <div class="tr th">
+      <div class="leadershipPerson">
+        <div class="td">Last name</div>
+        <div class="td">First Name</div>
+        <div class="td">Rank</div>
+        <div class="td">Rank Date</div>
+      </div>
+      <div class="leadershipDetails">
+        <div class="td positionhdr">Leadership Position</div>
+        <div class="td positionhdr">Leadership Start Date</div>
+      </div>
+    </div>
+
+    <div class="tr" ng-repeat="scout in $ctrl.currentleaderpositions">
+      <div class="leadershipPerson">
+        <div class="td">{{scout._lastName}}</div>
+        <div class="td">{{scout._firstName}}</div>
+        <div class="td">{{$ctrl.getCurrentRank(scout)}}</div>
+        <div class="td">{{$ctrl.getCurrentRankDate(scout)}}</div>
+      </div>
+      <div class="leadershipDetails">
+        <div class="td">
+          {{scout.por._position}}
+        </div>
+        <div class="td">
+          <date date="scout.por._startDate"></date>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
