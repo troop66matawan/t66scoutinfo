@@ -11,6 +11,7 @@
       <div class="leadershipDetails">
         <div class="td">Camping  %</div>
         <div class="td">Meeting  %</div>
+        <div class="td">Other %</div>
         <div class="td">Total Attendance (min 50%)</div>
       </div>
     </div>
@@ -28,6 +29,9 @@
         </div>
         <div class="td {{$ctrl.styleBackground(scout, $parent.ScoutbookDBService.getMeetingPercent(scout))}}">
           {{$parent.ScoutbookDBService.getMeetingPercent(scout)}}
+        </div>
+        <div class="td {{$ctrl.styleBackground(scout, $parent.ScoutbookDBService.getOtherPercent(scout))}}">
+          {{$parent.ScoutbookDBService.getOtherPercent(scout)}}
         </div>
         <div class="td {{$ctrl.styleBackground(scout, $parent.ScoutbookDBService.getTotalPercent( scout))}}">
           {{$parent.ScoutbookDBService.getTotalPercent( scout)}}

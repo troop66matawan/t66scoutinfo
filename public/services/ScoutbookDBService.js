@@ -257,6 +257,17 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         }
         return Math.round(meetingPercent * 100);
     }
+    _this.getOtherPercent = function(scout) {
+        let otherPercent = 0;
+        const totalOther = _this.calendar.other.length;
+        const scoutKey = _this.getCalendarKey(scout);
+        const scoutAttend = _this.calendar.attendance[scoutKey];
+        if (scoutAttend && scoutAttend.other) {
+            const attendOther = scoutAttend.other.length;
+            otherPercent = attendOther / totalOther;
+        }
+        return Math.round( otherPercent * 100);
+    }
 
     _this.getTotalPercent = function(scout) {
         let totalPercent = 0;
@@ -270,8 +281,9 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
                 const attendCamping = scoutAttend.camping ? scoutAttend.camping.length : 0;
                 const attendMeeting = scoutAttend.meeting ? scoutAttend.meeting.length : 0;
                 const attendOther = scoutAttend.other ? scoutAttend.other.length : 0;
-                totalPercent = (attendCamping + attendMeeting + attendOther) /
-                    (totalCamping + totalMeeting + totalOther);
+                totalPercent = ((attendCamping/totalCamping) +
+                    (attendMeeting/totalMeeting) +
+                    (attendOther/totalOther)) / 3;
             }
         }
         return Math.round(totalPercent * 100);
