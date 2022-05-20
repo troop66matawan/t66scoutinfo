@@ -1,0 +1,21 @@
+<div class="distribution-creator">
+    <style id='distribution-creator'></style>
+    <div>
+        <label for="distEmail">Distribution Email</label>
+        <input type="text" ng-model="$ctrl.distributionEmail" id="distEmail">
+    </div>
+    <div>
+        <label for="distCSV">Distrubtion CSV</label>
+        <textarea id="distCSV" ng-model="$ctrl.distCSV"disabled></textarea>
+    </div>
+    <div id="rosterDownload"><button ng-click="$ctrl.exportRoster()">Create</button></div>
+    <div class="scoutlist">
+        <div  ng-repeat="scout in $ctrl.activeScouts  track by $index "
+              ng-init="index = $index">
+            <div style="display:flex">
+                <input type="checkbox" ng-model="$ctrl.isChecked[index]">
+                <scoutname scout="scout"></scoutname>
+            </div>
+        </div>
+    </div>
+</div>

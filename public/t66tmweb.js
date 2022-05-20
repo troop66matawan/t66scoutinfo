@@ -30,6 +30,7 @@ app.component('scoutlist', {
     _this.trailToEagleReportMenuItem2 =       {name: 'Trail to Eagle Advancement Report v2', value: 2};
     _this.inactiveScoutDataMenuItem = {name: 'Inactive Scout Data', value: 12};
     _this.leadershipRoster = {name: 'Leadership Roster', value: 13};
+    _this.emailDistro = {name: 'Email Distro', value: 14};
 
 
 
@@ -85,6 +86,7 @@ app.component('scoutlist', {
                    _this.menuOptions.push(_this.rosterReport);
                    _this.menuOptions.push(_this.requirementsAnalysis);
                    _this.menuOptions.push(_this.leadershipRoster);
+                   _this.menuOptions.push(_this.emailDistro);
 
                    _this.scouts = ScoutbookDBService.getActiveScouts(scouts);
 
@@ -200,6 +202,7 @@ app.component('scoutlist', {
     '<roster-report ng-if="$ctrl.view === 10" scouts="ScoutbookDBService.scouts"></roster-report>' +
     '<requirements-analysis ng-if="$ctrl.view === 11" results="ScoutbookReqtAnalysisService.results"></requirements-analysis>' +
     '<leadership-roster ng-if="$ctrl.view === 13" scouts="ScoutbookDBService.scouts"></leadership-roster>' +
+    '<create-mail-distribution ng-if="$ctrl.view === 14" scouts="ScoutbookDBService.scouts"' +
     '<div class="t66footer"><img src="images/T66_Logo_22.png"></div>' +
   '</div>',
   // bindings: {
