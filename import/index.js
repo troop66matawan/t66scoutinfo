@@ -5,6 +5,7 @@ const LeadershipImporter = require('scoutbook-leadership-importer');
 const IAActivityImporter = require('ia-activity-importer');
 const admin = require('firebase-admin');
 const csvToJson = require('csvtojson');
+const RankAdvancement = require('./rankAdvancement');
 
 const t66App = admin.initializeApp({
     credential: admin.credential.applicationDefault(),
@@ -119,7 +120,20 @@ if (process.argv.length !== 8) {
         .then(function (scouts) {
             AdvancementImporter.scoutbook_advancement_importer(scouts, process.argv[3])
                 .then(function(scoutsWithAdv) {
-                    ActivityImporter.scoutbook_activities_importer(scouts, process.argv[4])
+                    // All Data is imported, ensure that next rank being worked exists in advancement even if no requirements completed.
+                    scoutKeys = Object.keys(scoutsWithAdv);
+                    scoutKeys.forEach(key => {
+                        const scout = scoutsWithAdv[key];
+                        if (scout && scout._advancement) {
+                            const nextRank = RankAdvancement.getNextRank(scout);
+                            const scoutAdvancement = scout._advancement;
+                            if (scoutAdvancement[nextRank] === undefined) {
+                                scoutAdvancement[nextRank] = RankAdvancement.createNextRank(nextRank);
+                            }
+                        }
+                    })
+
+                    ActivityImporter.scoutbook_activities_importer(scoutsWithAdv, process.argv[4])
                         .then(function(scoutsWithAct) {
                             IAActivityImporter.scoutbook_ia_activities_importer(scoutsWithAct, process.argv[6])
                                 .then(function(scoutsWithIA) {

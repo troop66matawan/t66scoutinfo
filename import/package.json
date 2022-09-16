@@ -13,6 +13,7 @@
     "ia-activity-importer": "github:troop66matawan/ia-activity-importer#main",
     "scoutbook-activities-importer": "github:troop66matawan/scoutbook-activities-importer#master",
     "scoutbook-advancement-importer": "github:troop66matawan/scoutbook-advancement-importer#master",
+    "scoutbook-advancement": "github:troop66matawan/scoutbook-advancement#master",
     "scoutbook-leadership-importer": "github:troop66matawan/scoutbook-leadership-importer#main",
     "scoutbook-scouts-importer": "github:troop66matawan/scoutbook-scouts-importer#master"
   },
