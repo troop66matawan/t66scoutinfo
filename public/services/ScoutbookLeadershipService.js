@@ -65,7 +65,7 @@ function ScoutbookLeadershipService(ScoutbookDBConstant, ScoutbookDBService) {
         if (currentRank) {
             const neededTenure = _this.LEADERSHIP_TENURE_MONTHS[currentRank];
             if (neededTenure) {
-                tenureRemaining = neededTenure;
+                tenureRemaining = neededTenure * 30;
                 const rankDate = ScoutbookDBService.getRankDate(scout, currentRank);
                 const rankTime = rankDate.getTime();
                 if (scout._leadership && Array.isArray(scout._leadership._positions)) {
