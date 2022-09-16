@@ -399,7 +399,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
             }
         }
     };
-    
+
     _this.initialize = function() {
         _this.requirementAnalyzer = {};
         _this.results = [];
@@ -444,6 +444,13 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
         }];
         _this.requirementAnalyzer[ScoutbookDBConstant.ADVANCEMENT.EAGLE] = [{
             version: 2016,
+            requirements: {
+                '1': _this.eagle2016_1,
+                '3': _this.eagle2016_3,
+                '4': _this.eagle2016_4,
+            }
+        },{
+            version: 2022,
             requirements: {
                 '1': _this.eagle2016_1,
                 '3': _this.eagle2016_3,
