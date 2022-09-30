@@ -236,35 +236,59 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
     }
     _this.getCampingPercent = function(scout) {
         let campingPercent = 0;
-        const totalCamping = _this.calendar.camping.length;
-        const scoutKey = _this.getCalendarKey(scout);
-        const scoutAttend = _this.calendar.attendance[scoutKey];
-        if (scoutAttend && scoutAttend.camping) {
-            const attendCamping = scoutAttend.camping.length;
-            campingPercent = attendCamping/totalCamping ;
+        if (_this.calendar.camping && Array.isArray(_this.calendar.camping)) {
+            const totalCamping = _this.calendar.camping.length;
+            if (totalCamping > 0) {
+                const scoutKey = _this.getCalendarKey(scout);
+                const scoutAttend = _this.calendar.attendance[scoutKey];
+                if (scoutAttend && scoutAttend.camping) {
+                    const attendCamping = scoutAttend.camping.length;
+                    campingPercent = attendCamping / totalCamping;
+                }
+            } else {
+                campingPercent = 1;
+            }
+        } else {
+            campingPercent =1;
         }
         return Math.round(campingPercent * 100);
     };
     
     _this.getMeetingPercent = function(scout) {
         let meetingPercent = 0;
-        const totalMeeting = _this.calendar.meeting.length;
-        const scoutKey = _this.getCalendarKey(scout);
-        const scoutAttend = _this.calendar.attendance[scoutKey];
-        if (scoutAttend && scoutAttend.meeting) {
-            const attendmeeting = scoutAttend.meeting.length;
-            meetingPercent = attendmeeting/totalMeeting ;
+        if (_this.calendar.meeting && Array.isArray(_this.calendar.meeting)) {
+            const totalMeeting = _this.calendar.meeting.length;
+            if (totalMeeting > 0) {
+                const scoutKey = _this.getCalendarKey(scout);
+                const scoutAttend = _this.calendar.attendance[scoutKey];
+                if (scoutAttend && scoutAttend.meeting) {
+                    const attendmeeting = scoutAttend.meeting.length;
+                    meetingPercent = attendmeeting / totalMeeting;
+                }
+            } else {
+                meetingPercent = 1;
+            }
+        } else {
+            meetingPercent = 1;
         }
         return Math.round(meetingPercent * 100);
     }
     _this.getOtherPercent = function(scout) {
         let otherPercent = 0;
-        const totalOther = _this.calendar.other.length;
-        const scoutKey = _this.getCalendarKey(scout);
-        const scoutAttend = _this.calendar.attendance[scoutKey];
-        if (scoutAttend && scoutAttend.other) {
-            const attendOther = scoutAttend.other.length;
-            otherPercent = attendOther / totalOther;
+        if (_this.calendar.other && Array.isArray(_this.calendar.other)) {
+            const totalOther = _this.calendar.other.length;
+            if (totalOther > 0) {
+                const scoutKey = _this.getCalendarKey(scout);
+                const scoutAttend = _this.calendar.attendance[scoutKey];
+                if (scoutAttend && scoutAttend.other) {
+                    const attendOther = scoutAttend.other.length;
+                    otherPercent = attendOther / totalOther;
+                }
+            } else {
+                otherPercent = 1;
+            }
+        } else {
+            otherPercent = 1;
         }
         return Math.round( otherPercent * 100);
     }
@@ -272,19 +296,11 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
     _this.getTotalPercent = function(scout) {
         let totalPercent = 0;
         if (scout) {
-            const totalCamping = _this.calendar.camping.length;
-            const totalMeeting = _this.calendar.meeting.length;
-            const totalOther = _this.calendar.other.length;
-            const scoutKey = _this.getCalendarKey(scout);
-            const scoutAttend = _this.calendar.attendance[scoutKey];
-            if (scoutAttend) {
-                const attendCamping = scoutAttend.camping ? scoutAttend.camping.length : 0;
-                const attendMeeting = scoutAttend.meeting ? scoutAttend.meeting.length : 0;
-                const attendOther = scoutAttend.other ? scoutAttend.other.length : 0;
-                totalPercent = ((attendCamping/totalCamping) +
-                    (attendMeeting/totalMeeting) +
-                    (attendOther/totalOther)) / 3;
-            }
+            const camping = _this.getCampingPercent(scout) / 100;
+            const meeting = _this.getMeetingPercent(scout) / 100;
+            const other = _this.getOtherPercent(scout) /100
+
+            totalPercent = (camping + meeting + other) / 3;
         }
         return Math.round(totalPercent * 100);
     }
