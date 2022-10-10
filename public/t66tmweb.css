@@ -420,6 +420,8 @@ eagleneeded {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .scoutsnotadvancing .header {
   font-family: "Roboto", sans-serif;

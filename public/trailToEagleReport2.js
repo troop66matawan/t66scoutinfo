@@ -48,6 +48,12 @@ app.component('trailtoeaglereportv2', {
       });
     }
 
+    _this.getHeaderDate = function() {
+      const now = Date.now();
+      const options = { year: 'numeric', month: 'long'};
+
+      return new Intl.DateTimeFormat('en-US', options).format(now);
+    }
     _this.getCurrentRank = function(scout) {
       return ScoutbookDBService.getCurrentRankText(scout);
     }
