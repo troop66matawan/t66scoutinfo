@@ -70,7 +70,8 @@ app.component('scoutlist', {
              ScoutbookDBService.initDB()
                  .then(function(scouts) {
                    ScoutbookReqtAnalysisService.initialize();
-                   scouts.forEach(function(scout) {
+                   let activeScouts = ScoutbookDBService.getActiveScouts(scouts);
+                   activeScouts.forEach(function(scout) {
                      ScoutbookReqtAnalysisService.analyze(scout);
                    });
                    _this.menuOptions.push(_this.indivScoutDataMenuItem);
