@@ -57,22 +57,23 @@ function CreateMailDistribution(ScoutbookDBService, CsvDownloadService ) {
                 if (contact._email2) {
                     emails[contact._email2] = true;
                 }
-                if (parent && Array.isArray(parents)) {}
-                parents.forEach(function(parent) {
-                    if (parent._email1) {
-                        emails[parent._email1] = true;
-                    }
-                    if (parent._email2) {
-                        emails[parent._email2] = true;
-                    }
-                })
+                if (parents !== undefined && Array.isArray(parents)) {
+                    parents.forEach(function (parent) {
+                        if (parent._email1) {
+                            emails[parent._email1] = true;
+                        }
+                        if (parent._email2) {
+                            emails[parent._email2] = true;
+                        }
+                    })
+                }
             }
         }
         const emailList = Object.keys(emails);
         console.log(JSON.stringify(emailList));
-        _this.distCSV = "Group Email [Required],Member Email,Member Name,Member Role,Member Type\n";
+        _this.distCSV = "Group Email [Required],Member Email,Member Type,Member Role\n";
         emailList.forEach(function(email) {
-            _this.distCSV += `${_this.distributionEmail},${email},Member,MEMBER,USER\n`;
+            _this.distCSV += `${_this.distributionEmail},${email},USER,MEMBER\n`;
         })
     };
 
