@@ -67,6 +67,7 @@ app.component('scoutlist', {
            if (response.hasOwnProperty('position')  &&
                 response.position === 'scoutmaster' || response.position === 'eaglecommittee') {
              MeetingAttendanceService.initDB();
+             ScoutbookDBService.initCalendar();
              ScoutbookDBService.initDB()
                  .then(function(scouts) {
                    ScoutbookReqtAnalysisService.initialize();
@@ -111,7 +112,6 @@ app.component('scoutlist', {
                      _this.selected = _this.scouts[0];
                    }
                  });
-             ScoutbookDBService.initCalendar();
              _this.position = response.position;
              var contactsRef = firedb.ref('scout_contact/');
              contactsRef.on('value', function(snapshot) {
@@ -190,7 +190,7 @@ app.component('scoutlist', {
     '<scoutdiv scout="$ctrl.selected" ></scoutdiv>'+
     '</div>' +
   '<trailtoeaglereportv2 ng-if="$ctrl.view === 2" scouts="ScoutbookDBService.scouts" min-age="16"></trailtoeaglereportv2>' +
-    '<photo-report ng-if="$ctrl.view === 3" scouts="$ctrl.scouts"></photo-report>'+
+    '<photo-report ng-if="$ctrl.view === 3" scouts="ScoutbookDBService.scouts"></photo-report>'+
     '<scoutsnotadvancing ng-if="$ctrl.view === 4" scouts="ScoutbookDBService.scouts"></scoutsnotadvancing>' +
     '<exporttoscoutbook ng-if="$ctrl.view === 5" scouts="$ctrl.scouts"></exporttoscoutbook>' +
     //'<leadershipreport ng-if="$ctrl.view === 6" scouts="$ctrl.scouts"></leadershipreport>' +

@@ -40,13 +40,15 @@
               </div>
             </div>
           </div>
-          <div ng-if='$ctrl.getParents(scout)' ng-repeat="parent in $ctrl.getParents(scout)" class="roster-report-parent-card">
+          <div ng-if="$ctrl.getParents(scout)" class="scoutinfo-parents">
+            <div ng-if='$ctrl.getParents(scout)' ng-repeat="parent in $ctrl.getParents(scout)" class="roster-report-parent-card">
             <div class="roster-report-parent-name scoutname">
               <div class="firstname">{{parent._firstName}}</div>
               <div class="lastname">{{parent._lastName}}</div>
               <div class="lastname">({{parent._relation}})</div>
             </div>
             <scoutcontact contact="parent"></scoutcontact>
+          </div>
           </div>
           <scoutimage class="scoutinfoimage" scout="scout"></scoutimage>
         </div>

@@ -99,6 +99,46 @@ function mergeContactInfo(scouts, pathToContactCSV) {
                     contact._parents.push(parent2);
                 }
 
+                const parent3Relation = contactRecord['Parent #3 Relation'];
+
+                if (parent3Relation.length > 0) {
+                    const parent3 = {};
+                    parent3._relation = parent3Relation;
+                    parent3._lastName = contactRecord['Parent #3 Last Name'];
+                    parent3._firstName = contactRecord['Parent #3 First Name'];
+                    parent3._suffix = contactRecord['Parent #3 Suffix'];
+                    parent3._nickName = contactRecord['Parent #3 Nickname'];
+                    //Parent #3 Sex (M/F),
+                    parent3._homePhone = contactRecord['Parent #3 Home Phone'];
+                    parent3._workPhone = contactRecord['Parent #3 Work Phone'];
+                    parent3._cellPhone = contactRecord['Parent #3 Cell Phone'];
+                    parent3._email1 = contactRecord['Parent #3 Email #1'];
+                    parent3._email2 = contactRecord['Parent #3 Email #2'];
+                    parent3._employer = contactRecord['Parent #3 Employer'];
+                    parent3._occupation = contactRecord['Parent #3 Occupation'];
+                    contact._parents.push(parent3);
+                }
+                
+                const parent4Relation = contactRecord['Parent #4 Relation'];
+
+                if (parent4Relation.length > 0) {
+                    const parent4 = {};
+                    parent4._relation = parent4Relation;
+                    parent4._lastName = contactRecord['Parent #4 Last Name'];
+                    parent4._firstName = contactRecord['Parent #4 First Name'];
+                    parent4._suffix = contactRecord['Parent #4 Suffix'];
+                    parent4._nickName = contactRecord['Parent #4 Nickname'];
+                    //Parent #4 Sex (M/F),
+                    parent4._homePhone = contactRecord['Parent #4 Home Phone'];
+                    parent4._workPhone = contactRecord['Parent #4 Work Phone'];
+                    parent4._cellPhone = contactRecord['Parent #4 Cell Phone'];
+                    parent4._email1 = contactRecord['Parent #4 Email #1'];
+                    parent4._email2 = contactRecord['Parent #4 Email #2'];
+                    parent4._employer = contactRecord['Parent #4 Employer'];
+                    parent4._occupation = contactRecord['Parent #4 Occupation'];
+                    contact._parents.push(parent4);
+                }
+
                 let scout = findScout(scouts, {bsaId: bsaID, firstName: firstName, lastName: lastName, nickname: nickName });
 
                 if (scout) {

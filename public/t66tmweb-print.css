@@ -578,9 +578,15 @@ div#rosterDownload{
 .roster-report-scout-card {
   font-size: small;
 }
+.scoutinfo-parents {
+  display: flex;
+  width: 600px;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
 .roster-report-parent-card {
   position: relative;
-  top: 50px;
+  width: 250px;
   font-size: smaller;
 }
 .roster-report-parent-name {

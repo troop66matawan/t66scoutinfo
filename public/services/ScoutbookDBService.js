@@ -29,6 +29,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         _this.calendarRef = firedb.ref('scoutbookCal');
         _this.calendarRef.on('value', function(curSnapshot) {
             _this.calendar = curSnapshot.val();
+            console.log(_this.calendar);
             defer.resolve(_this.calendar);
         });
         return defer.promise;
