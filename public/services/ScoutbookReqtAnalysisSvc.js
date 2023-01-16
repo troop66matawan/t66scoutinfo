@@ -409,9 +409,22 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 '1b': _this.tenderfoot2016_1b,
                 '7b': _this.tenderfoot2016_7b,
             }
-        }];
+        },{
+            version: 2022,
+            requirements: {
+                '1b': _this.tenderfoot2016_1b,
+                '7b': _this.tenderfoot2016_7b,
+            }
+        }
+        ];
         _this.requirementAnalyzer[ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS] = [{
             version: 2016,
+            requirements: {
+                '1a': _this.secClass2016_1a,
+                '81': _this.secClass2016_8e,
+            }
+        },{
+            version: 2022,
             requirements: {
                 '1a': _this.secClass2016_1a,
                 '81': _this.secClass2016_8e,
@@ -423,9 +436,23 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 '1a': _this.firstClass2016_1a,
                 '9d': _this.firstClass2016_9d,
             }
+        },{
+            version: 2022,
+            requirements: {
+                '1a': _this.firstClass2016_1a,
+                '9d': _this.firstClass2016_9d,
+            }
         }];
         _this.requirementAnalyzer[ScoutbookDBConstant.ADVANCEMENT.STAR] = [{
             version: 2016,
+            requirements: {
+                '1': _this.star2016_1,
+                '3': _this.star2016_3,
+                '4': _this.star2016_4,
+                '5': _this.star2016_5,
+            }
+        },{
+            version: 2022,
             requirements: {
                 '1': _this.star2016_1,
                 '3': _this.star2016_3,
