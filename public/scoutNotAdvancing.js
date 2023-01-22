@@ -23,7 +23,7 @@ app.component('scoutsnotadvancing', {
 
     _this.getJoinDate = function(scout) {
       let date;
-      const joinDate = ScoutbookDBService.getDate(scout._dateJoinedBSA);
+      const joinDate = ScoutbookDBService.getDate(scout._dateJoinedUnit);
       if (joinDate) {
         date = joinDate.getMonth()+1 + '/' + joinDate.getDate()+'/'+joinDate.getFullYear();
       }

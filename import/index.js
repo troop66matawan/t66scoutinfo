@@ -49,6 +49,7 @@ function mergeContactInfo(scouts, pathToContactCSV) {
                 const nickName = contactRecord['Nickname'];
                 const bsaID = contactRecord['BSA ID#'];
                 const dob = contactRecord['Date of Birth'];
+                const joinedUnit = contactRecord['Joined Unit']
 
                 contact._address1 = contactRecord['Home Address Line 1'];
                 contact._address2 = contactRecord['Home Address Line 2'];
@@ -143,6 +144,7 @@ function mergeContactInfo(scouts, pathToContactCSV) {
 
                 if (scout) {
                     scout._contactInfo = contact;
+                    scout._dateJoinedUnit = joinedUnit;
                     if (scout.dob === undefined || scout.dob === '') {
                         scout.dob = dob;
                     }
