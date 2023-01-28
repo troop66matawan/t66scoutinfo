@@ -55,7 +55,7 @@ function LeadershipRoster(ScoutbookLeadershipService, ScoutbookDBService, porSer
       } else if (a._lastName > b._lastName) {
         return 1;
       } else {
-        if (a._firstname < b._firstName) {
+        if (a._firstName < b._firstName) {
           return -1;
         } else if (a._firstName > b._firstName) {
           return 1;
