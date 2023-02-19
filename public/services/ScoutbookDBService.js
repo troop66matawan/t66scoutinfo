@@ -227,7 +227,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
     _this.getCalendarKey = function(scout) {
         if (scout) {
             let firstName = scout._nickname;
-            if (firstName === undefined || firstName && firstName.length === 0) {
+            if (firstName === undefined || firstName.length === 0) {
                 firstName = scout._firstName;
             }
             return `${firstName} ${scout._lastName}`;
@@ -238,7 +238,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
     _this.getCampingPercent = function(scout) {
         let campingPercent = 0;
         if (_this.calendar.camping && Array.isArray(_this.calendar.camping)) {
-            const totalCamping = _this.calendar.camping.length;
+            const totalCamping = _this.getScoutCalendarTotal(_this.calendar.camping, scout);
             if (totalCamping > 0) {
                 const scoutKey = _this.getCalendarKey(scout);
                 const scoutAttend = _this.calendar.attendance[scoutKey];
@@ -254,17 +254,36 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         }
         return Math.round(campingPercent * 100);
     };
-    
+
+    _this.getScoutCalendarTotal = function(calendar, scout) {
+        let dateJoined;
+        let totalMeetings = 0;
+        if (scout._dateJoinedUnit) {
+            dateJoined = new Date(scout._dateJoinedUnit);
+        }
+        calendar.forEach((evt) => {
+            const eventDate = new Date(evt.date);
+            if (dateJoined) {
+                if (dateJoined <= eventDate) {
+                    totalMeetings++;
+                }
+            } else {
+                totalMeetings++;
+            }
+        });
+        return totalMeetings;
+    };
+
     _this.getMeetingPercent = function(scout) {
         let meetingPercent = 0;
         if (_this.calendar.meeting && Array.isArray(_this.calendar.meeting)) {
-            const totalMeeting = _this.calendar.meeting.length;
-            if (totalMeeting > 0) {
+            const scoutTotalMeeting = this.getScoutCalendarTotal(_this.calendar.meeting, scout);
+            if (scoutTotalMeeting > 0) {
                 const scoutKey = _this.getCalendarKey(scout);
                 const scoutAttend = _this.calendar.attendance[scoutKey];
                 if (scoutAttend && scoutAttend.meeting) {
                     const attendmeeting = scoutAttend.meeting.length;
-                    meetingPercent = attendmeeting / totalMeeting;
+                    meetingPercent = attendmeeting / scoutTotalMeeting;
                 }
             } else {
                 meetingPercent = 1;
@@ -277,7 +296,7 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
     _this.getOtherPercent = function(scout) {
         let otherPercent = 0;
         if (_this.calendar.other && Array.isArray(_this.calendar.other)) {
-            const totalOther = _this.calendar.other.length;
+            const totalOther = _this.getScoutCalendarTotal(_this.calendar.other, scout);
             if (totalOther > 0) {
                 const scoutKey = _this.getCalendarKey(scout);
                 const scoutAttend = _this.calendar.attendance[scoutKey];
