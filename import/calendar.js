@@ -33,6 +33,20 @@ function mergeCalendarInfo(scouts, pathToCalendarCSV) {
     });
     return csvToJson()
         .on('header', function (header) {
+            //fix header if contains back-to-back space
+            let paddedHeaderIndex = this.runtime.headers.findIndex(e => e.includes('  '));
+            while (paddedHeaderIndex > -1) {
+                let stripSpacesHeader = this.runtime.headers[paddedHeaderIndex];
+                let paddingStartIndex = stripSpacesHeader.indexOf('  ');
+                while (paddingStartIndex > -1) {
+                    const first = stripSpacesHeader.substr(0, paddingStartIndex);
+                    const remaining = stripSpacesHeader.substr(paddingStartIndex+1);
+                    stripSpacesHeader = `${first}${remaining}`;
+                    paddingStartIndex = stripSpacesHeader.indexOf('  ');
+                }
+                this.runtime.headers[paddedHeaderIndex] = stripSpacesHeader;
+                paddedHeaderIndex = this.runtime.headers.findIndex(e => e.includes('  '));
+            }
             // store the header to get scouts.
             console.log(header);
         })
