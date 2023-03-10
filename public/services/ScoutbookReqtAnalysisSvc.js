@@ -16,7 +16,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 const camping = ScoutbookDBService.getCamping(scout);
                 if (camping && Array.isArray(camping) && camping.length > 0) {
                     camping.forEach(function (activity) {
-                        if (activity && activity._count > 0 && activity._notes.indexOf('cabin') === -1) {
+                        if (activity && activity._count > 0 && activity._notes.toLowerCase().indexOf('cabin') === -1) {
                             // Only count activities where overnight not in cabin
                             campingCount++;
                         }
@@ -62,7 +62,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 const camping = ScoutbookDBService.getCamping(scout);
                 if (camping && Array.isArray(camping) && camping.length > 0) {
                     camping.forEach(function (activity) {
-                        if (activity && activity._count > 0 && activity._notes.indexOf('cabin') === -1) {
+                        if (activity && activity._count > 0 && activity._notes.toLowerCase().indexOf('cabin') === -1) {
                             // Only count activities where overnight not in cabin
                             campingCount++
                         } else {
@@ -123,7 +123,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 const camping = ScoutbookDBService.getCamping(scout);
                 if (camping && Array.isArray(camping) && camping.length > 0) {
                     camping.forEach(function (activity) {
-                        if (activity && activity._count > 0 && activity._notes.indexOf('cabin') === -1) {
+                        if (activity && activity._count > 0 && activity._notes.toLowerCase().indexOf('cabin') === -1) {
                             // Only count activities where overnight not in cabin
                             campingCount++;
                         } else {
