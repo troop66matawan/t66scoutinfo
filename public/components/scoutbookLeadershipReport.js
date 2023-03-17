@@ -25,20 +25,20 @@ angular.module('t66tmweb').component('scoutbookLeadershipReport', {
     }
 
     _this.getCampingPercent = function(por,scout) {
-      return ScoutbookDBService.getCampingPercent(scout);
+      return ScoutbookDBService.getCampingPercent(scout, new Date(por._startDate));
     };
 
     _this.getMeetingPercent = function(por, scout) {
-      return ScoutbookDBService.getMeetingPercent(scout);
+      return ScoutbookDBService.getMeetingPercent(scout, new Date(por._startDate));
     };
 
     _this.getTotalAttendance = function(por, scout) {
-      return ScoutbookDBService.getTotalPercent(scout);
+      return ScoutbookDBService.getTotalPercent(scout, new Date(por._startDate));
     }
 
     _this.styleBackgroundTotal = function(por, scout) {
       const expectedTotal = 50;
-      let totalPercent = ScoutbookDBService.getTotalPercent(scout);
+      let totalPercent = ScoutbookDBService.getTotalPercent(scout, new Date(por._startDate));
       let style;
 
       if (totalPercent < expectedTotal) {
