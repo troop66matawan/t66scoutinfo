@@ -533,4 +533,28 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
         }
         return mbCount;
     };
+
+    /**
+     *
+     * @param scout
+     * @returns {boolean}
+     */
+    _this.eagleProjectComplete = function(scout) {
+        let complete = false;
+        if (scout) {
+            const currentRank = ScoutbookDBService.getCurrentRank(scout);
+            if (currentRank === ScoutbookDBConstant.ADVANCEMENT.LIFE) {
+                const eagleRank = ScoutbookDBService.getRankObj(scout, ScoutbookDBConstant.ADVANCEMENT.EAGLE);
+                if (eagleRank) {
+                    // Eagle Service Project
+                    const reqID = '5';
+                    const req = ScoutbookDBService.getRequirement(eagleRank, reqID);
+                    if (req._isApproved === true) {
+                        complete = true;
+                    }
+                }
+            }
+        }
+        return complete;
+    }
 }

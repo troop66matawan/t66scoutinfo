@@ -4,8 +4,10 @@ app.component('trailtoeaglereportv2', {
     minAge: '<'
   },
   templateUrl: 'templates/trailToEagleReport2.html',
-  controller: ['EagleRequired','RankAdvancement','ScoutbookDBConstant','ScoutbookDBService', 'ScoutbookLeadershipService', 'ScoutbookActivityService',
-    function(EagleRequired,RankAdvancement,ScoutbookDBConstant,ScoutbookDBService,ScoutbookLeadershipService, ScoutbookActivityService) {
+  controller: ['EagleRequired','RankAdvancement','ScoutbookDBConstant','ScoutbookDBService',
+    'ScoutbookLeadershipService', 'ScoutbookActivityService', 'ScoutbookReqtAnalysisService',
+    function(EagleRequired,RankAdvancement,ScoutbookDBConstant,ScoutbookDBService,ScoutbookLeadershipService,
+             ScoutbookActivityService, ScoutbookReqtAnalysisService) {
     const _this = this;
     _this.trailToEagleScouts = [];
 
@@ -195,5 +197,9 @@ app.component('trailtoeaglereportv2', {
 
       return ((eighteen.getFullYear()*12 + eighteen.getMonth()) - (now.getFullYear()*12 + now.getMonth()));
     };
+
+    _this.getEagleProjectComplete = function(scout) {
+      return ScoutbookReqtAnalysisService.eagleProjectComplete(scout) === true ? 'Yes' : 'No';
+    }
   }]
 });
