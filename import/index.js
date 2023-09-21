@@ -169,9 +169,7 @@ if (process.argv.length !== 8) {
                         if (scout && scout._advancement) {
                             const nextRank = RankAdvancement.getNextRank(scout);
                             const scoutAdvancement = scout._advancement;
-                            if (scoutAdvancement[nextRank] === undefined) {
-                                scoutAdvancement[nextRank] = RankAdvancement.createNextRank(nextRank);
-                            }
+                            RankAdvancement.addEmptyRanks(scoutAdvancement, nextRank);
                         }
                     })
 

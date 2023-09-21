@@ -83,6 +83,31 @@ class RankAdvancement {
         const version = this.getNextRankLatestVersion(nextRank);
         return new ScoutbookRankAdvancement(scoutbookNextRank, version);
     }
+    static addEmptyRanks(advancement, nextRank) {
+        if (advancement[nextRank] === undefined) {
+            advancement[nextRank] = RankAdvancement.createNextRank(nextRank);
+        }
+        switch (nextRank) {
+            case this.ADVANCEMENT.SCOUT:
+                RankAdvancement.addEmptyRanks(advancement, this.ADVANCEMENT.TENDERFOOT);
+                break;
+            case this.ADVANCEMENT.TENDERFOOT:
+                RankAdvancement.addEmptyRanks(advancement, this.ADVANCEMENT.SECOND_CLASS);
+                break;
+            case this.ADVANCEMENT.SECOND_CLASS:
+                RankAdvancement.addEmptyRanks(advancement, this.ADVANCEMENT.FIRST_CLASS);
+                break;
+            case this.ADVANCEMENT.FIRST_CLASS:
+                RankAdvancement.addEmptyRanks(advancement, this.ADVANCEMENT.STAR);
+                break;
+            case this.ADVANCEMENT.STAR:
+                RankAdvancement.addEmptyRanks(advancement, this.ADVANCEMENT.LIFE);
+                break;
+            case this.ADVANCEMENT.LIFE:
+                RankAdvancement.addEmptyRanks(advancement, this.ADVANCEMENT.EAGLE);
+                break;
+        }
+    }
 }
 
 module.exports = RankAdvancement
