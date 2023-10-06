@@ -17,8 +17,9 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 if (camping && Array.isArray(camping) && camping.length > 0) {
                     camping.forEach(function (activity) {
                         if (activity && activity._count > 0 && activity._notes.toLowerCase().indexOf('cabin') === -1 &&
-                            activity._notes.toLowerCase().indexOf('lean-to') === -1) {
-                            // Only count activities where overnight not in cabin or lean-to
+                            activity._notes.toLowerCase().indexOf('lean-to') === -1 &&
+                            activity._notes.toLowerCase().indexOf('summer camp') === -1) {
+                            // Only count activities where overnight not in cabin or lean-to, or summer camp tent
                             campingCount++;
                         }
                     });
