@@ -821,3 +821,10 @@ eagleneeded {
 .right {
   float: right;
 }
+
+.report .rank-report-rank-item {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 30px;
+  justify-content: space-between;
+}

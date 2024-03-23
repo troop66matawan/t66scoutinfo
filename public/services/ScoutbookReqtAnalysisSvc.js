@@ -405,6 +405,12 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
     _this.initialize = function() {
         _this.requirementAnalyzer = {};
         _this.results = [];
+        _this.jte = {
+            advancement: {
+                totalScouts: 0,
+                advancedOneRankThisYear: 0
+            }
+        };
         _this.requirementAnalyzer[ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT] = [{
             version: 2016,
             requirements: {
@@ -490,6 +496,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
 
     _this.analyze = function(scout) {
         if (scout) {
+            _this.analyzeJte(scout);
             const ranks = Object.keys(ScoutbookDBConstant.ADVANCEMENT);
             ranks.forEach(function(rankName){
                 const rank = ScoutbookDBConstant.ADVANCEMENT[rankName]
@@ -513,6 +520,19 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
         reqIds.forEach(function(id){
             requirements[id](scout);
         });
+    };
+    _this.analyzeJte = function(scout) {
+      if (scout !== undefined) {
+          _this.jte.advancement.totalScouts++;
+          const currentRank = ScoutbookDBService.getCurrentRank(scout);
+          if (currentRank !== undefined) {
+              const rankDate = ScoutbookDBService.getRankDate(scout, currentRank);
+              const today = new Date();
+              if (rankDate !== undefined && rankDate.getFullYear() === today.getFullYear()) {
+                  _this.jte.advancement.advancedOneRankThisYear++;
+              }
+          }
+      }
     };
     _this.countMeritBadges = function(scout) {
         let mbCount={

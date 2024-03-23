@@ -7,11 +7,12 @@ app.run(['RankPatchFactory', function(RankPatchFactory) {
 app.component('scoutlist', {
   bindings: {
   },
-  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService, ScoutService, ScoutbookDBService, ScoutbookReqtAnalysisService) {
+  controller: function ($scope, $window, $firebaseAuth, activityService, MeetingAttendanceService, ScoutService, ScoutbookDBService, ScoutbookReqtAnalysisService, ScoutbookRankReportService) {
     const _this = this;
     $scope.MeetingAttendanceService = MeetingAttendanceService;
     $scope.ScoutbookDBService = ScoutbookDBService;
     $scope.ScoutbookReqtAnalysisService = ScoutbookReqtAnalysisService;
+    $scope.ScoutbookRankReportService = ScoutbookRankReportService;
 
     _this.scouts = [];
     _this.view = 1;
@@ -31,6 +32,8 @@ app.component('scoutlist', {
     _this.inactiveScoutDataMenuItem = {name: 'Inactive Scout Data', value: 12};
     _this.leadershipRoster = {name: 'Leadership Roster', value: 13};
     _this.emailDistro = {name: 'Email Distro', value: 14};
+    _this.rankReport = {name: 'Rank Distribution Report', value: 15};
+    _this.jteReport = {name: 'JTE Report', value: 16};
 
 
 
@@ -71,9 +74,11 @@ app.component('scoutlist', {
              ScoutbookDBService.initDB()
                  .then(function(scouts) {
                    ScoutbookReqtAnalysisService.initialize();
+                   ScoutbookRankReportService.initialize();
                    let activeScouts = ScoutbookDBService.getActiveScouts(scouts);
                    activeScouts.forEach(function(scout) {
                      ScoutbookReqtAnalysisService.analyze(scout);
+                     ScoutbookRankReportService.analyze(scout);
                    });
                    _this.menuOptions.push(_this.indivScoutDataMenuItem);
                    _this.menuOptions.push(_this.inactiveScoutDataMenuItem);
@@ -89,6 +94,8 @@ app.component('scoutlist', {
                    _this.menuOptions.push(_this.requirementsAnalysis);
                    _this.menuOptions.push(_this.leadershipRoster);
                    _this.menuOptions.push(_this.emailDistro);
+                   _this.menuOptions.push(_this.rankReport);
+                   _this.menuOptions.push(_this.jteReport);
 
                    _this.scouts = ScoutbookDBService.getActiveScouts(scouts);
 
@@ -203,7 +210,9 @@ app.component('scoutlist', {
     '<roster-report ng-if="$ctrl.view === 10" scouts="ScoutbookDBService.scouts"></roster-report>' +
     '<requirements-analysis ng-if="$ctrl.view === 11" results="ScoutbookReqtAnalysisService.results"></requirements-analysis>' +
     '<leadership-roster ng-if="$ctrl.view === 13" scouts="ScoutbookDBService.scouts"></leadership-roster>' +
-    '<create-mail-distribution ng-if="$ctrl.view === 14" scouts="ScoutbookDBService.scouts"' +
+    '<create-mail-distribution ng-if="$ctrl.view === 14" scouts="ScoutbookDBService.scouts"></create-mail-distribution>' +
+    '<rank-report ng-if="$ctrl.view === 15" results="ScoutbookRankReportService.results"></rank-report>' +
+    '<jte-report ng-if="$ctrl.view === 16" results="ScoutbookReqtAnalysisService.jte"></jte-report>' +
     '<div class="t66footer"><img src="images/T66_Logo_22.png"></div>' +
   '</div>',
   // bindings: {

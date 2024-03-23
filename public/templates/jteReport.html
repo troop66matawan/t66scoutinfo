@@ -1,0 +1,16 @@
+<div class="report">
+    <div class="header">JTE Advancement Report {{$ctrl.getCurrentYear()}}</div>
+    <div class="rank-report-rank-item">
+        <div class="rank-report-rank-name">Total Scouts</div>
+        <div class="rank-report-rank-count">{{$ctrl.results.advancement.totalScouts}}</div>
+    </div>
+    <div class="rank-report-rank-item">
+        <div class="rank-report-rank-name">Scouts Advanced This Year</div>
+        <div class="rank-report-rank-count">{{$ctrl.results.advancement.advancedOneRankThisYear}}</div>
+    </div>
+    <div class="rank-report-rank-item">
+        <div class="rank-report-rank-name">% of Scouts Advanced this year</div>
+        <div class="rank-report-rank-count">{{$ctrl.getAdvPercentage()}}%</div>
+    </div>
+
+</div>

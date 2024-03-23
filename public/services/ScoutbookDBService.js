@@ -2,6 +2,7 @@ angular.module('t66tmweb')
     .service('ScoutbookDBService', ['ScoutbookDBConstant', '$q', ScoutbookDBService])
     .constant('ScoutbookDBConstant', {
         ADVANCEMENT: {
+            NONE: 'none',
             SCOUT: 'scout',
             TENDERFOOT: 'tenderfoot',
             SECOND_CLASS: 'Second Class',
