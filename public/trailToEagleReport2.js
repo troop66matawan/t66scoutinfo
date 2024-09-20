@@ -27,7 +27,7 @@ app.component('trailtoeaglereportv2', {
         if (patrolName !== undefined) {
           patrolName = patrolName.toLowerCase();
         }
-        if (patrolName === 'inactive') {
+        if (patrolName === 'inactive' || patrolName === 'agedout') {
           exclude = true;
         }
 
