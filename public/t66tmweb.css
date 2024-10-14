@@ -828,3 +828,27 @@ eagleneeded {
   margin: 10px 30px;
   justify-content: space-between;
 }
+
+.rankCompletionReport img {
+  height: 150px;
+  width: 200px;
+}
+
+.rankCompletionTable {
+  margin: 20px;
+  width: 96%
+}
+
+.requirementCompletionComplete {
+  background-color: green;
+  color: white
+}
+
+.requirementCompletionIncomplete {
+  background-color:red;
+  color: white;
+}
+
+.Summary {
+  font-weight: bolder;
+}

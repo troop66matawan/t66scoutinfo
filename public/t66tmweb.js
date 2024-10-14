@@ -34,6 +34,7 @@ app.component('scoutlist', {
     _this.emailDistro = {name: 'Email Distro', value: 14};
     _this.rankReport = {name: 'Rank Distribution Report', value: 15};
     _this.jteReport = {name: 'JTE Report', value: 16};
+    _this.rankCompletionReport = {name: 'Rank Completion Report', value: 17};
 
 
 
@@ -96,6 +97,7 @@ app.component('scoutlist', {
                    _this.menuOptions.push(_this.emailDistro);
                    _this.menuOptions.push(_this.rankReport);
                    _this.menuOptions.push(_this.jteReport);
+                   _this.menuOptions.push(_this.rankCompletionReport);
 
                    _this.scouts = ScoutbookDBService.getActiveScouts(scouts);
 
@@ -213,6 +215,7 @@ app.component('scoutlist', {
     '<create-mail-distribution ng-if="$ctrl.view === 14" scouts="ScoutbookDBService.scouts"></create-mail-distribution>' +
     '<rank-report ng-if="$ctrl.view === 15" results="ScoutbookRankReportService.results"></rank-report>' +
     '<jte-report ng-if="$ctrl.view === 16" results="ScoutbookReqtAnalysisService.jte"></jte-report>' +
+    '<rank-completion-report ng-if="$ctrl.view===17" scouts="ScoutbookDBService.scouts"></rank-completion-report>' +
     '<div class="t66footer"><img src="images/T66_Logo_22.png"></div>' +
   '</div>',
   // bindings: {

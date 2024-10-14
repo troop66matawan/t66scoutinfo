@@ -631,3 +631,24 @@ div#rosterDownload{
   padding-bottom: 3px;
   padding-right: 20px;
 }
+
+
+.rankCompletionReport img {
+  height: 150px;
+  width: 200px;
+}
+
+.rankCompletionTable {
+  margin: 20px;
+  width: 96%
+}
+
+.requirementCompletionComplete {
+  background-color: green;
+  color: white
+}
+
+.requirementCompletionIncomplete {
+  background-color:red;
+  color: white;
+}

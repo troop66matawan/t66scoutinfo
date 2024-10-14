@@ -1,0 +1,38 @@
+<div class="rankCompletionReport">
+    <style id='rosterReport'></style>
+    <div ng-repeat="rank in $ctrl.ranks" ng-init="scouts=$ctrl.rank[rank]">
+        <div ng-if="scouts !== undefined && scouts.length > 0" >
+            <img class="rank" ng-src="{{$ctrl.getRankPatch(rank)}}">
+            <table class="rankCompletionTable">
+                <tr>
+                    <th>Name</th>
+                    <th>Rank</th>
+                    <th ng-repeat="req in $ctrl.getRankRequirements($ctrl.getRankObj(rank, $ctrl.rank[rank][0]))" title="{{req._requirementText}}">{{req._id}}</th>
+                </tr>
+                <tr ng-repeat="scout in $ctrl.rank[rank]" ng-init="rankObj = $ctrl.getRankObj(rank, scout)">
+                    <td>
+                        <span>{{scout._firstName}}</span>
+                        <span>{{scout._lastName}}</span>
+                    </td>
+                    <td>
+                        <span>{{$ctrl.getCurRank(scout)}}</span>
+                    </td>
+                    <td ng-repeat="req in $ctrl.getRankRequirements(rankObj)">
+                        <span ng-if="req._markedCompleted !== undefined" class="requirementCompletionComplete">&nbsp;Y&nbsp;</span>
+                        <span ng-if="req._markedCompleted === undefined" class="requirementCompletionIncomplete">&nbsp;N&nbsp;</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="Summary">Number of Scouts</td>
+                    <td></td>
+                    <td class="Summary" ng-repeat="req in $ctrl.getRankRequirements($ctrl.getRankObj(rank, $ctrl.rank[rank][0]))">
+                        {{$ctrl.sumNumberOfScouts($ctrl.rank[rank], rank, req._id)}}
+                    </td>
+                </tr>
+            </table>
+            <div ng-attr-id="{{$ctrl.getDownloadId(rank)}}">
+                <button ng-click="$ctrl.export(scouts, rank)">Download CSV</button>
+            </div>
+        </div>
+    </div>
+</div>
