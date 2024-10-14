@@ -170,6 +170,41 @@ function RankCompletionController(ScoutbookDBService, ScoutbookDBConstant, RankP
         }
         CsvDownloadService.downloadCsv(csvString,'reqCompleted_'+rankString, _this.getDownloadId(rankString));
     }
+    _this.exportPivot = function() {
+        var csvString = CsvDownloadService.encodeCSV();
+        // Scouts in first class is all scouts
+        csvString += ',';
+        let rankString = ',';
+        for (const scouts of _this.rank[ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS]) {
+            csvString += ','+scouts._firstName + ' ' + scouts._lastName;
+            rankString += ','+_this.getCurRank(scouts);
+        }
+        csvString += '\r\n'+rankString+'\r\n';
+        for (const rank of _this.ranks) {
+            if (_this.rank[rank] && _this.rank[rank].length > 0) {
+                const requirements = _this.getRankRequirements(_this.getRankObj(rank, _this.rank[rank][0]));
+
+                for (const req of requirements) {
+                    csvString += rank + ' ' + req._id + ',"' + req._requirementText+'"';
+                    for (const scout of _this.rank[ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS]) {
+                        const rankObj = _this.getRankObj(rank, scout);
+                        csvString += ',';
+                        if (rankObj._isApproved === false) {
+                           if (rankObj._requirements._requirement[req._id]._markedCompleted !== undefined ) {
+                               csvString += 'Y';
+                           } else {
+                               csvString += 'N';
+                           }
+                        }
+                    }
+                    csvString += '\r\n';
+                }
+            }
+        }
+
+        CsvDownloadService.downloadCsv(csvString,'reqCompleted', 'downloadReq');
+
+    }
     _this.getDownloadId = function(rank) {
         return 'reqDownload_'+rank;
     }
