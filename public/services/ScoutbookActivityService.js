@@ -6,8 +6,8 @@ function ScoutbookActivityService(ScoutbookDBConstant, ScoutbookDBService) {
 
     _this.SERVICE_NEEDED_NEXT_RANK = {};
     _this.SERVICE_NEEDED_NEXT_RANK[ScoutbookDBConstant.ADVANCEMENT.SCOUT] = {total: 1, conservation: 0};
-    _this.SERVICE_NEEDED_NEXT_RANK[ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT] = {total: 2, conservation: 0};
-    _this.SERVICE_NEEDED_NEXT_RANK[ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS] = {total: 3, conservation: 0};
+    _this.SERVICE_NEEDED_NEXT_RANK[ScoutbookDBConstant.ADVANCEMENT.TENDERFOOT] = {total: 3, conservation: 0};
+    _this.SERVICE_NEEDED_NEXT_RANK[ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS] = {total: 6, conservation: 0};
     _this.SERVICE_NEEDED_NEXT_RANK[ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS] = {total: 6, conservation: 0};
     _this.SERVICE_NEEDED_NEXT_RANK[ScoutbookDBConstant.ADVANCEMENT.STAR] = {total: 6, conservation: 3};
 
@@ -84,6 +84,10 @@ function ScoutbookActivityService(ScoutbookDBConstant, ScoutbookDBService) {
                         } else {
                             neededService.total -= serviceProj._count;
                         }
+                    }
+                    // if Next rank is first class, must have >= 2 service projects
+                    if (nextRank === ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS && serviceList.length < 2) {
+                        neededService.total = 3;
                     }
                 }
             }
