@@ -1,0 +1,25 @@
+<div class="needs-awarding-report">
+    <style id='awardReport'></style>
+    <div class="rank-needs-awarding">
+        <div class="header">Rank Advancements to be Awarded</div>
+        <div class="tobeawarded" ng-repeat="rankTBA in $ctrl.ranksToBeAwarded">
+            <scoutname scout="rankTBA.scout"></scoutname>
+            <div class = "awarditems">
+                <div ng-repeat="rank in rankTBA.ranks">
+                    <div class="ranktobeawarded">{{$ctrl.displayRank(rank)}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mbNeedsAwarding">
+        <div class="header">Merit Badges to be Awarded</div>
+        <div class="tobeawarded" ng-repeat="mbTBA in $ctrl.mbToBeAwarded">
+            <scoutname scout="mbTBA.scout"></scoutname>
+            <div class = "awarditems">
+                <div  ng-repeat="mb in mbTBA.mbs">
+                    <div class="mbtobeawarded">{{mb}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

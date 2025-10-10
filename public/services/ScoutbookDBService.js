@@ -204,6 +204,25 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         }
         return rankText;
     };
+
+    _this.getMeritBadges = function(scout) {
+        let meritbadges = [];
+        if (scout && scout._advancement && scout._advancement._meritBadges) {
+            const mbKeys = Object.keys(scout._advancement._meritBadges);
+            for (let i=0; i< mbKeys.length;i++) {
+                meritbadges.push(scout._advancement._meritBadges[mbKeys[i]]);
+            }
+        }
+        return meritbadges
+    }
+
+    _this.needsAwarding = function(advancement) {
+        let rv = false;
+        if (advancement !== undefined && advancement._isApproved === true && advancement._isAwarded === false) {
+            rv = true;
+        }
+        return rv;
+    }
     _this.getRequirement = function(rankObj, requirementID) {
         let requirement;
         if (rankObj && rankObj._requirements && rankObj._requirements._requirement) {

@@ -309,6 +309,42 @@ eagleneeded {
   max-width: initial;
 }
 
+.needs-awarding-report .header {
+  font-family: "Roboto", sans-serif;
+  font-size: larger;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.needs-awarding-report scoutname {
+  width: 30%;
+}
+.needs-awarding-report .scoutname {
+  font-size: medium;
+  font-weight: bolder;
+}
+
+.needs-awarding-report .tobeawarded {
+  display: flex;
+  flex-direction: column;
+}
+.needs-awarding-report .awarditems {
+  display: flex;
+  margin-left:50px;
+}
+
+.needs-awarding-report .awarditems .mbtobeawarded {
+  padding-right: 20px;
+}
+
+.needs-awarding-report .mbNeedsAwarding {
+  margin-top: 40px;
+}
 .leadershipreport .table .position {
   min-width: 155px;
   min-height: 155px;
