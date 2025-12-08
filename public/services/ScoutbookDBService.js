@@ -216,6 +216,27 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         return meritbadges
     }
 
+    _this.isDateWithinRange = function(targetDate, startDate, endDate) {
+        // Ensure all inputs are valid Date objects
+        if (!(targetDate instanceof Date) || isNaN(targetDate.getTime()) ||
+            !(startDate instanceof Date) || isNaN(startDate.getTime()) ||
+            !(endDate instanceof Date) || isNaN(endDate.getTime())) {
+            throw new Error("All arguments must be valid Date objects.");
+        }
+
+        // Compare the target date with the start and end dates
+        return targetDate >= startDate && targetDate <= endDate;
+    }
+
+    _this.isEarnedWithin = function(advancement, startDate, endDate) {
+        let rv = false;
+        if (advancement !== undefined && advancement._isApproved === true ) {
+            let rankDate = new Date(advancement._completionDate);
+            rv = _this.isDateWithinRange(rankDate, startDate, endDate);
+        }
+        return rv;
+
+    }
     _this.needsAwarding = function(advancement) {
         let rv = false;
         if (advancement !== undefined && advancement._isApproved === true && advancement._isAwarded === false) {

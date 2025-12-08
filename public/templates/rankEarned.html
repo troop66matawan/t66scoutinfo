@@ -1,0 +1,27 @@
+<div class="rank-earned-report">
+    <style id='rankEarnedReport'></style>
+    <div class="rank-earned-timespan">
+        <div class="datentry">
+            <input type="date" ng-model="$ctrl.startDate" id="rankEarnedStartDate" >
+        </div>
+        <div class="datentry">
+            <input type="date" ng-model="$ctrl.endDate" id="rankEarnedEndDate" >
+        </div>
+        <button ng-click="$ctrl.filterDate()">Re-Filter</button>
+    </div>
+    <div class="rank-needs-awarding">
+        <div class="header">
+            <span>Rank Advancements</span>
+            <span>{{$ctrl.rankEarnedStartDate}} - {{$ctrl.rankEarnedEndDate}}</span>
+        </div>
+        <div class="tobeawarded" ng-repeat="rankEarned in $ctrl.ranksToBeAwarded">
+            <scoutname scout="rankEarned.scout"></scoutname>
+            <div class = "awarditems">
+                <div class="rank-earned-rankitem" ng-repeat="rank in rankEarned.ranks">
+                    <span class="ranktobeawarded">{{$ctrl.displayRank(rank.rank)}}</span>
+                    <span class="ranktobeawarded">{{$ctrl.displayDate(rank.date)}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
