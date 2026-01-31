@@ -37,7 +37,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
             const req7b = ScoutbookDBService.getRequirement(tenderfoot, '7b');
             if (req7b && req7b._isApproved !== true) {
                 let serviceHours=0;
-                const service = ScoutbookDBService.getService(scout);
+                const service = ScoutbookDBService.getScoutsBSAService(scout);
                 if (service && Array.isArray(service) && service.length > 0) {
                     service.forEach(function (activity) {
                         if (activity && activity._count > 0) {
@@ -72,7 +72,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                         }
                     });
                 }
-                const service = ScoutbookDBService.getService(scout);
+                const service = ScoutbookDBService.getScoutsBSAService(scout);
                 if (service && Array.isArray(service) && service.length > 0) {
                     service.forEach(function (activity) {
                         if (activity && activity._count > 0 &&
@@ -98,7 +98,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
             const req8e = ScoutbookDBService.getRequirement(secClass, '8e');
             if (req8e && req8e._isApproved !== true) {
                 let serviceHours=0;
-                const service = ScoutbookDBService.getService(scout);
+                const service = ScoutbookDBService.getScoutsBSAService(scout);
                 if (service && Array.isArray(service) && service.length > 0) {
                     service.forEach(function (activity) {
                         if (activity && activity._count > 0) {
@@ -133,7 +133,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                         }
                     });
                 }
-                const service = ScoutbookDBService.getService(scout);
+                const service = ScoutbookDBService.getScoutsBSAService(scout);
                 if (service && Array.isArray(service) && service.length > 0) {
                     service.forEach(function (activity) {
                         if (activity && activity._count > 0 &&
@@ -159,7 +159,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
             const req8e = ScoutbookDBService.getRequirement(firstClass, '9d');
             if (req8e && req8e._isApproved !== true) {
                 let serviceHours=0;
-                const service = ScoutbookDBService.getService(scout);
+                const service = ScoutbookDBService.getScoutsBSAService(scout);
                 if (service && Array.isArray(service) && service.length > 0) {
                     service.forEach(function (activity) {
                         if (activity && activity._count > 0) {
@@ -225,7 +225,7 @@ function ScoutbookReqtAnalysisService(ScoutbookDBConstant, ScoutbookDBService, S
                 if (firstClass && firstClass._isApproved === true) {
                     const firstClassDate = ScoutbookDBService.getRankDate(scout, ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS);
                     let serviceHours=0;
-                    const service = ScoutbookDBService.getService(scout);
+                    const service = ScoutbookDBService.getScoutsBSAService(scout);
                     if (service && Array.isArray(service) && service.length > 0) {
                         service.forEach(function (activity) {
                             const activityDate = new Date(activity._date);

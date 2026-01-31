@@ -46,6 +46,11 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         return scoutArray;
     };
 
+    /**
+     * Convert date from string (MM/DD/YYYY or YYYY/MM/DD)
+     * @param scoutbookDate
+     * @returns {Date}
+     */
     _this.getDate = function(scoutbookDate) {
         let date;
         if (scoutbookDate) {
@@ -258,6 +263,11 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         }
         return camping;
     };
+    /**
+     * Returns ScoutbookDB format Service Array for given scout
+     * @param scout
+     * @returns {Array<Service>}
+     */
     _this.getService = function(scout) {
         let service;
         if (scout && scout._activities && scout._activities._service) {
@@ -265,6 +275,26 @@ function ScoutbookDBService(ScoutbookDBConstant, $q) {
         }
         return service;
     };
+    /**
+     * Returns ScoutbookDB format Service Array for service performed after joined ScoutsBSA
+     * @param scout
+     * @returns {*}
+     */
+    _this.getScoutsBSAService = function(scout) {
+        let scoutsBSA_service=[];
+        const joinedScoutsBSA = _this.getDate(scout._dateJoinedBSA);
+
+        if (scout && scout._activities && scout._activities._service) {
+            const service = scout._activities._service;
+            service.forEach(function (activity) {
+                const activityDate = new Date(activity._date);
+                if (activity && activity._count > 0 && activityDate >= joinedScoutsBSA) {
+                    scoutsBSA_service.push(activity);
+                }
+            });
+        }
+        return scoutsBSA_service;
+    }
     _this.getCalendarKey = function(scout) {
         if (scout) {
             let firstName = scout._nickname;

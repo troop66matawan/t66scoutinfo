@@ -8,9 +8,9 @@
             <div class="td">Remarks</div>
             <div class="td">Hours</div>
         </div>
-        <div ng-if="$ctrl.scout._activities && $ctrl.scout._activities._service"
+        <div ng-if="$ctrl.scoutBSA_Service"
              class="tr"
-             ng-repeat="trip in $ctrl.scout._activities._service">
+             ng-repeat="trip in $ctrl.scoutBSA_Service">
             <div class="td"><date date="trip._date"></date></div>
             <div class="td"><div ng-class="{conservation:trip._conservation === true}"></div></div>
             <div class="td">{{trip._location}}</div>
