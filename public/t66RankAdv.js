@@ -126,7 +126,7 @@ app.service('EagleRequired', function() {
     'Citizenship in the Community',
     'Citizenship in the Nation',
     'Citizenship in the World',
-    'Citizenship in Society',
+    //'Citizenship in Society',
     'Communication',
     'Cooking',
     'Family Life',

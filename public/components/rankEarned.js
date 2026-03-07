@@ -14,7 +14,8 @@ function RankEarnedController(ScoutbookDBService, ScoutbookDBConstant ) {
         ScoutbookDBConstant.ADVANCEMENT.SECOND_CLASS,
         ScoutbookDBConstant.ADVANCEMENT.FIRST_CLASS,
         ScoutbookDBConstant.ADVANCEMENT.STAR,
-        ScoutbookDBConstant.ADVANCEMENT.LIFE
+        ScoutbookDBConstant.ADVANCEMENT.LIFE,
+        ScoutbookDBConstant.ADVANCEMENT.EAGLE
     ]
 
     _this.$onInit = function() {
@@ -25,8 +26,8 @@ function RankEarnedController(ScoutbookDBService, ScoutbookDBConstant ) {
         endDate.setDate(endDate.getDate() -1);
         _this.rankEarnedStartDate = startDate.toLocaleDateString();
         _this.rankEarnedEndDate = endDate.toLocaleDateString()
-        _this.activeScouts = ScoutbookDBService.getActiveScouts(_this.scouts);
-        _this.activeScouts.forEach(function(scout){
+        //_this.activeScouts = ScoutbookDBService.getActiveScouts(_this.scouts);
+        _this.scouts.forEach(function(scout){
             let scoutRanksEarned = [];
             ranks.forEach(function(rank) {
                 let scoutRank = ScoutbookDBService.getRankObj(scout, rank);
