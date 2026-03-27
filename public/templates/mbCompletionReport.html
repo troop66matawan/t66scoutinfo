@@ -1,0 +1,10 @@
+<div class="rankCompletionReport">
+    <style id='rosterReport'></style>
+    <select id="mbselect" ng-model="$ctrl.selectedMB" ng-change="$ctrl.setSelected()" ng-options="mb for mb in $ctrl.mbList">	</select>
+    <input type="checkbox" ng-model="$ctrl.haveMeritBadge" ng-change="$ctrl.setSelected()"><span>Have</span>
+
+    <meritbadge name="$ctrl.selectedMB" ></meritbadge>
+    <div class="tobeawarded" ng-repeat="scoutNeed in $ctrl.scoutsNeedingMB | orderBy: '_lastName' ">
+        <scoutname scout="scoutNeed"></scoutname>
+    </div>
+</div>
