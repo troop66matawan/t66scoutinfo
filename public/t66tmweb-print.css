@@ -681,7 +681,9 @@ div#rosterDownload{
   display: flex;
   margin-left:50px;
 }
-
+.needs-awarding-report .awarditems .ranktobeawarded {
+  padding-right: 20px;
+}
 .needs-awarding-report .awarditems .mbtobeawarded {
   padding-right: 20px;
 }
